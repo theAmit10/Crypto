@@ -31,7 +31,7 @@ const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="ProfitAndLoss">
+        initialRouteName="Wallet">
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />

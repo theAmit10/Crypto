@@ -55,7 +55,7 @@ const PLTopContainer = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        source={require('../../../assets/image/bitcoin.png')}
+        source={require('../../../assets/image/bitcoin_image.jpg')}
         style={styles.centerImage}
       />
       <View>
@@ -63,18 +63,30 @@ const PLTopContainer = () => {
         <Text style={styles.totalBalAmount}>$20,360.34</Text>
       </View>
 
-      <View style={styles.totalVal}>
+      <View style={styles.totalValContainer}>
         <MaterialCommunityIcons name="bitcoin" size={20} color="orange" />
-        <Text>0,0035</Text>
-        <Text>BTC</Text>
+        <Text style={styles.totalValText}>0,0035</Text>
+        <Text style={styles.totalValText}>BTC</Text>
       </View>
 
       <View style={styles.containerBottom}>
         <TouchableOpacity>
-          <Text style={styles.bottomContainerContent}>1H</Text>
+          <View style={styles.bottomContainerLeft}>
+            <Text style={styles.bottomContainerContent}>YESTERDAY’S P&L</Text>
+            <Text style={styles.bottomContainerLoss}>
+              -$58234979.68
+              <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.bottomContainerContent}>1D</Text>
+          <View style={styles.bottomContainerRight}>
+            <Text style={styles.bottomContainerContent}>YESTERDAY’S P&L</Text>
+            <Text style={styles.bottomContainerProfit}>
+              +$465.37{' '}
+              <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
+            </Text>
+          </View>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -89,39 +101,41 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: COLORS.skyBlue,
     width: '100%',
-    height: heightPercentageToDP(40),
+    height: heightPercentageToDP(25),
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: heightPercentageToDP(3),
   },
   totalBal: {
-    color: 'white',
+    color: COLORS.white,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(2),
-    margin: 10,
-    marginTop: 10,
+    margin: heightPercentageToDP(2),
+    alignSelf:'center'
   },
+
   totalBalAmount: {
-    color: 'white',
+    color: COLORS.white,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(3),
+    alignSelf:'center'
   },
-  totalVal: {
-    color: 'white',
+  totalValContainer: {
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.6),
-
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingStart: 20,
-    paddingEnd: 20,
-    backgroundColor: COLORS.purpleDark,
-    borderWidth: 2,
-    borderColor: COLORS.skyBlue,
-    borderRadius: 20,
     flexDirection: 'row',
-    gap: 2,
+    gap: heightPercentageToDP(1),
+  },
+  totalValText: {
+    fontFamily: FONT.regular,
+    fontSize: heightPercentageToDP(1.6),
+    color: COLORS.white,
+    textAlignVertical: 'center',
+  },
+  totalVal: {
+    fontFamily: FONT.regular,
+    fontSize: heightPercentageToDP(1.6),
   },
 
   centerImage: {
@@ -130,47 +144,60 @@ const styles = StyleSheet.create({
     width: '50%',
     height: '100%',
     resizeMode: 'cover',
-    opacity: 0.1,
+    opacity: 0.5,
   },
   containerBottom: {
+    flex: 1,
+    width: widthPercentageToDP(100),
+    height: heightPercentageToDP(100),
     flexDirection: 'row',
-    position: 'absolute',
-    alignItems: 'center',
-    bottom: 10,
-    justifyContent: 'space-evenly',
+    justifyContent:'space-evenly'
+  },
+  bottomContainerLeft: {
+    flex:1,
+    width: widthPercentageToDP(40),
+    height: heightPercentageToDP(100),
+    backgroundColor: COLORS.purpleDark,
+    margin:heightPercentageToDP(1),
+    borderRadius: heightPercentageToDP(1),
+    padding:heightPercentageToDP(1),
+    alignItems:'center',
+   
+   
+  },
+  bottomContainerRight:{
+    flex:1,
+    width: widthPercentageToDP(40),
+    height: heightPercentageToDP(100),
+    backgroundColor: COLORS.purpleDark,
+    margin:heightPercentageToDP(1),
+    borderRadius: heightPercentageToDP(1),
+    padding:heightPercentageToDP(1),
+    alignItems:'center',
+  
   },
   bottomContainerContent: {
     color: 'white',
     fontFamily: FONT.medium,
-    fontSize: heightPercentageToDP(1.6),
-    paddingBottom: 5,
-    paddingTop: 5,
-    paddingStart: 20,
-    paddingEnd: 20,
-    backgroundColor: COLORS.purpleDark,
-    borderWidth: 2,
-    borderColor: COLORS.skyBlue,
-    borderRadius: 10,
+    fontSize: heightPercentageToDP(1.8),
+   
   },
-  chart: {
-    position: 'absolute',
-    zIndex: -1,
-    left: 0,
-  },
-  chartIndicatorStatus: {
-    position: 'absolute',
-    width: widthPercentageToDP(30),
-    color: COLORS.purpleDark,
-    fontFamily: FONT.semibold,
+  bottomContainerLoss: {
+    flex:1,
+    color: COLORS.red,
+    fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(2),
-    zIndex: 99,
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingStart: 20,
-    backgroundColor: COLORS.white,
-    borderWidth: 2,
-    borderColor: COLORS.skyBlue,
-    borderRadius: 20,
+   
+   
   },
-  
+  bottomContainerProfit: {
+    flex:1,
+    color: COLORS.green,
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(2),
+    
+  },
+ 
 });
+
+
