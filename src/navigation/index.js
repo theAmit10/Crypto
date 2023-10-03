@@ -24,14 +24,28 @@ import History from '../screens/History';
 import Payment from '../screens/Payment';
 import ProfitAndLoss from '../screens/ProfitAndLoss';
 
+import {createStore, applyMiddleware} from 'redux'
+// import { createStoreHook,applyMiddleware } from 'react-redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import rootReducer from '../../stores/rootReducer';
+
 const Stack = createNativeStackNavigator();
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+)
 
 const AppNavigation = () => {
   return (
+    <Provider store={store}>
+    
+    
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Wallet">
+        initialRouteName="Hcontainer">
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
@@ -61,6 +75,8 @@ const AppNavigation = () => {
         <Stack.Screen name="ProfitAndLoss" component={ProfitAndLoss} />
       </Stack.Navigator>
     </NavigationContainer>
+
+    </Provider>
   );
 };
 
