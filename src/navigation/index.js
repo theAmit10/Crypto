@@ -29,6 +29,11 @@ import {createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../stores/rootReducer';
+import ActionSheet from '../component/setting/ActionSheet';
+import ActionSheetBottom from '../screens/ActionSheetBottom';
+import { actionSheetEventManager } from 'react-native-actions-sheet/dist/src/eventmanager';
+import ActionSheetParent from '../screens/ActionSheetParent';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -45,7 +50,7 @@ const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="Hcontainer">
+        initialRouteName="ActionSheetBottom">
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
@@ -73,6 +78,10 @@ const AppNavigation = () => {
         <Stack.Screen name="History" component={History} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="ProfitAndLoss" component={ProfitAndLoss} />
+        <Stack.Screen name="ActionSheetBottom" component={ActionSheetBottom} />
+        <Stack.Screen name="ActionSheetParent" component={ActionSheetParent} />
+       
+        
       </Stack.Navigator>
     </NavigationContainer>
 

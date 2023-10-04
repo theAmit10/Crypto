@@ -38,7 +38,7 @@ const Profile = () => {
 
         {/** verification */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('BottomActionSheet')}>
             <View style={{flexDirection: 'row'}}>
               <Text
                 style={{textAlignVertical: 'center'}}

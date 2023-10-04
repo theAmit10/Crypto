@@ -35,17 +35,17 @@ const dailyStatus = ['Top Gainers', 'Top Losers'];
 const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
   const navigation = useNavigation();
 
-  useEffect(() => {
-    console.log('Hey from EFFECt');
-    getCoinMarket();
-  }, []);
+  // useEffect(() => {
+  //   console.log('Hey from EFFECt');
+  //   getCoinMarket();
+  // }, []);
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     getCoinMarket();
-  //     // getHoldings(holdings = dummyData)
-  //   }, []),
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      getCoinMarket();
+      // getHoldings(holdings = dummyData)
+    }, []),
+  );
 
   const [activeDayStatus, setActiveDayStatus] = useState('Top Gainers');
 
@@ -200,13 +200,13 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
 
         {topCryptoCurrencySection()}
 
-        {console.log(coins)}
+        
 
         <FlatList
           data={coins}
           keyExtractor={item => item.id}
           contentContainerStyle={{
-            marginTop: 30,
+            marginTop: 10,
             paddingHorizontal: 10,
           }}
           //
@@ -331,7 +331,7 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
               </TouchableOpacity>
             );
           }}
-          ListFooterComponent={<View style={{marginBottom: 50}}></View>}
+          ListFooterComponent={<View style={{marginBottom: 10}}></View>}
         />
       </ScrollView>
     </SafeAreaView>
