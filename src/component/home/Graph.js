@@ -51,7 +51,7 @@ const Graph = () => {
   return (
     <SafeAreaView style={styles.container}>
         <Image 
-        source={require("../../../assets/image/bitcoin.png")}
+        source={require("../../../assets/image/bitcoin_image.jpg")}
         style={styles.centerImage}
             />
         <View style={styles.containerTop}> 

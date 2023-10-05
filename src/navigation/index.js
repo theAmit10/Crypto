@@ -24,67 +24,75 @@ import History from '../screens/History';
 import Payment from '../screens/Payment';
 import ProfitAndLoss from '../screens/ProfitAndLoss';
 
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware} from 'redux';
 // import { createStoreHook,applyMiddleware } from 'react-redux';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../stores/rootReducer';
 import ActionSheet from '../component/setting/ActionSheet';
 import ActionSheetBottom from '../screens/ActionSheetBottom';
-import { actionSheetEventManager } from 'react-native-actions-sheet/dist/src/eventmanager';
+import {actionSheetEventManager} from 'react-native-actions-sheet/dist/src/eventmanager';
 import ActionSheetParent from '../screens/ActionSheetParent';
-
+import Verification from '../screens/SubSetting/Verification';
+import KnowYourCrypto from '../screens/SubSetting/KnowYourCrypto';
+import Rewards from '../screens/SubSetting/Rewards';
+import HelpDesk from '../screens/SubSetting/HelpDesk';
 
 const Stack = createNativeStackNavigator();
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk)
-)
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const AppNavigation = () => {
   return (
     <Provider store={store}>
-    
-    
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName="ActionSheetBottom">
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen
-          name="OnboardingScreenTwo"
-          component={OnboardingScreenTwo}
-        />
-        <Stack.Screen
-          name="OnboardingScreenThree"
-          component={OnboardingScreenThree}
-        />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="OtpAuth" component={OtpAuth} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Trade" component={Trade} />
-        <Stack.Screen name="Setting" component={Setting} />
-        <Stack.Screen name="NotificationTab" component={NotificationTab} />
-        <Stack.Screen name="Transfer" component={Transfer} />
-        <Stack.Screen name="TransferSuccess" component={TransferSuccess} />
-        <Stack.Screen name="Hcontainer" component={Hcontainer} />
-        <Stack.Screen name="Onboard" component={Onboard} />
-        <Stack.Screen name="Wallet" component={Wallet} />
-        <Stack.Screen name="History" component={History} />
-        <Stack.Screen name="Payment" component={Payment} />
-        <Stack.Screen name="ProfitAndLoss" component={ProfitAndLoss} />
-        <Stack.Screen name="ActionSheetBottom" component={ActionSheetBottom} />
-        <Stack.Screen name="ActionSheetParent" component={ActionSheetParent} />
-       
-        
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName="HelpDesk">
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen
+            name="OnboardingScreenTwo"
+            component={OnboardingScreenTwo}
+          />
+          <Stack.Screen
+            name="OnboardingScreenThree"
+            component={OnboardingScreenThree}
+          />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+          <Stack.Screen name="OtpAuth" component={OtpAuth} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Trade" component={Trade} />
+          <Stack.Screen name="Setting" component={Setting} />
+          <Stack.Screen name="NotificationTab" component={NotificationTab} />
+          <Stack.Screen name="Transfer" component={Transfer} />
+          <Stack.Screen name="TransferSuccess" component={TransferSuccess} />
+          <Stack.Screen name="Hcontainer" component={Hcontainer} />
+          <Stack.Screen name="Onboard" component={Onboard} />
+          <Stack.Screen name="Wallet" component={Wallet} />
+          <Stack.Screen name="History" component={History} />
+          <Stack.Screen name="Payment" component={Payment} />
+          <Stack.Screen name="ProfitAndLoss" component={ProfitAndLoss} />
+          <Stack.Screen
+            name="ActionSheetBottom"
+            component={ActionSheetBottom}
+          />
+          <Stack.Screen
+            name="ActionSheetParent"
+            component={ActionSheetParent}
+          />
 
+          <Stack.Screen name="Verification" component={Verification} />
+          <Stack.Screen name="KnowYourCrypto" component={KnowYourCrypto} />
+          <Stack.Screen name="Rewards" component={Rewards} />
+          <Stack.Screen name="HelpDesk" component={HelpDesk} />
+
+          
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 };
