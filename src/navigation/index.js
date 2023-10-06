@@ -48,7 +48,7 @@ const AppNavigation = () => {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="HelpDesk">
+          initialRouteName="Hcontainer">
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />

@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   FlatListComponent,
+  StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {COLORS, FONT} from '../../constants';
@@ -19,6 +20,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CoinItem from '../component/Coinitems';
@@ -35,17 +38,17 @@ const dailyStatus = ['Top Gainers', 'Top Losers'];
 const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   console.log('Hey from EFFECt');
-  //   getCoinMarket();
-  // }, []);
+  useEffect(() => {
+    console.log('Hey from EFFECt');
+    getCoinMarket();
+  }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getCoinMarket();
-      // getHoldings(holdings = dummyData)
-    }, []),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     getCoinMarket();
+  //     // getHoldings(holdings = dummyData)
+  //   }, []),
+  // );
 
   const [activeDayStatus, setActiveDayStatus] = useState('Top Gainers');
 
@@ -58,6 +61,7 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
       style={{backgroundColor: COLORS.purpleDark}}
       className="flex-1">
       {/** Header */}
+      <StatusBar barStyle={'dark-content'} />
       <View style={styles.containerHeader}>
         <View style={styles.containerLeft}>
           <Image
@@ -73,14 +77,14 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
             onPress={() => {
               navigation.navigate('Search');
             }}>
-            <Image
-              source={require('../../assets/image/round_bg.png')}
-              style={styles.centerImage}
-            />
-            <Image
-              source={require('../../assets/image/search_white.png')}
-              style={styles.centerImageIcon}
-            />
+            <View style={styles.middleContentTopIcon} className="rounded-full ">
+              <Icon
+                name="search1"
+                size={20}
+                color={COLORS.white}
+                style={{alignSelf: 'center', opacity: 0.9}}
+              />
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -88,14 +92,14 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
             onPress={() => {
               navigation.navigate('NotificationTab');
             }}>
-            <Image
-              source={require('../../assets/image/round_bg.png')}
-              style={styles.centerImage}
-            />
-            <Image
-              source={require('../../assets/image/notification_white.png')}
-              style={styles.centerImageIcon}
-            />
+            <View style={styles.middleContentTopIcon} className="rounded-full ">
+              <Icon
+                name="bells"
+                size={20}
+                color={COLORS.white}
+                style={{alignSelf: 'center', opacity: 0.9}}
+              />
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -103,14 +107,14 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
             onPress={() => {
               navigation.navigate('Setting');
             }}>
-            <Image
-              source={require('../../assets/image/round_bg.png')}
-              style={styles.centerImage}
-            />
-            <Image
-              source={require('../../assets/image/menu_white.png')}
-              style={styles.centerImageIcon}
-            />
+            <View style={styles.middleContentTopIcon} className="rounded-full ">
+              <Icon
+                name="setting"
+                size={20}
+                color={COLORS.white}
+                style={{alignSelf: 'center', opacity: 0.9}}
+              />
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -122,8 +126,6 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
         contentContainerStyle={{flexGrow: 1}}
         nestedScrollEnabled={true}>
         {/** Graph */}
-
-        <Graph />
 
         <View>
           {
@@ -144,24 +146,21 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
             title={'Total Balance'}
             amount={'$8,060.34'}
             itemColor={'red'}
+            chartPrices={coins[0]?.sparkline_in_7d?.price}
           />
           <CenterGraph
             image={'barschart'}
             title={'Profit & Loss'}
             amount={'$6,640.34'}
             itemColor={'orange'}
+            chartPrices={coins[0]?.sparkline_in_7d?.price}
           />
           <CenterGraph
             image={'gift'}
             title={'Rewards'}
             amount={'$1,050.14'}
             itemColor={'green'}
-          />
-          <CenterGraph
-            image={'wallet'}
-            title={'Total Balance'}
-            amount={'$8,060.34'}
-            itemColor={'red'}
+            chartPrices={coins[0]?.sparkline_in_7d?.price}
           />
         </ScrollView>
 
@@ -199,8 +198,6 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
         {/** FOR TOP CRYPTO DATA */}
 
         {topCryptoCurrencySection()}
-
-        
 
         <FlatList
           data={coins}
@@ -368,6 +365,10 @@ const styles = StyleSheet.create({
   },
   containerRight: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: heightPercentageToDP(0.5),
+    marginEnd: heightPercentageToDP(1),
   },
   imageContainer: {
     position: 'relative',
@@ -437,6 +438,12 @@ const styles = StyleSheet.create({
     fontSize: heightPercentageToDP(2),
     textAlign: 'center',
   }),
+  middleContentTopIcon: {
+    backgroundColor: COLORS.purple,
+    padding: heightPercentageToDP(1),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 function mapStateToProps(state) {

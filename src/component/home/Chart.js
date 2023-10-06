@@ -1,125 +1,107 @@
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
-import moment from 'moment';
+import {COLORS, FONT} from '../../../constants';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {COLORS} from '../../../constants';
-// import {LineChart} from 'react-native-gifted-charts';
+import moment from 'moment';
 import {LineChart} from 'react-native-chart-kit';
 
-
-
-const lineData = [
-  {value: 26227.05218111046, dataPointText: 1695807867},
-  {value: 26138.4925731258, dataPointText: 1695811467},
-  {value: 2638.4925731258, dataPointText: 1695815067},
-  {value: 26338.4925731258, dataPointText: 1695818667},
-  {value: 26038.4925731258, dataPointText: 1695822267},
-  {value: 26138.4925731258, dataPointText: 1695822267},
-  {value: 26138.4925731258, dataPointText: 1695822267},
-  {value: 26238.4925731258, dataPointText: 1695822267},
-  {value: 23138.4925731258, dataPointText: 31695822267},
-  {value: 21138.4925731258, dataPointText: 1695822267},
-  {value: 20138.4925731258, dataPointText: 169522267},
-  {value: 2000, dataPointText: 169582267},
-  {value: 36000, dataPointText: 169582267},
-  {value: 6000, dataPointText: 1695822267},
-];
-
-const dataaa = [
-  {value: 24138.4925731258},
-  {value: 26138.4925731258},
-  {value: 25138.4925731258},
-  {value: 22138.4925731258},
-];
-console.log(dataaa);
-const data = [26117, 26138, 26181, 26128, 26059];
-
-const dataaaa = data.map(value => ({value: value + 2000.4925731258}));
-
 const Chart = ({containerStyles, chartPrices}) => {
-  let startUnixTimeStamp = moment().subtract(7, 'day').unix();
+  if (chartPrices && chartPrices.length > 0) {
+    let startUnixTimeStamp = moment().subtract(7, 'day').unix();
 
-  let datas = chartPrices
-    ? chartPrices?.map((item, index) => {
-        return {
-          x: startUnixTimeStamp + (index + 1) * 3600,
-          y: item,
-        };
-      })
-    : [];
+    let realTimeChartData = chartPrices.map(value => value);
 
-  // console.log('HEY MAN BEFORE DATAS : ' + chartPrices.length);
-  // const selectedData = chartPrices.slice(0, 40);
-  // console.log('HEY MAN AFYER DATAS : ' + selectedData.length);
+    return (
+      <SafeAreaView style={styles.container}>
+        <Image
+          source={require('../../../assets/image/bitcoin_image.jpg')}
+          style={styles.centerImage}
+        />
+        <View style={styles.containerTop}>
+          <Text style={styles.totalBal}>Total Balance</Text>
+          <Text style={styles.totalBalAmount}>$20,360.34</Text>
+        </View>
+        <Text style={styles.totalVal}>
+          BTC: 0,0035
+          <Text className="text-green-500">+5.64%</Text>
+        </Text>
 
-  let realTimeChartData = chartPrices
-    ? chartPrices?.map(value => ({value}))
-    : [];
+        <View style={styles.chart}>
+          <LineChart
+            data={{
+              datasets: [
+                {
+                  data: realTimeChartData,
+                },
+              ],
+            }}
+            width={Dimensions.get('window').width}
+            height={heightPercentageToDP(30)}
+            yAxisLabel="$"
+            yAxisSuffix="k"
+            yAxisInterval={1}
+            chartConfig={{
+              backgroundGradientFrom: COLORS.skyBlue,
+              backgroundGradientTo: COLORS.purple,
+              decimalPlaces: 2,
 
-  let realTimeChartDat = chartPrices
-    ? chartPrices?.map((index, value) => ({value: value, dataPointText: index}))
-    : [];
+              color: (opacity = 1) => `rgba(255, 0, 0, 1)`, // Set opacity to 1 (fully opaque)
+              labelColor: (opacity = 0) => `rgba(255, 255, 255, 0)`, // Set opacity to 0 (fully transparent)
+              style: {
+                borderRadius: 2,
+              },
+            }}
+            bezier
+            style={{
+              marginTop: heightPercentageToDP(10),
+              borderRadius: 16,
+            }}
+            withShadow
+            withHorizontalLines={false}
+            withDots={false}
+            withInnerLines={false}
+            withOuterLines={false}
+            withVerticalLabels={false} // Remove vertical labels
+            withHorizontalLabels={false} // Remove horizontal labels
+          />
+        </View>
 
-  
-
-  const lineDatas = chartPrices
-    ? chartPrices?.map((value, index) => ({
-        x: value, 
-        y: index, 
-      }))
-    : [];
-
-
-
-  return (
-    <View style={styles.mainContainer}>
-      {datas.length > 0 && console.log('abd')}
-
-      <LineChart
-        data={{
-          
-          datasets: [
-            {
-              data: chartPrices,
-            },
-          ],
-        }}
-        width={Dimensions.get('window').width} // from react-native
-        height={220}
-        yAxisLabel="$"
-        yAxisSuffix="k"
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: '#e26a00',
-          backgroundGradientFrom: COLORS.skyBlue,
-          backgroundGradientTo: COLORS.purple,
-          
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-          propsForDots: {
-            r: '2',
-            strokeWidth: '1',
-            stroke: COLORS.skyBlue,
-            
-            color: 'green'
-          },
-        }}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-        }}
-        withShadow
-      />
-    </View>
-  );
+        <View style={styles.containerBottom}>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>1H</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>1D</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>1W</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>1M</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>1Y</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.bottomContainerContent}>All</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default Chart;
@@ -127,10 +109,278 @@ export default Chart;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.skyBlue,
+
     marginTop: heightPercentageToDP(2),
   },
+
+  container: {
+    display: 'flex',
+    position: 'relative',
+    backgroundColor: COLORS.skyBlue,
+    width: '100%',
+    height: heightPercentageToDP(40),
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: heightPercentageToDP(3),
+  },
+  totalBal: {
+    color: 'white',
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(2),
+    margin: 10,
+    marginTop: 10,
+  },
+  totalBalAmount: {
+    color: 'white',
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(3),
+  },
+  totalVal: {
+    color: 'white',
+    fontFamily: FONT.regular,
+    fontSize: heightPercentageToDP(1.6),
+    paddingStart: 30,
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingStart: 20,
+    paddingEnd: 20,
+    backgroundColor: COLORS.purpleDark,
+    borderWidth: 2,
+    borderColor: COLORS.skyBlue,
+    borderRadius: 20,
+  },
+
+  centerImage: {
+    position: 'absolute',
+    left: -40,
+    width: '50%',
+    height: '100%',
+    resizeMode: 'cover',
+    opacity: 0.1,
+  },
+  containerBottom: {
+    flexDirection: 'row',
+    position: 'absolute',
+    alignItems: 'center',
+    bottom: 10,
+    justifyContent: 'space-evenly',
+  },
+  bottomContainerContent: {
+    color: 'white',
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(1.6),
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingStart: 20,
+    paddingEnd: 20,
+    backgroundColor: COLORS.purpleDark,
+    borderWidth: 2,
+    borderColor: COLORS.skyBlue,
+    borderRadius: 10,
+  },
+  chart: {
+    position: 'absolute',
+    zIndex: -1,
+    left: 0,
+  },
+  chartIndicatorStatus: {
+    position: 'absolute',
+    width: widthPercentageToDP(30),
+    color: COLORS.purpleDark,
+    fontFamily: FONT.semibold,
+    fontSize: heightPercentageToDP(2),
+    zIndex: 99,
+
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingStart: 20,
+
+    backgroundColor: COLORS.white,
+    borderWidth: 2,
+    borderColor: COLORS.skyBlue,
+    borderRadius: 20,
+  },
 });
+
+// import React from 'react';
+// import moment from 'moment';
+// import {
+//   Dimensions,
+//   StyleSheet,
+//   Text,
+//   View
+// } from 'react-native';
+// import {
+//   heightPercentageToDP,
+//   widthPercentageToDP
+// } from 'react-native-responsive-screen';
+// import { COLORS } from '../../../constants';
+// import { LineChart } from 'react-native-chart-kit';
+
+// const Chart = ({ containerStyles, chartPrices }) => {
+//   if (chartPrices && chartPrices.length > 0) {
+//     let startUnixTimeStamp = moment().subtract(7, 'day').unix();
+
+//     let realTimeChartData = chartPrices.map(value => value);
+
+//     return (
+//       <View style={styles.mainContainer}>
+//         <LineChart
+//           data={{
+//             datasets: [
+//               {
+//                 data: realTimeChartData,
+//               },
+//             ],
+//           }}
+//           width={Dimensions.get('window').width}
+
+//           height={220}
+//           yAxisLabel="$"
+//           yAxisSuffix="k"
+//           yAxisInterval={1}
+//           chartConfig={{
+//             backgroundColor: '#e26a00',
+//             backgroundGradientFrom: COLORS.skyBlue,
+//             backgroundGradientTo: COLORS.purple,
+//             decimalPlaces: 2,
+//             color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
+//             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+//             style: {
+//               borderRadius: 16,
+//             },
+//             propsForDots: {
+//               r: '2',
+//               strokeWidth: '1',
+//               stroke: COLORS.skyBlue,
+//               color: 'green',
+//             },
+//           }}
+//           bezier
+//           style={{
+//             marginVertical: 8,
+//             borderRadius: 16,
+//           }}
+//           withShadow
+// withHorizontalLines={false}
+// withDots={false}
+// withInnerLines={false}
+// withOuterLines={false}
+// withVerticalLabels={false} // Remove vertical labels
+// withHorizontalLabels={false} // Remove horizontal labels
+
+//         />
+//       </View>
+//     );
+//   } else {
+//     return null; // Render nothing if chartPrices is undefined or empty
+//   }
+// };
+
+// export default Chart;
+
+// const styles = StyleSheet.create({
+//   mainContainer: {
+//     flex: 1,
+//     backgroundColor: COLORS.skyBlue,
+//     marginTop: heightPercentageToDP(2),
+//   },
+// });
+
+// import {Dimensions, StyleSheet, Text, View} from 'react-native';
+// import React from 'react';
+// import moment from 'moment';
+// import {
+//   heightPercentageToDP,
+//   widthPercentageToDP,
+// } from 'react-native-responsive-screen';
+// import {COLORS} from '../../../constants';
+// // import {LineChart} from 'react-native-gifted-charts';
+// import {LineChart} from 'react-native-chart-kit';
+
+// const data = [26117, 26138, 26181, 26128, 26059];
+
+// // const dataaaa = data.map(value => ({value: value + 2000.4925731258}));
+
+// const Chart = ({containerStyles, chartPrices}) => {
+//   let startUnixTimeStamp = moment().subtract(7, 'day').unix();
+
+//   let datas = chartPrices
+//     ? chartPrices?.map((item, index) => {
+//         return {
+//           x: startUnixTimeStamp + (index + 1) * 3600,
+//           y: item,
+//         };
+//       })
+//     : [];
+
+//   // console.log('HEY MAN BEFORE DATAS : ' + chartPrices.length);
+//   // const selectedData = chartPrices.slice(0, 40);
+//   // console.log('HEY MAN AFYER DATAS : ' + selectedData.length);
+//   // console.log('HEY MAN AFYER DATAS : ' + selectedData);
+
+//   let realTimeChartData = chartPrices
+//     ? chartPrices?.map(value => (value))
+//     : '';
+
+//     console.log('HEY chart : ' + chartPrices);
+//     console.log('HEY Real : ' + realTimeChartData);
+
+//   return (
+//     <View style={styles.mainContainer}>
+//       <LineChart
+//         data={{
+//           datasets: [
+//             {
+//               data: realTimeChartData,
+//             },
+//           ],
+//         }}
+//         width={Dimensions.get('window').width}
+//         height={220}
+//         yAxisLabel="$"
+//         yAxisSuffix="k"
+//         yAxisInterval={1} // optional, defaults to 1
+//         chartConfig={{
+//           backgroundColor: '#e26a00',
+//           backgroundGradientFrom: COLORS.skyBlue,
+//           backgroundGradientTo: COLORS.purple,
+
+//           decimalPlaces: 2, // optional, defaults to 2dp
+//           color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
+//           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+//           style: {
+//             borderRadius: 16,
+//           },
+//           propsForDots: {
+//             r: '2',
+//             strokeWidth: '1',
+//             stroke: COLORS.skyBlue,
+
+//             color: 'green',
+//           },
+//         }}
+//         bezier
+//         style={{
+//           marginVertical: 8,
+//           borderRadius: 16,
+//         }}
+//         withShadow
+//       />
+//     </View>
+//   );
+// };
+
+// export default Chart;
+
+// const styles = StyleSheet.create({
+//   mainContainer: {
+//     flex: 1,
+//     backgroundColor: COLORS.skyBlue,
+//     marginTop: heightPercentageToDP(2),
+//   },
+// });
 
 // <LineChart
 
@@ -177,3 +427,38 @@ const styles = StyleSheet.create({
 // spacing={1}
 // hideAxesAndRules
 // />
+// let realTimeChartDat = chartPrices
+//   ? chartPrices?.map((index, value) => ({value: value, dataPointText: index}))
+//   : [];
+
+// const lineDatas = chartPrices
+//   ? chartPrices?.map((value, index) => ({
+//       x: value,
+//       y: index,
+//     }))
+//   : [];
+
+// const lineData = [
+//   {value: 26227.05218111046, dataPointText: 1695807867},
+//   {value: 26138.4925731258, dataPointText: 1695811467},
+//   {value: 2638.4925731258, dataPointText: 1695815067},
+//   {value: 26338.4925731258, dataPointText: 1695818667},
+//   {value: 26038.4925731258, dataPointText: 1695822267},
+//   {value: 26138.4925731258, dataPointText: 1695822267},
+//   {value: 26138.4925731258, dataPointText: 1695822267},
+//   {value: 26238.4925731258, dataPointText: 1695822267},
+//   {value: 23138.4925731258, dataPointText: 31695822267},
+//   {value: 21138.4925731258, dataPointText: 1695822267},
+//   {value: 20138.4925731258, dataPointText: 169522267},
+//   {value: 2000, dataPointText: 169582267},
+//   {value: 36000, dataPointText: 169582267},
+//   {value: 6000, dataPointText: 1695822267},
+// ];
+
+// const dataaa = [
+//   {value: 24138.4925731258},
+//   {value: 26138.4925731258},
+//   {value: 25138.4925731258},
+//   {value: 22138.4925731258},
+// ];
+// console.log(dataaa);

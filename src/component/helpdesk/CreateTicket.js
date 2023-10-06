@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   title: {
     color: COLORS.white,
     fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2),
+    fontSize: heightPercentageToDP(2.5),
   },
   subtitle: {
     color: COLORS.gray2,

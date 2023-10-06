@@ -24,7 +24,13 @@ const ActionSheetBottom = () => {
         }}
         onBackButtonPress={() => {
           setVisible(false);
-        }}>
+        }}
+        
+        onBackdropPress={() => {
+          setVisible(false); // Close the modal when the user clicks outside of it
+        }}
+        
+        >
         <View
           style={{
             flex: 1,

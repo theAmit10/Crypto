@@ -1,4 +1,4 @@
-import {StatusBar} from 'react-native';
+import {Alert, StatusBar} from 'react-native';
 import {
   StyleSheet,
   Text,
@@ -38,15 +38,15 @@ const Profile = () => {
 
         {/** verification */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('BottomActionSheet')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Verification')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="Safety"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -65,17 +65,17 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
 
-        {/** verification */}
+        {/** KnowYourCrypto */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('KnowYourCrypto')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="question"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -100,12 +100,12 @@ const Profile = () => {
           <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Setting')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="setting"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -130,12 +130,12 @@ const Profile = () => {
           <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('History')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="clockcircleo"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -160,17 +160,17 @@ const Profile = () => {
         
 
 
-        {/** verification */}
+        {/** Rewards */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Rewards')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="tago"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -195,12 +195,12 @@ const Profile = () => {
           <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="carryout"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -223,17 +223,17 @@ const Profile = () => {
        
 
 
-        {/** verification */}
+        {/** Helpdesk */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('HelpDesk')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="infocirlceo"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -253,17 +253,17 @@ const Profile = () => {
         </View>
 
 
-        {/** verification */}
+        {/** About */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('KnowYourCrypto')}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="questioncircleo"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -285,15 +285,15 @@ const Profile = () => {
 
         {/** verification */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity style={styles.contentContainer} onPress={() => Alert.alert("Logging Off")}>
             <View style={{flexDirection: 'row'}}>
               <Text
-                style={{textAlignVertical: 'center'}}
-                className="rounded-full bg-white p-2">
+                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                className="rounded-full bg-white p-3">
                 <AntDesign
                   name="logout"
                   size={heightPercentageToDP(3)}
-                  color={'black'}
+                  color={'white'}
                   style={styles.centerImage}
                 />
               </Text>
@@ -317,7 +317,7 @@ const Profile = () => {
         
       </ScrollView>
 
-      <NavigationContainer />
+      
     </SafeAreaView>
   );
 };

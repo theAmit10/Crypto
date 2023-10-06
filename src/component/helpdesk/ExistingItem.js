@@ -15,22 +15,42 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import Octicons from 'react-native-vector-icons/Octicons';
-import ExistingItem from './ExistingItem';
 
-const ExistingTicket = () => {
+const ExistingItem = () => {
   return (
-    <View style={styles.mainCointer}>
-      <ScrollView>
-        <ExistingItem />
-        <ExistingItem />
-        <ExistingItem />
-        <ExistingItem />
-      </ScrollView>
+    <View style={styles.contentContainer}>
+      {/** left container */}
+      <View style={styles.leftContainer}>
+        <View
+          style={{
+            padding: heightPercentageToDP(2),
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: COLORS.green,
+            opacity: 0.5,
+          }}
+          className=" rounded-full ">
+          <Octicons
+            name="comment-discussion"
+            size={heightPercentageToDP(4)}
+            color={COLORS.white}
+            style={{alignSelf: 'center'}}
+          />
+        </View>
+      </View>
+
+      {/** right container */}
+      <View style={styles.rightContainer}>
+        <Text style={styles.title}>Ticket #101</Text>
+        <Text style={styles.subtitle} numberOfLines={1}>
+          Hey, something went wrong in my account please solve my issue
+        </Text>
+      </View>
     </View>
   );
 };
 
-export default ExistingTicket;
+export default ExistingItem;
 
 const styles = StyleSheet.create({
   mainCointer: {

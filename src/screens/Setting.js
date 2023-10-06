@@ -15,10 +15,22 @@ import {COLORS, SIZES, FONT, images} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import HeaderTop from '../component/profile/HeaderTop';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {heightPercentageToDP} from 'react-native-responsive-screen';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import Modal from 'react-native-modal';
+import {useState} from 'react';
+import CoinItem from '../component/Coinitems';
 
 const Setting = () => {
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
+  const [emailVisible, setEmailVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,20 +42,82 @@ const Setting = () => {
           <View>
             <TouchableOpacity
               style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              onPress={() => setVisible(true)}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center',  backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="user"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
 
-                <Text style={styles.title}>Personal Information</Text>
+                <Text style={styles.title}>Account ID</Text>
+              </View>
+
+              <Text style={{textAlignVertical: 'center'}}>
+                <AntDesign
+                  name="right"
+                  size={heightPercentageToDP(3)}
+                  color={'white'}
+                  style={styles.centerImage}
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/** Email id */}
+          <View>
+            <TouchableOpacity
+              style={styles.contentContainer}
+              onPress={() => setEmailVisible(true)}>
+              <View style={{flexDirection: 'row'}}>
+                <Text
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
+                  <Fontisto
+                    name="email"
+                    size={heightPercentageToDP(3)}
+                    color={'white'}
+                    style={styles.centerImage}
+                  />
+                </Text>
+
+                <Text style={styles.title}>Change Email ID</Text>
+              </View>
+
+              <Text style={{textAlignVertical: 'center'}}>
+                <AntDesign
+                  name="right"
+                  size={heightPercentageToDP(3)}
+                  color={'white'}
+                  style={styles.centerImage}
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/** Change Password */}
+          <View>
+            <TouchableOpacity
+              style={styles.contentContainer}
+              onPress={() => setPasswordVisible(true)}>
+              <View style={{flexDirection: 'row'}}>
+                <Text
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
+                  <AntDesign
+                    name="lock"
+                    size={heightPercentageToDP(3)}
+                    color={'white'}
+                    style={styles.centerImage}
+                  />
+                </Text>
+
+                <Text style={styles.title}>Change Password</Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
@@ -61,15 +135,15 @@ const Setting = () => {
           <View>
             <TouchableOpacity
               style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              onPress={() => navigation.navigate('Wallet')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="wallet"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -95,12 +169,12 @@ const Setting = () => {
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="bells"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -126,12 +200,12 @@ const Setting = () => {
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="clockcircleo"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -150,36 +224,7 @@ const Setting = () => {
             </TouchableOpacity>
           </View>
 
-          {/** Dark Mode */}
-          <View>
-            <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
-              <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
-                  <AntDesign
-                    name="Safety"
-                    size={heightPercentageToDP(3)}
-                    color={'black'}
-                    style={styles.centerImage}
-                  />
-                </Text>
-
-                <Text style={styles.title}>Dark Mode</Text>
-              </View>
-
-              <Text style={{textAlignVertical: 'center'}}>
-                <AntDesign
-                  name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
-                  style={styles.centerImage}
-                />
-              </Text>
-            </TouchableOpacity>
-          </View>
+          
 
           {/** Payment */}
           <View>
@@ -188,12 +233,12 @@ const Setting = () => {
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="carryout"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -219,12 +264,12 @@ const Setting = () => {
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="gift"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -247,15 +292,15 @@ const Setting = () => {
           <View>
             <TouchableOpacity
               style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              onPress={() => navigation.navigate('Rewards')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="addusergroup"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -278,15 +323,15 @@ const Setting = () => {
           <View>
             <TouchableOpacity
               style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              onPress={() => navigation.navigate('KnowYourCrypto')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="questioncircleo"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -305,24 +350,56 @@ const Setting = () => {
             </TouchableOpacity>
           </View>
 
-          {/** verification */}
+          {/** Helpdesk */}
+          <View>
+            <TouchableOpacity
+              style={styles.contentContainer}
+              onPress={() => navigation.navigate('HelpDesk')}>
+              <View style={{flexDirection: 'row'}}>
+                <Text
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
+                  <AntDesign
+                    name="infocirlceo"
+                    size={heightPercentageToDP(3)}
+                    color={'white'}
+                    style={styles.centerImage}
+                  />
+                </Text>
+
+                <Text style={styles.title}>Helpdesk</Text>
+              </View>
+
+              <Text style={{textAlignVertical: 'center'}}>
+                <AntDesign
+                  name="right"
+                  size={heightPercentageToDP(3)}
+                  color={'white'}
+                  style={styles.centerImage}
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+
+          {/** Dark Mode */}
           <View>
             <TouchableOpacity
               style={styles.contentContainer}
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
-                  <AntDesign
-                    name="infocirlceo"
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
+                  <MaterialIcons
+                    name="dark-mode"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
 
-                <Text style={styles.title}>Helpdesk</Text>
+                <Text style={styles.title}>Dark Mode</Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
@@ -343,12 +420,12 @@ const Setting = () => {
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
                 <Text
-                  style={{textAlignVertical: 'center'}}
-                  className="rounded-full bg-white p-2">
+                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
+                  className="rounded-full bg-white p-3">
                   <AntDesign
                     name="logout"
                     size={heightPercentageToDP(3)}
-                    color={'black'}
+                    color={'white'}
                     style={styles.centerImage}
                   />
                 </Text>
@@ -366,6 +443,140 @@ const Setting = () => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          {/** Models  */}
+
+          {/**  Account ID Models  */}
+
+          <Modal
+            animationIn={'slideInUp'}
+            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            isVisible={visible}
+            onTouchCancel={() => {
+              setVisible(false);
+            }}
+            onBackdropPress={() => {
+              setVisible(false);
+            }}
+            onBackButtonPress={() => {
+              setVisible(false);
+            }}>
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 0,
+                backgroundColor: COLORS.skyBlue,
+                width: '100%',
+                borderTopRightRadius: heightPercentageToDP(6),
+                borderTopLeftRadius: heightPercentageToDP(6),
+              }}>
+              <View style={styles.topView}></View>
+              <View style={styles.modelContent}>
+                <Text style={styles.modelParentTitle}>Account ID</Text>
+
+                <Text style={styles.modeltitle}>Account ID</Text>
+                <Text style={styles.modelSubtitle}>19876121249</Text>
+
+                <Text style={styles.copybtn}>Copy</Text>
+              </View>
+            </View>
+          </Modal>
+
+          {/**  Email Models  */}
+
+          <Modal
+            animationIn={'slideInUp'}
+            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            isVisible={emailVisible}
+            onTouchCancel={() => {
+              setEmailVisible(false);
+            }}
+            onBackdropPress={() => {
+              setEmailVisible(false);
+            }}
+            onBackButtonPress={() => {
+              setEmailVisible(false);
+            }}>
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 0,
+                backgroundColor: COLORS.skyBlue,
+                width: '100%',
+                borderTopRightRadius: heightPercentageToDP(6),
+                borderTopLeftRadius: heightPercentageToDP(6),
+              }}>
+              <View style={styles.topView}></View>
+              <View style={styles.modelContent}>
+                <Text style={styles.modelParentTitle}>New Email Address</Text>
+
+                <Text style={styles.modeltitle}>Current Email</Text>
+                <Text style={styles.modelSubtitle}>wasu@gmail.com</Text>
+
+                <Text style={styles.modeltitle}>Enter New Email</Text>
+                <TextInput
+                  style={styles.modelSubtitle}
+                  inputMode="email"
+                  placeholder="wasu@gmail.com"
+                  placeholderTextColor={COLORS.gray}></TextInput>
+
+                <Text style={styles.copybtn}>Continue</Text>
+              </View>
+            </View>
+          </Modal>
+
+          {/**  Change Password Models  */}
+
+          <Modal
+            animationIn={'slideInUp'}
+            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            isVisible={passwordVisible}
+            onTouchCancel={() => {
+              setPasswordVisible(false);
+            }}
+            onBackdropPress={() => {
+              setPasswordVisible(false);
+            }}
+            onBackButtonPress={() => {
+              setPasswordVisible(false);
+            }}>
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 0,
+                backgroundColor: COLORS.skyBlue,
+                width: '100%',
+                borderTopRightRadius: heightPercentageToDP(6),
+                borderTopLeftRadius: heightPercentageToDP(6),
+              }}>
+              <View style={styles.topView}></View>
+              <View style={styles.modelContent}>
+                <Text style={styles.modelParentTitle}>Change Password</Text>
+
+                <TextInput
+                  style={styles.modelSubtitle}
+                  placeholder="Current Password"
+                  placeholderTextColor={COLORS.gray}></TextInput>
+
+                <TextInput
+                  style={styles.modelSubtitle}
+                  placeholder="New Password"
+                  placeholderTextColor={COLORS.gray}></TextInput>
+
+                <TextInput
+                  style={styles.modelSubtitle}
+                  placeholder="Confirm Password"
+                  placeholderTextColor={COLORS.gray}></TextInput>
+
+                <Text style={styles.copybtn}>Continue</Text>
+              </View>
+            </View>
+          </Modal>
+
+          {/** End Model */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -396,6 +607,48 @@ const styles = StyleSheet.create({
     fontFamily: FONT.extrabold,
     fontSize: 15,
     textAlignVertical: 'center',
-    marginStart: 10,
+    margin: 10,
+  },
+  topView: {
+    height: heightPercentageToDP(0.8),
+    width: widthPercentageToDP(25),
+    backgroundColor: COLORS.white,
+    margin: heightPercentageToDP(2),
+    alignSelf: 'center',
+    borderRadius: heightPercentageToDP(2),
+  },
+  modelContent: {
+    margin: heightPercentageToDP(2),
+  },
+  modelParentTitle: {
+    color: 'white',
+    fontFamily: FONT.extrabold,
+    fontSize: 15,
+    textAlignVertical: 'center',
+    margin: heightPercentageToDP(2),
+  },
+  modeltitle: {
+    color: COLORS.green,
+    fontFamily: FONT.regular,
+    marginTop: heightPercentageToDP(2),
+    marginHorizontal: heightPercentageToDP(2),
+  },
+  modelSubtitle: {
+    color: COLORS.white,
+    backgroundColor: COLORS.purple,
+    marginHorizontal: heightPercentageToDP(2),
+    marginBottom: heightPercentageToDP(2),
+    padding: heightPercentageToDP(2),
+    borderRadius: heightPercentageToDP(1),
+  },
+  copybtn: {
+    color: COLORS.white,
+    fontFamily: FONT.semibold,
+    fontSize: heightPercentageToDP(2),
+    backgroundColor: COLORS.green,
+    margin: heightPercentageToDP(2),
+    padding: heightPercentageToDP(2),
+    borderRadius: heightPercentageToDP(2),
+    textAlign: 'center',
   },
 });
