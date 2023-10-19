@@ -1,21 +1,34 @@
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import React from 'react';
 import {COLORS, FONT} from '../../../constants';
-import {heightPercentageToDP, widthPercentageToDP} from 'react-native-responsive-screen';
-
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import {useSelector} from 'react-redux';
 
 const CardDetails = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View className="flex-1" style={{backgroundColor: COLORS.purpleDark}}>
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+      }}>
       <ScrollView>
         {/** Top container */}
         <View style={styles.accountDetailsTopContainer}>
           <View style={styles.topContainerLeft}>
-            <Text style={styles.title}>Card Details</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}>
+              Card Details
+            </Text>
           </View>
 
           <View style={styles.topContainerRight}>
@@ -31,7 +44,14 @@ const CardDetails = () => {
           <Text style={styles.titleGreen}>Card Holder Name</Text>
           <View>
             <TextInput
-              style={styles.userInput}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
               placeholderTextColor="gray"
               inputMode="text"
             />
@@ -40,7 +60,14 @@ const CardDetails = () => {
           <Text style={styles.titleGreen}>Card Type</Text>
           <View>
             <TextInput
-              style={styles.userInput}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
               placeholderTextColor="gray"
               inputMode="text"
             />
@@ -49,7 +76,14 @@ const CardDetails = () => {
           <Text style={styles.titleGreen}>Card Number</Text>
           <View>
             <TextInput
-              style={styles.userInput}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
               placeholderTextColor="gray"
               inputMode="numeric"
             />
@@ -58,7 +92,14 @@ const CardDetails = () => {
           <Text style={styles.titleGreen}>Expiration</Text>
           <View>
             <TextInput
-              style={styles.userInput}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
               placeholderTextColor="gray"
               inputMode="text"
             />
@@ -66,9 +107,24 @@ const CardDetails = () => {
         </View>
 
         {/** Third container */}
-        <View style={styles.cardContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+            borderColor:
+              THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+
+            ...styles.cardContainer,
+          }}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View style={styles.cardTopIcon}>
+            <View
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.cardTopIcon,
+              }}>
               <MaterialCommunityIcons
                 name="check"
                 size={20}
@@ -76,7 +132,7 @@ const CardDetails = () => {
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
-            
+
             <FontAwesome
               name="cc-mastercard"
               size={heightPercentageToDP(3)}
@@ -84,8 +140,14 @@ const CardDetails = () => {
               style={{alignSelf: 'center', opacity: 0.9, marginStart: 2}}
             />
           </View>
-          <Text style={styles.subtitle}>**** **** 5262</Text>
-          
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}>
+            **** **** 5262
+          </Text>
+
           <View
             style={{
               flexDirection: 'row',
@@ -94,32 +156,66 @@ const CardDetails = () => {
               gap: 3,
             }}>
             <View style={{flex: 2, alignItems: 'flex-start'}}>
-              <Text style={styles.subSubTitle}>Holder Name</Text>
-              <Text style={styles.subtitle} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subSubTitle,
+                }}>
+                Holder Name
+              </Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}
+                numberOfLines={1}>
                 Wasu Dev
               </Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={styles.subSubTitle}>Expiry</Text>
-              <Text style={styles.subtitle} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subSubTitle,
+                }}>
+                Expiry
+              </Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}
+                numberOfLines={1}>
                 08/22
               </Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={styles.subSubTitle}>CVV</Text>
-              <Text style={styles.subtitle} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subSubTitle,
+                }}>
+                CVV
+              </Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}
+                numberOfLines={1}>
                 ***
               </Text>
             </View>
           </View>
-
-
-         
-
         </View>
-        
 
         {/** bottom Buttons */}
 
@@ -150,29 +246,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    color: 'white',
     fontFamily: FONT.bold,
     fontSize: heightPercentageToDP(2.5),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
   subtitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
   subSubTitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
-    opacity: 0.5,
+    opacity: 0.8,
   },
   topRightDefault: {
-    borderRadius: 10,
+    height: heightPercentageToDP(5),
+    borderRadius: heightPercentageToDP(1),
     borderColor: COLORS.gray,
     borderWidth: 2,
     padding: heightPercentageToDP(1),
@@ -180,7 +274,8 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
   },
   topRightVerified: {
-    borderRadius: 10,
+    height: heightPercentageToDP(5),
+    borderRadius: heightPercentageToDP(1),
     borderColor: COLORS.green,
     borderWidth: 2,
     padding: heightPercentageToDP(1),
@@ -189,17 +284,15 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     position: 'relative',
-    backgroundColor: COLORS.purple,
-    height: heightPercentageToDP(20),
-    borderRadius: 10,
-    borderColor: COLORS.purple,
+    height: heightPercentageToDP(18),
+    borderRadius: heightPercentageToDP(1),
     borderWidth: 2,
-    marginHorizontal: 10,
-    marginBottom: 10,
-    padding: 10,
+    marginHorizontal: heightPercentageToDP(1),
+    marginBottom: heightPercentageToDP(1),
+    padding: heightPercentageToDP(1),
   },
   thirdTopContainer: {
-    padding: 10,
+    padding: heightPercentageToDP(1),
   },
   semiTitle: {
     color: 'white',
@@ -209,12 +302,9 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   userInput: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2.5),
-    backgroundColor: COLORS.purple,
     borderWidth: 1,
-    borderColor: COLORS.purple,
     borderRadius: 5,
     paddingStart: 10,
   },
@@ -226,7 +316,7 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     marginTop: 10,
   },
-  
+
   addNewAccount: {
     backgroundColor: COLORS.green,
     flex: 1,
@@ -251,9 +341,8 @@ const styles = StyleSheet.create({
   },
   cardTopIcon: {
     borderWidth: 1,
-    borderColor: COLORS.purple,
+
     borderRadius: 5,
-    backgroundColor: COLORS.skyBlue,
 
     padding: 3,
   },
@@ -265,11 +354,11 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   bottmContainer: {
-    flexDirection:'row',
-    alignItems:'stretch',
+    flexDirection: 'row',
+    alignItems: 'stretch',
     height: heightPercentageToDP(10),
-    padding: 10,
+    padding: heightPercentageToDP(2),
     marginBottom: heightPercentageToDP(5),
-    gap: 10
+    gap: 10,
   },
 });

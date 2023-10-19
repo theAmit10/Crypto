@@ -16,10 +16,18 @@ import {
 } from 'react-native-responsive-screen';
 import Octicons from 'react-native-vector-icons/Octicons';
 import ExistingItem from './ExistingItem';
+import {useSelector} from 'react-redux';
 
 const ExistingTicket = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View style={styles.mainCointer}>
+    <View
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+        borderColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+        ...styles.mainCointer,
+      }}>
       <ScrollView>
         <ExistingItem />
         <ExistingItem />
@@ -35,7 +43,6 @@ export default ExistingTicket;
 const styles = StyleSheet.create({
   mainCointer: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   contentContainer: {
     height: heightPercentageToDP(10),
@@ -46,7 +53,6 @@ const styles = StyleSheet.create({
     borderRadius: heightPercentageToDP(2),
     gap: heightPercentageToDP(1),
     borderWidth: 1,
-    borderColor: COLORS.purple,
   },
   leftContainer: {
     flex: 1,

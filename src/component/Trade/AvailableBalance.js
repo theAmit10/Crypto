@@ -1,84 +1,72 @@
-import { SafeAreaView, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { COLORS,FONT } from '../../../constants'
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {COLORS, FONT} from '../../../constants';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const AvailableBalance = ({from, value}) => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <SafeAreaView style={styles.container}>
-    <Text style={styles.name}>Available Balance :</Text>
-    
-    <Text style={styles.tradeValue}>$765,678 BTC</Text>   
-      
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        ...styles.container,
+        borderColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+      }}>
+      <Text
+        style={{
+          color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+          ...styles.name,
+        }}>
+        Available Balance :
+      </Text>
+      <Text
+        style={{
+          color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+          ...styles.tradeValue,
+        }}
+        numberOfLines={1}>
+        $765,678 BTC
+      </Text>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default AvailableBalance
+export default AvailableBalance;
 
 const styles = StyleSheet.create({
-
   container: {
-    display:'flex',
-    backgroundColor: COLORS.skyBlue,
-    height:60,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginTop:20,
-    marginStart:10,
-    marginEnd:10,
-    borderWidth: 1,         
-    borderColor: COLORS.skyBlue,   
+    display: 'flex',
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: heightPercentageToDP(2),
+    marginStart: heightPercentageToDP(1),
+    marginEnd: heightPercentageToDP(1),
+    borderWidth: 1,
+
     borderRadius: 5,
-    padding:10
-    
-    
-    
-  },
-  email: {
-    color: "white",
-    fontFamily: FONT.semibold,
-    fontSize: 16,  
-    
+    padding: heightPercentageToDP(2),
   },
   name: {
-    color: "white",
-    fontFamily: FONT.bold,
-    fontSize: heightPercentageToDP(2.5),
-    textAlignVertical: 'center'
-   
-    
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(2),
+    textAlignVertical: 'center',
   },
-  
-  
-  containerLeft: {
-    width: 150,
-    flexDirection:'column',
-    justifyContent:'center',
-    padding:10
-  },
-  containerRight: {
-    flexDirection:'row',
-    flex:1,
-    justifyContent:'flex-end'
-  },
-  profileImage:{
-    width: 50,
-    height: 50,
-    resizeMode: "cover",  
-    tintColor: "white" ,
-    alignSelf:'center'
-    
-
-  },
-  tradeValue:{
-    color: "white",
+  tradeValue: {
     fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2.5),
-    textAlignVertical: 'center'
-  }
-
-  
-  
-
-})
+    fontSize: heightPercentageToDP(2),
+    textAlignVertical: 'center',
+  },
+});

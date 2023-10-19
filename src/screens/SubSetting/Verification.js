@@ -14,16 +14,28 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useSelector} from 'react-redux';
 
 const Verification = () => {
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME VERIFICATION : ' + THEME.data);
   return (
-    <SafeAreaView style={styles.mainCointer}>
+    <SafeAreaView
+      style={{
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+        ...styles.mainCointer,
+      }}>
       <ScrollView>
         <HeaderTop value={'Verification'} />
 
         {/** Content Parent Container */}
 
-        <View style={styles.contentParentConatainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.contentParentConatainer,
+          }}>
           {/** Content Container */}
 
           {/** your details Container */}
@@ -38,8 +50,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Your Details</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Your Details
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   Please provide your name and email
                 </Text>
               </View>
@@ -58,8 +82,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Scan QR code</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Scan QR code
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   Verified at least one device with 2FA
                 </Text>
               </View>
@@ -78,8 +114,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Choose a password</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Choose a password
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   must be atleast 8 characters
                 </Text>
               </View>
@@ -98,8 +146,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Invite your team</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Invite your team
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   Start collaborating with your team
                 </Text>
               </View>
@@ -118,8 +178,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Add your social</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Add your social
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   share post to your social account
                 </Text>
               </View>
@@ -138,8 +210,20 @@ const Verification = () => {
                 />
               </View>
               <View style={styles.rightContainer}>
-                <Text style={styles.title}>Your Details</Text>
-                <Text style={styles.subtitle}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Your Details
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.subtitle,
+                  }}>
                   Please provide your name and email
                 </Text>
               </View>
@@ -157,13 +241,12 @@ export default Verification;
 const styles = StyleSheet.create({
   mainCointer: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   contentParentConatainer: {
     height: heightPercentageToDP(50),
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1),
-    backgroundColor: COLORS.purple,
+
     borderRadius: heightPercentageToDP(2),
   },
   contentContainer: {
@@ -181,24 +264,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
   },
   subtitle: {
-    color: COLORS.gray2,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
   },
-  verify:{
+  verify: {
     color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
     backgroundColor: COLORS.green,
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(2),
-    borderRadius:heightPercentageToDP(2),
-    textAlign:'center'
-
-  }
+    borderRadius: heightPercentageToDP(2),
+    textAlign: 'center',
+  },
 });

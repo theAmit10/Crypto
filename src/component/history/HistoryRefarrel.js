@@ -11,9 +11,11 @@ import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import WithdrawReferalItem from './withdraw/WithdrawReferalItem';
+import {useSelector} from 'react-redux';
 
 const HistoryRefarrel = () => {
-  
+  const THEME = useSelector(state => state.theme);
+
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
 
@@ -54,7 +56,6 @@ const HistoryRefarrel = () => {
     setMode(currentMode);
   };
 
-
   const showDatepickerFrom = () => {
     showModeFrom('date');
   };
@@ -63,19 +64,29 @@ const HistoryRefarrel = () => {
     showModeTo('date');
   };
 
-  
-
   return (
-    <View className="flex-1" style={{backgroundColor: COLORS.purpleDark}}>
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+      }}>
       <View style={styles.dateContainer}>
         {/** Calender container */}
-        <View style={styles.dateContainerLeft}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.dateContainerLeft,
+          }}>
           <Feather name="calendar" size={20} color={COLORS.green} />
           {/** From Calender  */}
           <View>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 opacity: 0.5,
                 fontFamily: FONT.regular,
@@ -84,7 +95,7 @@ const HistoryRefarrel = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
               }}
@@ -94,12 +105,18 @@ const HistoryRefarrel = () => {
             </Text>
           </View>
 
-          <Text style={{color: 'white', textAlignVertical: 'center'}}>-</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              textAlignVertical: 'center',
+            }}>
+            -
+          </Text>
           {/** To Calender  */}
           <View>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 opacity: 0.5,
                 fontFamily: FONT.regular,
@@ -108,7 +125,7 @@ const HistoryRefarrel = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
               }}
@@ -141,7 +158,12 @@ const HistoryRefarrel = () => {
           )}
         </View>
 
-        <View style={styles.dateContainerRight}>
+        <View
+          style={{
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.dateContainerRight,
+          }}>
           <Feather
             name="download"
             size={25}
@@ -155,13 +177,11 @@ const HistoryRefarrel = () => {
 
       <GestureHandlerRootView className="flex-1 mt-2">
         <ScrollView>
-          <WithdrawReferalItem/>
-          
-          <WithdrawReferalItem/>
-          <WithdrawReferalItem/>
-          <WithdrawReferalItem/>
-          <WithdrawReferalItem/>
-          
+          <WithdrawReferalItem />
+          <WithdrawReferalItem />
+          <WithdrawReferalItem />
+          <WithdrawReferalItem />
+          <WithdrawReferalItem />
         </ScrollView>
       </GestureHandlerRootView>
     </View>
@@ -187,7 +207,6 @@ const styles = StyleSheet.create({
   },
   dateContainerLeft: {
     width: widthPercentageToDP(75),
-    backgroundColor: COLORS.skyBlue,
     padding: heightPercentageToDP(3),
     borderWidth: 2,
     borderRadius: 10,

@@ -15,14 +15,26 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useSelector} from 'react-redux';
 
 const CreateTicket = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View style={styles.mainCointer}>
+    <View
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+        ...styles.mainCointer,
+      }}>
       <ScrollView>
         {/** Content Parent Container */}
 
-        <View style={styles.contentTopConatainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+            ...styles.contentTopConatainer,
+          }}>
           {/** Content Container */}
           <View
             style={{
@@ -30,7 +42,6 @@ const CreateTicket = () => {
               alignItems: 'center',
               padding: heightPercentageToDP(3),
               backgroundColor: COLORS.green,
-              opacity: 0.3
             }}
             className=" rounded-full ">
             <AntDesign
@@ -41,8 +52,18 @@ const CreateTicket = () => {
             />
           </View>
 
-          <Text style={styles.title}>Welcome to crypto Money HelpDesk</Text>
-          <Text style={styles.subtitle}>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.title,
+            }}>
+            Welcome to crypto Money HelpDesk
+          </Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}>
             If you have any issue, open a ticket
           </Text>
         </View>
@@ -53,21 +74,35 @@ const CreateTicket = () => {
           }}>
           <Text style={styles.subSubTitle}>Subject</Text>
           <TextInput
-            style={styles.inputContainer}
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              color:
+                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              borderColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              ...styles.inputContainer,
+            }}
             placeholderTextColor="white"
           />
 
-
           <Text style={styles.subSubTitle}>Message</Text>
           <TextInput
-            style={styles.messageInputContainer}
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              color:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              borderColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              ...styles.messageInputContainer,
+            }}
             placeholderTextColor="white"
           />
         </View>
 
         <Text style={styles.addTicket}>Add Ticket</Text>
       </ScrollView>
-      
     </View>
   );
 };
@@ -77,12 +112,10 @@ export default CreateTicket;
 const styles = StyleSheet.create({
   mainCointer: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   contentTopConatainer: {
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1),
-    
     borderRadius: heightPercentageToDP(2),
     justifyContent: 'center',
     alignItems: 'center',
@@ -90,12 +123,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2.5),
   },
   subtitle: {
-    color: COLORS.gray2,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
   },
@@ -103,7 +134,7 @@ const styles = StyleSheet.create({
     color: COLORS.green,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
-    marginStart: heightPercentageToDP(2)
+    marginStart: heightPercentageToDP(2),
   },
   addTicket: {
     color: COLORS.white,
@@ -122,27 +153,25 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     padding: 10,
     fontSize: 14,
-    backgroundColor: COLORS.purple,
+
     borderWidth: 2,
-    borderColor: COLORS.purpleDark,
+
     borderRadius: 5,
     margin: 5,
     marginEnd: 10,
-    opacity: 0.5,
   },
-  messageInputContainer:{
+  messageInputContainer: {
     height: heightPercentageToDP(20),
     lineHeight: 20,
-    color: 'white',
+
     fontFamily: FONT.regular,
     padding: 10,
     fontSize: 14,
-    backgroundColor: COLORS.purple,
+
     borderWidth: 2,
-    borderColor: COLORS.purpleDark,
+
     borderRadius: 5,
     margin: 5,
     marginEnd: 10,
-    opacity: 0.5,
-  }
+  },
 });

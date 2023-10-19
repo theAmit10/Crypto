@@ -17,22 +17,30 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {COLORS, FONT} from '../../../../constants';
 import CoinItem from '../../Coinitems';
+import {useSelector} from 'react-redux';
 
 const WithdrawReferalItem = () => {
+  const THEME = useSelector(state => state.theme);
   const [isHiddenBottomView, setIsHiddenBottomView] = useState(false);
 
   const hideView = () => {
-    if(isHiddenBottomView) {
-        setIsHiddenBottomView(false);
-    }else{
-        setIsHiddenBottomView(true);
+    if (isHiddenBottomView) {
+      setIsHiddenBottomView(false);
+    } else {
+      setIsHiddenBottomView(true);
     }
-    
   };
 
   return (
     <TouchableOpacity onPress={hideView}>
-      <View style={styles.container}>
+      <View
+        style={{
+          backgroundColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          borderColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          ...styles.container,
+        }}>
         {/** left container */}
 
         <View style={styles.containerLeft}>
@@ -49,19 +57,46 @@ const WithdrawReferalItem = () => {
 
           <View style={styles.middleContent}>
             <View style={styles.middleContentTop}>
-              <Text style={styles.title}>0.0115</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                0.0115
+              </Text>
 
-              <Text style={styles.title}>BTC</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                BTC
+              </Text>
             </View>
 
-            <Text style={styles.subtitle}>Jan 8, 2023 - 8:20am</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}>
+              Jan 8, 2023 - 8:20am
+            </Text>
           </View>
         </View>
 
         {/** Right container */}
         <View style={styles.containerRight}>
           <View style={styles.rightStatusContainerLeft}>
-            <View style={styles.rightStatusContainerIconLeft}>
+            <View
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                borderColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.rightStatusContainerIconLeft,
+              }}>
               <Ionicons
                 name={isHiddenBottomView ? 'remove-outline' : 'add'}
                 size={20}
@@ -76,8 +111,14 @@ const WithdrawReferalItem = () => {
       {/** bottom View */}
 
       {isHiddenBottomView && (
-        <View style={styles.bottmContainer}>
-          
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.bottmContainer,
+          }}>
           <View
             style={{
               flexDirection: 'row',
@@ -86,17 +127,38 @@ const WithdrawReferalItem = () => {
             }}>
             <View style={{flex: 2, alignItems: 'flex-start'}}>
               <Text style={styles.bottomTitle}>Accounts ID</Text>
-              <Text style={styles.subtitle}>#13173917937917</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}>
+                #13173917937917
+              </Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'center'}}>
               <Text style={styles.bottomTitle}>Tier</Text>
-              <Text style={styles.subtitle}>1</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}>
+                1
+              </Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'center'}}>
               <Text style={styles.bottomTitle}>Total Value</Text>
-              <Text style={styles.subtitle}>$78.89</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}>
+                $78.89
+              </Text>
             </View>
           </View>
         </View>
@@ -108,35 +170,29 @@ const WithdrawReferalItem = () => {
 export default WithdrawReferalItem;
 
 const styles = StyleSheet.create({
-  
   container: {
     display: 'flex',
     flexDirection: 'row',
     height: heightPercentageToDP(10),
-    backgroundColor: COLORS.skyBlue,
-    marginTop: 10,
-    marginStart: 10,
-    marginEnd: 10,
-    lineHeight: 50,
-    padding: 10,
+
+    marginTop: heightPercentageToDP(1),
+    marginHorizontal: heightPercentageToDP(1),
+    padding: heightPercentageToDP(1),
     borderWidth: 2,
     borderRadius: 10,
   },
 
   title: {
-    color: 'white',
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
   subtitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
-    opacity: 0.5,
   },
   containerLeft: {
     width: widthPercentageToDP(80),
@@ -178,7 +234,7 @@ const styles = StyleSheet.create({
   },
   rightStatusContainerIconLeft: {
     borderWidth: 1,
-    borderColor: COLORS.purple,
+
     borderRadius: 5,
   },
   rightStatusContainerIcon: {
@@ -202,14 +258,12 @@ const styles = StyleSheet.create({
   },
   bottmContainer: {
     height: heightPercentageToDP(10),
-    backgroundColor: COLORS.skyBlue,
-    marginStart: 10,
-    marginEnd: 10,
-    padding: 10,
+    marginHorizontal: heightPercentageToDP(1),
+    padding: heightPercentageToDP(1),
     borderTopRightRadius: 2,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    marginTop: -5,
+    borderBottomRightRadius: heightPercentageToDP(1),
+    borderBottomLeftRadius: heightPercentageToDP(1),
+    marginTop: heightPercentageToDP(-1),
     borderWidth: 2,
   },
 });

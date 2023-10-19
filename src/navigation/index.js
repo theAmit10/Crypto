@@ -37,14 +37,17 @@ import Verification from '../screens/SubSetting/Verification';
 import KnowYourCrypto from '../screens/SubSetting/KnowYourCrypto';
 import Rewards from '../screens/SubSetting/Rewards';
 import HelpDesk from '../screens/SubSetting/HelpDesk';
+import Market from '../screens/Market';
+import TradeListing from '../screens/TradeListing';
+import Store from '../../stores/Store';
 
 const Stack = createNativeStackNavigator();
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+
 
 const AppNavigation = () => {
   return (
-    <Provider store={store}>
+    <Provider store={Store}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
@@ -89,8 +92,9 @@ const AppNavigation = () => {
           <Stack.Screen name="KnowYourCrypto" component={KnowYourCrypto} />
           <Stack.Screen name="Rewards" component={Rewards} />
           <Stack.Screen name="HelpDesk" component={HelpDesk} />
-
-          
+          <Stack.Screen name="Market" component={Market} />
+          <Stack.Screen name="TradeListing" component={TradeListing} />
+          <Stack.Screen name="Search" component={Search} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

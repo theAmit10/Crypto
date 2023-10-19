@@ -7,15 +7,12 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  FlatListComponent,
   StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {COLORS, FONT} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
-import Graph from '../component/home/Graph';
 import CenterGraph from '../component/home/CenterGraph';
-import BottomCard from '../component/home/BottomCard';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
@@ -26,22 +23,78 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import CoinItem from '../component/Coinitems';
 import cryptocurrencies from '../../assets/data/cryptocurrencies.json';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {getHoldings, getCoinMarket} from '../../stores/market/MarketAction';
 import {useFocusEffect} from '@react-navigation/native';
 import {dummyData} from '../constrants/constrants';
 import Chart from '../component/home/Chart';
 
+import {fetchCoinMarket} from '../../stores/coinMarketSlice';
+import {fetchHoldings} from '../../stores/holdingsSlice';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {changeTheme} from '../../stores/ThemeSlice';
+import LinearGradient from 'react-native-linear-gradient';
+import Search from './Search';
+import Market from './Market';
+
 // flatlist data
 const dailyStatus = ['Top Gainers', 'Top Losers'];
 
-const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
+const HomeScreen = () => {
   const navigation = useNavigation();
 
+  const [selectedCoin, setSelectedCoin] = useState(null);
+
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME : ' + THEME.data);
+
+  const dispatch = useDispatch();
+  const myHoldings = useSelector(state => state.holdings.myHoldings);
+  const coins = useSelector(state => state.coinMarket.coins);
+  // Fetch data when the component mounts
   useEffect(() => {
+    // Fetch your holdings and coin market data
+    // dispatch(fetchHoldings(/* Pass your parameters here */));
+    dispatch(fetchCoinMarket());
     console.log('Hey from EFFECt');
-    getCoinMarket();
+
+    // coins.map(c => {
+    //   // console.log('DATA : ' + c.name);
+    // });
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = THEME.data === 'DARK' ? 'LIGHT' : 'DARK';
+    dispatch(changeTheme(newTheme));
+  };
+
+  // storing data
+  const storeUser = async value => {
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(value));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // getting data
+  const getUser = async () => {
+    try {
+      const userData = JSON.parse(await AsyncStorage.getItem('user'));
+      console.log('ASYNC : ' + userData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  storeUser(THEME.data);
+  getUser();
+
+  // useEffect(() => {
+  //   console.log('Hey from EFFECt');
+  //   getCoinMarket();
+  // }, []);
 
   // useFocusEffect(
   //   React.useCallback(() => {
@@ -58,279 +111,314 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
 
   return (
     <SafeAreaView
-      style={{backgroundColor: COLORS.purpleDark}}
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+      }}
       className="flex-1">
       {/** Header */}
       <StatusBar barStyle={'dark-content'} />
-      <View style={styles.containerHeader}>
+      <View
+        style={{
+          backgroundColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          ...styles.containerHeader,
+        }}>
         <View style={styles.containerLeft}>
           <Image
             source={require('../../assets/image/logo.png')}
             style={styles.centerImage}
+            tintColor={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
           />
-          <Text style={styles.title}>VRK Invest</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.title,
+            }}>
+            VRK Invest
+          </Text>
         </View>
+
+        {/** CONTAINER RIGHT */}
 
         <View style={styles.containerRight}>
           <TouchableOpacity
             style={styles.imageContainer}
-            onPress={() => {
-              navigation.navigate('Search');
-            }}>
-            <View style={styles.middleContentTopIcon} className="rounded-full ">
+            className="rounded-full"
+            onPress={() => navigation.navigate(Market)}>
+            <LinearGradient
+              colors={[
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+              ]}
+              className="rounded-full p-2"
+              style={styles.middleContentTopIcon}>
               <Icon
                 name="search1"
                 size={20}
-                color={COLORS.white}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
-            </View>
+            </LinearGradient>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.imageContainer}
-            onPress={() => {
-              navigation.navigate('NotificationTab');
-            }}>
-            <View style={styles.middleContentTopIcon} className="rounded-full ">
+            className="rounded-full"
+            onPress={() => navigation.navigate('NotificationTab')}>
+            <LinearGradient
+              colors={[
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+              ]}
+              className="rounded-full p-2"
+              style={styles.middleContentTopIcon}>
               <Icon
                 name="bells"
                 size={20}
-                color={COLORS.white}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
-            </View>
+            </LinearGradient>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.imageContainer}
-            onPress={() => {
-              navigation.navigate('Setting');
-            }}>
-            <View style={styles.middleContentTopIcon} className="rounded-full ">
+            className="rounded-full"
+            onPress={() => navigation.navigate('Setting')}>
+            <LinearGradient
+              colors={[
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+              ]}
+              className="rounded-full p-2"
+              style={styles.middleContentTopIcon}>
               <Icon
                 name="setting"
                 size={20}
-                color={COLORS.white}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
-            </View>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
 
       {/** Main Content */}
 
-      <ScrollView
-        style={{flex: 1, marginBottom: 70}}
-        contentContainerStyle={{flexGrow: 1}}
-        nestedScrollEnabled={true}>
-        {/** Graph */}
+      {/** FOR TOP CRYPTO DATA */}
 
-        <View>
-          {
-            <Chart
-              containerStyles={{
-                marginTop: heightPercentageToDP(2),
-              }}
-              chartPrices={coins[0]?.sparkline_in_7d?.price}
-            />
-          }
-        </View>
+      {topCryptoCurrencySection()}
 
-        {/** CenterGraph  */}
-
-        <ScrollView horizontal={true}>
-          <CenterGraph
-            image={'wallet'}
-            title={'Total Balance'}
-            amount={'$8,060.34'}
-            itemColor={'red'}
-            chartPrices={coins[0]?.sparkline_in_7d?.price}
-          />
-          <CenterGraph
-            image={'barschart'}
-            title={'Profit & Loss'}
-            amount={'$6,640.34'}
-            itemColor={'orange'}
-            chartPrices={coins[0]?.sparkline_in_7d?.price}
-          />
-          <CenterGraph
-            image={'gift'}
-            title={'Rewards'}
-            amount={'$1,050.14'}
-            itemColor={'green'}
-            chartPrices={coins[0]?.sparkline_in_7d?.price}
-          />
-        </ScrollView>
-
-        {/** Active Status Gainer OR Looser */}
-
-        <View style={styles.containerTodayStatus}>
-          <FlatList
-            data={dailyStatus}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                style={styles.tab(activeDayStatus, item)}
-                onPress={() => {
-                  setActiveDayStatus(item);
-                }}>
-                <Text style={styles.tabText(activeDayStatus, item)}>
-                  {item}
-                </Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item}
-            contentContainerStyle={{columnGap: 10}}
-            width={widthPercentageToDP(100)}
-            horizontal
-          />
-        </View>
-
-        {/**
       <FlatList
-          data={cryptocurrencies}
-          renderItem={({item}) => <CoinItem marketCoin={item}/>}
-        />
-       
-      */}
+        data={coins}
+        keyExtractor={item => item.id}
+        contentContainerStyle={{}}
+        ListHeaderComponent={
+          <View>
+            {/**Top Chart Coponent */}
+            <View>
+              {
+                <Chart
+                  containerStyles={{
+                    marginTop: heightPercentageToDP(2),
+                  }}
+                  chartPrices={
+                    selectedCoin
+                      ? selectedCoin?.sparkline_in_7d?.price
+                      : coins[0]?.sparkline_in_7d?.price
+                  }
+                />
+              }
+            </View>
 
-        {/** FOR TOP CRYPTO DATA */}
+            {/**Middle Chart Coponent */}
 
-        {topCryptoCurrencySection()}
+            <ScrollView horizontal={true}>
+              <CenterGraph
+                image={'wallet'}
+                title={'Total Balance'}
+                amount={'$8,060.34'}
+                itemColor={'red'}
+                chartColor={'rgba(255, 0, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
+              <CenterGraph
+                image={'barschart'}
+                title={'Profit & Loss'}
+                amount={'$6,640.34'}
+                itemColor={'orange'}
+                chartColor={'rgba(255, 165, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
+              <CenterGraph
+                image={'gift'}
+                title={'Rewards'}
+                amount={'$1,050.14'}
+                itemColor={'rgba(0, 255, 0, 1)'}
+                chartColor={'rgba(0,255, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
+            </ScrollView>
 
-        <FlatList
-          data={coins}
-          keyExtractor={item => item.id}
-          contentContainerStyle={{
-            marginTop: 10,
-            paddingHorizontal: 10,
-          }}
-          //
-          // ListHeaderComponent={
-          //   <View style={{marginBottom: 10}}>
-          //     <Text
-          //       style={{color: 'white', fontFamily: FONT.bold, fontSize: 18}}>
-          //       TOP CRYPTOCURRENCIES
-          //     </Text>
-          //   </View>
-          // }
-          renderItem={({item}) => {
-            let priceColor =
-              item.price_change_percentage_7d_in_currency == 0
-                ? COLORS.gray
-                : item.price_change_percentage_7d_in_currency > 0
-                ? COLORS.green
-                : COLORS.red;
+            {/** Active Status Gainer OR Looser */}
 
-            return (
-              <TouchableOpacity
-                style={{
-                  height: heightPercentageToDP(10),
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: COLORS.skyBlue,
-                  marginVertical: heightPercentageToDP(1),
-                  borderRadius: heightPercentageToDP(1),
-                  padding: heightPercentageToDP(1),
-                }}
-                // on press
-              >
-                {/** LOGO */}
-                <View
-                  style={{
-                    width: widthPercentageToDP(15),
-                    alignItems: 'center',
-                  }}>
-                  <View
-                    style={{backgroundColor: COLORS.purpleDark, padding: 6}}
-                    className="rounded-full ">
-                    <Image
-                      source={{uri: item.image}}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        resizeMode: 'cover',
-                      }}
-                    />
-                  </View>
-                </View>
-
-                {/** NAME */}
-
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Text
-                    style={{
-                      color: COLORS.white,
-                      fontFamily: FONT.bold,
-                      fontSize: heightPercentageToDP(2),
+            <View
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                borderColor:
+                  THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+                ...styles.containerTodayStatus,
+              }}>
+              <FlatList
+                data={dailyStatus}
+                renderItem={({item}) => (
+                  <TouchableOpacity
+                    style={styles.tab(activeDayStatus, item)}
+                    onPress={() => {
+                      setActiveDayStatus(item);
                     }}>
-                    {item.name}
-                  </Text>
-                  <Text
-                    style={{
-                      color: COLORS.white,
-                      fontFamily: FONT.regular,
-                      fontSize: heightPercentageToDP(2),
-                    }}>
-                    {item.symbol.toUpperCase()}
-                  </Text>
-                </View>
-
-                {/** FIGURES */}
-
-                <View>
-                  <Text
-                    style={{
-                      textAlign: 'right',
-
-                      color: COLORS.white,
-                      fontFamily: FONT.bold,
-                    }}>
-                    $ {item.current_price}
-                  </Text>
-
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'flex-end',
-                    }}>
-                    {item.price_change_percentage_7d_in_currency != 0 && (
-                      <AntDesign
-                        name={
-                          item.price_change_percentage_7d_in_currency < 0
-                            ? 'caretdown'
-                            : 'caretup'
-                        }
-                        size={12}
-                        color={priceColor}
-                        style={{alignSelf: 'center', marginRight: 5}}
-                      />
-                    )}
-
-                    <Text
-                      style={{
-                        marginLeft: 5,
-                        color: priceColor,
-                        fontFamily: FONT.regular,
-                        lineHeight: 15,
-                        padding: 2,
-                      }}>
-                      {item.price_change_percentage_7d_in_currency.toFixed(2)}%
+                    <Text style={styles.tabText(activeDayStatus, item)}>
+                      {item}
                     </Text>
-                  </View>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={item => item}
+                contentContainerStyle={{columnGap: 10}}
+                width={widthPercentageToDP(100)}
+                horizontal
+              />
+            </View>
+          </View>
+        }
+        renderItem={({item}) => {
+          let priceColor =
+            item.price_change_percentage_7d_in_currency == 0
+              ? COLORS.gray
+              : item.price_change_percentage_7d_in_currency > 0
+              ? COLORS.green
+              : COLORS.red;
+
+          return (
+            <TouchableOpacity
+              style={{
+                height: heightPercentageToDP(10),
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                marginVertical: heightPercentageToDP(1),
+                borderRadius: heightPercentageToDP(1),
+                padding: heightPercentageToDP(1),
+                marginHorizontal: heightPercentageToDP(1),
+              }}
+              // on press
+              onPress={() => setSelectedCoin(item)}>
+              {/** LOGO */}
+              <View
+                style={{
+                  width: widthPercentageToDP(15),
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+                    padding: heightPercentageToDP(1),
+                  }}
+                  className="rounded-full ">
+                  <Image
+                    source={{uri: item.image}}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      resizeMode: 'cover',
+                    }}
+                  />
                 </View>
-              </TouchableOpacity>
-            );
-          }}
-          ListFooterComponent={<View style={{marginBottom: 10}}></View>}
-        />
-      </ScrollView>
+              </View>
+
+              {/** NAME */}
+
+              <View
+                style={{
+                  flex: 1,
+                }}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    fontFamily: FONT.bold,
+                    fontSize: heightPercentageToDP(2),
+                  }}>
+                  {item.name}
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    fontFamily: FONT.regular,
+                    fontSize: heightPercentageToDP(2),
+                  }}>
+                  {item.symbol.toUpperCase()}
+                </Text>
+              </View>
+
+              {/** FIGURES */}
+
+              <View>
+                <Text
+                  style={{
+                    textAlign: 'right',
+                    fontSize: heightPercentageToDP(2),
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    fontFamily: FONT.medium,
+                  }}>
+                  $ {item.current_price.toFixed(2)}
+                </Text>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                  }}>
+                  {item.price_change_percentage_7d_in_currency != 0 && (
+                    <AntDesign
+                      name={
+                        item.price_change_percentage_7d_in_currency < 0
+                          ? 'caretdown'
+                          : 'caretup'
+                      }
+                      size={heightPercentageToDP(1.5)}
+                      color={priceColor}
+                      style={{alignSelf: 'center', marginRight: 5}}
+                    />
+                  )}
+
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      color: priceColor,
+                      fontFamily: FONT.regular,
+                      lineHeight: 15,
+                      padding: 2,
+                      fontSize: heightPercentageToDP(1.5),
+                      textAlignVertical: 'center',
+                      textAlign: 'center',
+                    }}>
+                    {item.price_change_percentage_7d_in_currency.toFixed(2)}%
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+        ListFooterComponent={<View style={{marginBottom: 10}}></View>}
+      />
     </SafeAreaView>
   );
 };
@@ -340,14 +428,12 @@ const HomeScreen = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
 const styles = StyleSheet.create({
   containerHeader: {
     display: 'flex',
-    backgroundColor: COLORS.skyBlue,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     lineHeight: 50,
   },
   title: {
-    color: 'white',
     fontFamily: FONT.extrabold,
     fontSize: heightPercentageToDP(3),
     textAlignVertical: 'center',
@@ -382,55 +468,27 @@ const styles = StyleSheet.create({
     left: 10,
   },
   containerTodayStatus: {
-    backgroundColor: COLORS.skyBlue,
+    flex: 1,
 
-    marginTop: 10,
-    marginStart: 10,
-    marginEnd: 10,
-    padding: 10,
+    marginTop: heightPercentageToDP(1),
+    marginStart: heightPercentageToDP(1),
+    marginEnd: heightPercentageToDP(1),
+    padding: heightPercentageToDP(1),
     borderWidth: 2,
-    borderRadius: 10,
-  },
-  gainer: {
-    color: 'white',
-    fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2),
-    paddingBottom: 5,
-    paddingTop: 5,
-    paddingStart: 30,
-    paddingEnd: 30,
-    backgroundColor: 'green',
-    borderWidth: 2,
-    borderColor: COLORS.white,
-    borderRadius: 10,
-    textAlignVertical: 'center',
-    textAlign: 'center',
-    opacity: 0.8,
-  },
-  loser: {
-    color: 'white',
-    fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2),
-    paddingBottom: 5,
-    paddingTop: 5,
-    paddingStart: 30,
-    paddingEnd: 30,
-    backgroundColor: 'red',
-    borderWidth: 2,
-    borderColor: 'red',
-    borderRadius: 10,
-    textAlignVertical: 'center',
-    textAlign: 'center',
-    opacity: 0.8,
+    borderRadius: heightPercentageToDP(1),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   tab: (activeJobType, item) => ({
+    flex: 1,
     paddingVertical: 12 / 2,
     paddingHorizontal: 12,
     borderRadius: 16,
+    width: widthPercentageToDP(42),
     borderWidth: 1,
     borderColor: activeJobType === item ? 'green' : 'gray',
-    width: widthPercentageToDP(40),
   }),
   tabText: (activeJobType, item) => ({
     color: activeJobType === item ? 'green' : 'gray',
@@ -439,67 +497,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }),
   middleContentTopIcon: {
-    backgroundColor: COLORS.purple,
     padding: heightPercentageToDP(1),
     justifyContent: 'center',
     alignItems: 'center',
   },
 });
 
-function mapStateToProps(state) {
-  return {
-    myHoldings: state.marketReducer.myHoldings,
-    coins: state.marketReducer.coins,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getHoldings: (
-      holdings,
-      currency,
-      coinList,
-      orderBy,
-      sparkline,
-      priceChangePerc,
-      perPage,
-      page,
-    ) => {
-      return dispatch(
-        getHoldings(
-          holdings,
-          currency,
-          coinList,
-          orderBy,
-          sparkline,
-          priceChangePerc,
-          perPage,
-          page,
-        ),
-      );
-    },
-    getCoinMarket: (
-      currency,
-      coinList,
-      orderBy,
-      sparkline,
-      priceChangePerc,
-      perPage,
-      page,
-    ) => {
-      return dispatch(
-        getCoinMarket(
-          currency,
-          coinList,
-          orderBy,
-          sparkline,
-          priceChangePerc,
-          perPage,
-          page,
-        ),
-      );
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;

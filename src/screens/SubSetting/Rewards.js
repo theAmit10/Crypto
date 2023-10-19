@@ -16,21 +16,53 @@ import {
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import {useSelector} from 'react-redux';
 
 const Rewards = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <SafeAreaView style={styles.mainCointer}>
+    <SafeAreaView
+      style={{
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+        ...styles.mainCointer,
+      }}>
       <HeaderTop value={'Rewards'} />
       <ScrollView>
         {/** Content Container */}
-        <View style={styles.contentParentConatainer}>
-          <Text style={styles.title}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.contentParentConatainer,
+          }}>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.title,
+            }}>
             Share your referral link and earn ccrypto when others trade
           </Text>
-          <Text style={styles.subtitle}>Referral ID</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}>
+            Referral ID
+          </Text>
 
-          <View style={styles.referralContainer}>
-            <Text style={styles.subtitle}>ANSWBOWHSJ</Text>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.white,
+              ...styles.referralContainer,
+            }}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}>
+              ANSWBOWHSJ
+            </Text>
             <Feather
               name="copy"
               size={heightPercentageToDP(3)}
@@ -39,9 +71,26 @@ const Rewards = () => {
             />
           </View>
 
-          <Text style={styles.subtitle}>Referral Link</Text>
-          <View style={styles.referralContainer}>
-            <Text style={styles.subtitle}>ADNKNANKDNKNGANNACKNV</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}>
+            Referral Link
+          </Text>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.white,
+              ...styles.referralContainer,
+            }}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}>
+              ADNKNANKDNKNGANNACKNV
+            </Text>
             <Feather
               name="copy"
               size={heightPercentageToDP(3)}
@@ -53,45 +102,57 @@ const Rewards = () => {
           {/** social media container */}
           <View style={styles.socialMediaContainer}>
             <View
-              style={{backgroundColor: COLORS.purple}}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              }}
               className="rounded-md blur-sm p-2">
               <FontAwesome5
                 name="facebook"
                 size={heightPercentageToDP(3)}
-                color="white"
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
 
             <View
-              style={{backgroundColor: COLORS.purple}}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              }}
               className="rounded-md blur-sm p-2">
               <FontAwesome5
                 name="whatsapp"
                 size={heightPercentageToDP(3)}
-                color="white"
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
 
             <View
-              style={{backgroundColor: COLORS.purple}}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              }}
               className="rounded-md blur-lg p-2">
               <FontAwesome5
                 name="instagram"
                 size={heightPercentageToDP(3)}
-                color="white"
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
 
             <View
-              style={{backgroundColor: COLORS.purple}}
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              }}
               className="rounded-md blur-sm p-2">
               <FontAwesome5
                 name="twitter"
                 size={heightPercentageToDP(3)}
-                color="white"
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
@@ -102,8 +163,18 @@ const Rewards = () => {
 
         {/** middle left */}
 
-        <View style={styles.middleComponent}>
-          <View style={styles.middleLeft}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+            ...styles.middleComponent,
+          }}>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+              ...styles.middleLeft,
+            }}>
             <View
               style={{
                 backgroundColor: COLORS.green,
@@ -118,15 +189,37 @@ const Rewards = () => {
                 style={{alignSelf: 'center', opacity: 1}}
               />
             </View>
-            <Text style={styles.title}>Your Community</Text>
-            <Text style={styles.referCount} numberOfLines={1}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}>
+              Your Community
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.referCount,
+              }}
+              numberOfLines={1}>
               99
             </Text>
-            <Text style={styles.referText}>Referrals</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.referText,
+              }}>
+              Referrals
+            </Text>
           </View>
 
           {/** middle right */}
-          <View style={styles.middleRight}>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+              ...styles.middleRight,
+            }}>
             <View
               style={{
                 backgroundColor: COLORS.green,
@@ -141,29 +234,61 @@ const Rewards = () => {
                 style={{alignSelf: 'center', opacity: 1}}
               />
             </View>
-            <Text style={styles.title}>Lifetime Rewards</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}>
+              Lifetime Rewards
+            </Text>
             <Text style={styles.referCount} numberOfLines={1}>
               78.89
             </Text>
-            <Text style={styles.referText}>0.892 BTC</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.referText,
+              }}>
+              0.892 BTC
+            </Text>
           </View>
 
           {/** Bottom Section */}
         </View>
 
-        <Text style={styles.BottomTitle}>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.BottomTitle,
+          }}>
           Track your income with our unique two-tier referral system;
         </Text>
 
-        <Text style={styles.BottomSubTitle}>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.BottomSubTitle,
+          }}>
           Crypto Money shares 20% of its trading fee profits from your direct
           and indirect referrals
         </Text>
 
         {/** Referral percentage bottom */}
 
-        <View style={styles.referralBottom}>
-          <View style={styles.topReferralContainer}>
+        <View
+          style={{
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.referralBottom,
+          }}>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              borderColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.topReferralContainer,
+            }}>
             <View
               style={{
                 flex: 1,
@@ -171,7 +296,14 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title}>#</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                #
+              </Text>
             </View>
 
             <View
@@ -181,7 +313,14 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title}>Rewards Split</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Rewards Split
+              </Text>
             </View>
 
             <View
@@ -191,7 +330,14 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title}>Referrals</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Referrals
+              </Text>
             </View>
 
             <View
@@ -201,7 +347,14 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(3),
               }}>
-              <Text style={styles.title}>Amount Earned</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Amount Earned
+              </Text>
             </View>
           </View>
 
@@ -215,7 +368,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>#1</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                #1
+              </Text>
             </View>
 
             <View
@@ -225,7 +380,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>8%</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                8%
+              </Text>
             </View>
 
             <View
@@ -235,7 +392,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>3</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                3
+              </Text>
             </View>
 
             <View
@@ -245,7 +404,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>(0.01 BTC)</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                (0.01 BTC)
+              </Text>
             </View>
           </View>
 
@@ -259,7 +420,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>#2</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                #2
+              </Text>
             </View>
 
             <View
@@ -269,7 +432,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>6%</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                6%
+              </Text>
             </View>
 
             <View
@@ -279,7 +444,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>13</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                13
+              </Text>
             </View>
 
             <View
@@ -289,7 +456,9 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>(0.03 BTC)</Text>
+              <Text style={styles.title} numberOfLines={1}>
+                (0.03 BTC)
+              </Text>
             </View>
           </View>
         </View>
@@ -303,18 +472,15 @@ export default Rewards;
 const styles = StyleSheet.create({
   mainCointer: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   contentParentConatainer: {
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(2),
-    backgroundColor: COLORS.skyBlue,
     borderRadius: heightPercentageToDP(2),
     gap: heightPercentageToDP(1),
   },
 
   title: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
   },
@@ -326,7 +492,7 @@ const styles = StyleSheet.create({
   referralContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'gray',
+
     padding: heightPercentageToDP(1.5),
     borderColor: COLORS.purpleDark,
     borderRadius: heightPercentageToDP(2),
@@ -346,7 +512,7 @@ const styles = StyleSheet.create({
   },
   middleLeft: {
     flex: 1,
-    backgroundColor: COLORS.skyBlue,
+
     margin: heightPercentageToDP(1),
     padding: heightPercentageToDP(2),
     borderRadius: heightPercentageToDP(2),
@@ -354,7 +520,6 @@ const styles = StyleSheet.create({
   },
   middleRight: {
     flex: 1,
-    backgroundColor: COLORS.skyBlue,
     margin: heightPercentageToDP(1),
     padding: heightPercentageToDP(2),
     borderRadius: heightPercentageToDP(2),
@@ -366,44 +531,36 @@ const styles = StyleSheet.create({
     fontSize: heightPercentageToDP(3),
   },
   referText: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
-    opacity: 0.5,
   },
   BottomTitle: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
+    width: widthPercentageToDP(90),
     fontSize: heightPercentageToDP(2.5),
     alignSelf: 'center',
     textAlign: 'center',
-    marginTop : heightPercentageToDP(2)
+    marginTop: heightPercentageToDP(2),
   },
   BottomSubTitle: {
-    color: COLORS.white,
     fontFamily: FONT.regular,
+    width: widthPercentageToDP(90),
     fontSize: heightPercentageToDP(2),
     alignSelf: 'center',
     textAlign: 'center',
-    opacity: 0.5,
-    marginTop : heightPercentageToDP(1)
+    marginTop: heightPercentageToDP(1),
   },
   referralBottom: {
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1.5),
-    borderColor: COLORS.purpleDark,
     borderRadius: heightPercentageToDP(2),
   },
   topReferralContainer: {
-   
     flexDirection: 'row',
-    backgroundColor: 'gray',
-    borderColor: COLORS.purpleDark,
     borderRadius: heightPercentageToDP(2),
   },
   topReferralContainerData: {
     height: heightPercentageToDP(10),
-    
     flexDirection: 'row',
   },
 });

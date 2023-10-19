@@ -20,12 +20,20 @@ import ProfileAbout from '../component/profile/ProfileAbout';
 import ProfileContent from '../component/profile/ProfileContent';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME PROFILE : ' + THEME.data);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+        ...styles.container,
+      }}>
       <StatusBar style="light" hidden={false} />
       <HeaderTop value={'Profile'} />
       <ScrollView>
@@ -33,291 +41,430 @@ const Profile = () => {
           <ProfileAbout />
         </View>
 
-       
-
-
         {/** verification */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Verification')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('Verification')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="Safety"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Verification</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Verification
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
 
-        {/** KnowYourCrypto */}
+        {/** About Us */}
+
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('KnowYourCrypto')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('KnowYourCrypto')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="question"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Know Your Crypto</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Know Your Crypto
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
 
         {/** Setting */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Setting')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('Setting')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="setting"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Settings</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Settings
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
 
         {/** History */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('History')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('History')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="clockcircleo"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>History</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                History
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
-      
-
-       
-        
-
 
         {/** Rewards */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Rewards')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('Rewards')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="tago"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Rewards</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Rewards
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
 
         {/** Payment */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('Payment')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('Payment')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="carryout"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Payment</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Payment
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
-        
-       
-
 
         {/** Helpdesk */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('HelpDesk')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('HelpDesk')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="infocirlceo"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Helpdesk</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Helpdesk
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
 
         {/** About */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => navigation.navigate('KnowYourCrypto')}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => navigation.navigate('KnowYourCrypto')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="questioncircleo"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>About</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                About
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
 
         {/** verification */}
         <View>
-          <TouchableOpacity style={styles.contentContainer} onPress={() => Alert.alert("Logging Off")}>
+          <TouchableOpacity
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              ...styles.contentContainer,
+            }}
+            onPress={() => Alert.alert('Logging Off')}>
             <View style={{flexDirection: 'row'}}>
-              <Text
-                style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                className="rounded-full bg-white p-3">
+              <LinearGradient
+                colors={[
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                ]}
+                className="rounded-full p-3">
                 <AntDesign
                   name="logout"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
-              </Text>
+              </LinearGradient>
 
-              <Text style={styles.title}>Logout</Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}>
+                Logout
+              </Text>
             </View>
 
             <Text style={{textAlignVertical: 'center'}}>
               <AntDesign
                 name="right"
-                size={heightPercentageToDP(3)}
-                color={'white'}
+                size={heightPercentageToDP(2)}
+                color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
                 style={styles.centerImage}
               />
             </Text>
           </TouchableOpacity>
         </View>
-
-       
-       
-        
       </ScrollView>
-
-      
     </SafeAreaView>
   );
 };
@@ -328,21 +475,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: COLORS.purpleDark,
     alignItems: 'stretch',
   },
   contentContainer: {
     display: 'flex',
-    backgroundColor: COLORS.skyBlue,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    padding: heightPercentageToDP(1),
   },
   title: {
-    color: 'white',
     fontFamily: FONT.extrabold,
-    fontSize: 15,
+    fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
-    marginStart: 10,
+    marginStart: heightPercentageToDP(2),
   },
 });

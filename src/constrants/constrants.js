@@ -1,11 +1,11 @@
 const marketTabs = [
     {
         id: 1,
-        title: "Cryptoassets",
+        title: "All Crypto",
     },
     {
         id: 2,
-        title: "Exchanges",
+        title: "New listing",
     },
 ]
 

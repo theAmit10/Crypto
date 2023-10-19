@@ -13,36 +13,67 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const ProfileAbout = () => {
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME HEADER TOP : ' + THEME.data);
   return (
-    <SafeAreaView style={styles.container}>
-    <Image
-          source={require('../../../assets/image/bitcoin_image.jpg')}
-          style={styles.centerImage}
-        />
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        ...styles.container,
+      }}>
+      <Image
+        source={require('../../../assets/image/bitcoin_image.jpg')}
+        style={styles.centerImage}
+      />
       <View style={styles.containerLeft}>
-        <Image
-          source={require('../../../assets/image/person.jpeg')}
-          className="rounded-full"
-          style={styles.profileImage}
-          
-        />
-
-        <View style={styles.profileImageEdit} className="rounded-full p-1">
-          <AntDesign
-            name="edit"
-            size={heightPercentageToDP(3)}
-            color={'white'}
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+          }}>
+          <Image
+            source={require('../../../assets/image/person.jpeg')}
+            className="rounded-full"
+            style={styles.profileImage}
           />
+
+          <View style={styles.profileImageEdit} className="rounded-full p-2">
+            <AntDesign
+              name="edit"
+              size={heightPercentageToDP(2)}
+              color={'white'}
+            />
+          </View>
         </View>
-        
       </View>
 
       <View style={styles.containerRight}>
-        <Text style={styles.name}>Wasu</Text>
-        <Text style={styles.email}>wasu@gmail.com</Text>
-        <Text style={styles.number}>9897562429</Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.name,
+          }}>
+          Wasu
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.email,
+          }}>
+          wasu@gmail.com
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.number,
+          }}>
+          9897562429
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -53,7 +84,7 @@ export default ProfileAbout;
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    backgroundColor: COLORS.skyBlue,
+
     width: '100%',
     height: heightPercentageToDP(30),
     flexDirection: 'row',
@@ -62,21 +93,16 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentageToDP(2),
   },
   email: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2.5),
-    opacity: 0.5,
   },
   name: {
-    color: 'white',
     fontFamily: FONT.bold,
     fontSize: heightPercentageToDP(3),
   },
   number: {
-    color: 'white',
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(2.5),
-    opacity: 0.5,
+    fontSize: heightPercentageToDP(2),
   },
 
   centerImage: {
@@ -85,10 +111,9 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
     opacity: 0.1,
-    
   },
   containerLeft: {
-    width: heightPercentageToDP(25),
+    width: heightPercentageToDP(20),
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
@@ -98,8 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profileImage: {
-    width: widthPercentageToDP(30),
-    height: heightPercentageToDP(17),
+    width: heightPercentageToDP(15),
+    height: heightPercentageToDP(15),
     marginStart: heightPercentageToDP(2),
     resizeMode: 'cover',
     alignSelf: 'center',
@@ -109,7 +134,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: COLORS.green,
     alignSelf: 'center',
-    left: heightPercentageToDP(16),
+    left: heightPercentageToDP(15),
     top: heightPercentageToDP(16),
     zIndex: 2,
   },

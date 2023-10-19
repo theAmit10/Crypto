@@ -15,10 +15,18 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import Octicons from 'react-native-vector-icons/Octicons';
+import {useSelector} from 'react-redux';
 
 const ExistingItem = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View style={styles.contentContainer}>
+    <View
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        borderColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        ...styles.contentContainer,
+      }}>
       {/** left container */}
       <View style={styles.leftContainer}>
         <View
@@ -27,12 +35,11 @@ const ExistingItem = () => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: COLORS.green,
-            opacity: 0.5,
           }}
           className=" rounded-full ">
           <Octicons
             name="comment-discussion"
-            size={heightPercentageToDP(4)}
+            size={heightPercentageToDP(3)}
             color={COLORS.white}
             style={{alignSelf: 'center'}}
           />
@@ -41,8 +48,19 @@ const ExistingItem = () => {
 
       {/** right container */}
       <View style={styles.rightContainer}>
-        <Text style={styles.title}>Ticket #101</Text>
-        <Text style={styles.subtitle} numberOfLines={1}>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.title,
+          }}>
+          Ticket #101
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.subtitle,
+          }}
+          numberOfLines={1}>
           Hey, something went wrong in my account please solve my issue
         </Text>
       </View>
@@ -59,14 +77,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     height: heightPercentageToDP(10),
-
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1),
     flexDirection: 'row',
     borderRadius: heightPercentageToDP(2),
     gap: heightPercentageToDP(1),
     borderWidth: 1,
-    borderColor: COLORS.purple,
   },
   leftContainer: {
     flex: 1,
@@ -79,12 +95,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2.5),
+    fontSize: heightPercentageToDP(2),
   },
   subtitle: {
-    color: COLORS.gray2,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
   },

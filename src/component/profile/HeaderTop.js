@@ -1,68 +1,78 @@
-import { SafeAreaView, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { COLORS,FONT } from '../../../constants'
-import { useNavigation } from '@react-navigation/native'
-import { heightPercentageToDP } from 'react-native-responsive-screen'
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {COLORS, FONT} from '../../../constants';
+import {useNavigation} from '@react-navigation/native';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const HeaderTop = ({value}) => {
-
   const navigation = useNavigation();
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME HEADER TOP : ' + THEME.data);
 
   return (
-    <SafeAreaView style={styles.container}>
-    
+    <SafeAreaView
+      style={{
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        ...styles.container,
+      }}>
       <View style={styles.containerLeft}>
-        <TouchableOpacity onPress={() => {navigation.goBack()}}>
-          <Image 
-                      source={require("../../../assets/image/back_arrow.png")}
-                      style={styles.centerImage}
-                  />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Image
+            source={require('../../../assets/image/back_arrow.png')}
+            style={styles.centerImage}
+            tintColor={THEME.data === 'DARK' ? COLORS.lightGray : COLORS.purpleDark}
+          />
         </TouchableOpacity>
-        <Text style={styles.title}>{value}</Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.title,
+          }}>
+          {value}
+        </Text>
       </View>
-      
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HeaderTop
+export default HeaderTop;
 
 const styles = StyleSheet.create({
-
   container: {
-    display:'flex',
-    position:'relative',
-    height: 50,
-    flexDirection:'row',
-    justifyContent:'space-evenly',
-    backgroundColor:COLORS.skyBlue,
-    alignItems:'center',
-    lineHeight: 50
+    display: 'flex',
+    position: 'relative',
+    height: heightPercentageToDP(7),
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   title: {
-    color: "white",
     fontFamily: FONT.extrabold,
-    fontSize: heightPercentageToDP(3),
-    marginStart:-15,
+    fontSize: heightPercentageToDP(2.5),
     flex: 1,
-    textAlign:'center',
-    textAlignVertical:'center'     
-
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
-  centerImage:{
-    width:30,
-    height: 30,
-    resizeMode: "cover",   
-    tintColor:COLORS.white,
-    
-     
+  centerImage: {
+    width: heightPercentageToDP(3),
+    height: heightPercentageToDP(3),
+    resizeMode: 'cover',
+    tintColor: COLORS.white,
   },
   containerLeft: {
-    flexDirection:'row',
-    
-    margin: 10,
-    
+    flexDirection: 'row',
+    margin: heightPercentageToDP(2),
   },
-
-
-})
+});

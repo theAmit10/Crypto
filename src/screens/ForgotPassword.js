@@ -1,438 +1,210 @@
-
-import { ScrollView, StatusBar } from 'react-native';
-import { StyleSheet, Text, View, Image, SafeAreaView, ImageBackground, TouchableOpacity, TextInput, Button } from 'react-native';
-import { COLORS, SIZES, FONT, images } from '../../constants'
-import { useNavigation } from "@react-navigation/native";
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import {ScrollView, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  TextInput,
+} from 'react-native';
+import {COLORS, SIZES, FONT, images} from '../../constants';
+import {useNavigation} from '@react-navigation/native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 const ForgotPassword = () => {
-
   const navigation = useNavigation();
-  
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME ForgotPassword : ' + THEME);
 
   return (
-    <SafeAreaView style={styles.container}>
-    <StatusBar style="light"/>
-    <ScrollView >
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+        ...styles.container,
+      }}>
+      <StatusBar style="light" />
+      <ScrollView>
+        <View style={styles.contentContainer}>
+          {/** Round Image */}
 
-    <View style={styles.contentContainer} >
+          <LinearGradient
+            colors={[
+              THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+              THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+            ]}
+            className="rounded-full p-10 mb-10">
+            <Image
+              source={require('../../assets/image/add-user.png')}
+              style={styles.centerImage}
+            />
+          </LinearGradient>
 
-      {/** Round Image */}
-      <View style={styles.imageContainer} className="rounded-full ">
-        <Image 
-                  source={require("../../assets/image/add-user.png")}
-                  style={styles.centerImage}
-                  
-                />
-      </View>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.title,
+            }}>
+            Forgot Password
+          </Text>
+          <Text style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.titleDescription,
+          }}>
+            Enter your Email address to recovert your password
+          </Text>
 
+          <View style={styles.inputContainer}>
+            <View>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}>
+                Email address
+              </Text>
+              <TextInput
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  borderColor:
+                    THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.gray2,
+                  backgroundColor:
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ...styles.userNameInput,
+                }}
+                placeholder="example@gmail.com"
+                placeholderTextColor={
+                  THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                }></TextInput>
+            </View>
+          </View>
 
-      <Text style={styles.title}>Forgot Password</Text>
-      <Text style={styles.titleDescription}>Enter your Email address to recovert your password</Text>
+          <View style={styles.accountAndForgotContainer}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.resendCodeText,
+              }}
+              onPress={() => navigation.navigate('Register')}>
+              I didn’t receive code.
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.resendCode,
+              }}
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              {' '}
+              Resend Code
+            </Text>
+          </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.subtitle}>Email address</Text>
-        <TextInput style={styles.userNameInput} placeholder='example@gmail.com' placeholderTextColor="white"></TextInput>
-        
-      </View>
-
-
-      <Text style={styles.subtitle}>I didn’t receive code. Resend Code</Text>
-      
-
-      
-      <Text style={styles.continue} onPress={() => navigation.navigate("OtpAuth")} >Continue</Text>
-      
-      
-
-      
-    </View>
-    
-    
-    
-    </ScrollView>
-    
-
-      
-
-    
-    
-      
-
-      
-      
-
-      
-    
-        
+          <Text
+            style={styles.continue}
+            onPress={() => navigation.navigate('OtpAuth')}>
+            Continue
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default ForgotPassword
-
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
-    backgroundColor: COLORS.purpleDark,
-    alignItems:'center'
-  },
-  
-  contentContainer: {
-    height:heightPercentageToDP(100),
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: heightPercentageToDP(5),
-  
-    
   },
-  imageContainer: {
-    display: 'flex',
-    height: heightPercentageToDP(20),
-    width: widthPercentageToDP(40),
-    backgroundColor: COLORS.skyBlue,
-    justifyContent:'center',
-    alignItems: 'center'
+
+  contentContainer: {
+    height: heightPercentageToDP(100),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: heightPercentageToDP(2),
   },
-  centerImage:{
-    height: heightPercentageToDP(15),
-    width: widthPercentageToDP(18),
-    resizeMode: "contain",  
-    
+
+  centerImage: {
+    height: heightPercentageToDP(8),
+    width: heightPercentageToDP(8),
+    resizeMode: 'contain',
   },
   title: {
-    color: COLORS.white,
     fontFamily: FONT.bold,
-    fontSize: heightPercentageToDP(4), 
-    
+    fontSize: heightPercentageToDP(3),
   },
   titleDescription: {
-    color: COLORS.white,
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(2.5), 
-    opacity:0.5,
+    fontSize: heightPercentageToDP(2),
     width: widthPercentageToDP(70),
-    textAlign:'center'
-   
+    textAlign: 'center',
   },
   subtitle: {
-    color: "white",
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
-    margin: 5
-  
-    
+    margin: heightPercentageToDP(1),
   },
   userNameInput: {
-    color: "white",
+    color: 'white',
     fontFamily: FONT.regular,
-    
-    fontSize: heightPercentageToDP(2.5),
-    backgroundColor:COLORS.purpleDark,
-    borderWidth: 1,         
-    borderColor: COLORS.skyBlue,   
-    borderRadius: 5,    
-    opacity:0.5,
-    paddingStart: 10
-    
-
+    fontSize: heightPercentageToDP(2),
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingStart: 10,
   },
   inputContainer: {
-    width:widthPercentageToDP(100),
-    padding: 20,
-    alignItems:'stretch',
+    width: widthPercentageToDP(100),
+    padding: heightPercentageToDP(2),
+    alignItems: 'stretch',
   },
- 
+
   continue: {
-    color: "white",
+    color: 'white',
     fontFamily: FONT.bold,
     backgroundColor: COLORS.green,
-    borderBottomColor:COLORS.green,
-    fontSize:heightPercentageToDP(2.5),
-    padding: 12,
-    borderRadius: 5,
-    textAlign:'center',
+    borderBottomColor: COLORS.green,
+    fontSize: heightPercentageToDP(2.5),
+    padding: heightPercentageToDP(1),
+    borderRadius: heightPercentageToDP(1),
+    textAlign: 'center',
     alignSelf: 'stretch',
-    marginStart: 20,
-    marginEnd: 20,
-   marginTop:heightPercentageToDP(10)
-    
-    
+    marginHorizontal: heightPercentageToDP(2),
+    marginTop: heightPercentageToDP(10),
+  },
 
-  },
-  
- 
-  
-  googleAuthContainer: {
-    color: "white",
-    flexDirection:'row',
-    fontFamily: FONT.semibold,
-    padding: 10,
-    fontSize: 14,
-    backgroundColor:COLORS.purpleDark,
-    borderWidth: 1,         
-    borderColor: COLORS.skyBlue,   
-    borderRadius: 5,    
-    justifyContent:'center',
-    marginBottom: heightPercentageToDP(3),
-    alignSelf:'stretch',
+  accountAndForgotContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginEnd: 10,
     marginStart: 20,
-    marginEnd: 20,    
-    
   },
-  googleAuth: {
-    color: "white",
-    fontFamily: FONT.semibold,
+  resendCodeText: {
+    fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
-    display:'flex',
-    justifyContent:'flex-start',
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'baseline',
     marginStart: 10,
-    
-    
+    marginTop: heightPercentageToDP(2),
   },
-  googleImage:{
-    
-    width: 25,
-    height: 25,
-    resizeMode: "cover", 
-   
-  }
-
+  resendCode: {
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(2),
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'baseline',
+    marginStart: 10,
+    marginTop: heightPercentageToDP(2),
+  },
 });
-
-
-
-
-// import { StatusBar } from 'react-native';
-// import { StyleSheet, Text, View, Image, SafeAreaView, ImageBackground, TouchableOpacity, TextInput, Button } from 'react-native';
-// import { COLORS, SIZES, FONT, images } from '../../constants'
-// import { useNavigation } from "@react-navigation/native";
-// import { Colors } from 'react-native/Libraries/NewAppScreen';
-
-// const ForgotPassword = () => {
-
-//   const navigation = useNavigation();
-
-  
-
-//   return (
-//     <SafeAreaView style={styles.container}>
-//     <StatusBar style="light"/>
-//     <ImageBackground 
-//       source={require("../../assets/image/account_background.png")}
-//       style={styles.image}
-    
-//     />
-
-//       <Image 
-//           source={require("../../assets/image/add-user.png")}
-//           style={styles.centerImage}
-//         />
-
-      
-//       <Text style={styles.title}>Forgot Password</Text>
-//       <Text style={styles.titleDescription}>Enter your Email address to recover your password</Text>
-
-//       <View style={styles.inputContainer}>
-//         <Text style={styles.subtitle}>Email address</Text>
-//         <TextInput style={styles.userNameInput}>example@gmail.com</TextInput>
-        
-//       </View>
-
-//       <Text style={styles.subtitle}>I didn’t receive code. Resend Code</Text>
-
-      
-      
-
-//       <View style={styles.bottonContainer}>
-        
-//         <Text style={styles.next} onPress={() => navigation.navigate("Login")} >Send code</Text>
-//       </View>
-    
-        
-//     </SafeAreaView>
-//   )
-// }
-
-// export default ForgotPassword
-
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     position: 'relative',
-//     backgroundColor: COLORS.purple,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-    
-    
-    
-
-//   },
-//   image: {
-//     position: 'absolute',
-//     width: "100%",
-//     height: "100%",
-//     resizeMode: "stretch", 
-//   },
-//   contentContainer: {
-//     position:'absolute'
-//   },
-//   centerImage:{
-//     position: "absolute",
-//     top: -120,
-//     width: 80,
-//     height: 80,
-//     resizeMode: "cover", 
-//     marginTop: 225,
-    
-    
-//   },
-//   title: {
-//     color: "white",
-//     fontFamily: FONT.bold,
-//     fontSize: 28,
-//     display:'flex',
-//     justifyContent:'center',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-    
-//   },
-//   titleDescription: {
-//     color: "white",
-//     fontFamily: FONT.regular,
-//     fontSize: 16,
-//     display:'flex',
-//     justifyContent:'center',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-//     opacity:0.5
-   
-//   },
-//   subtitle: {
-//     color: "white",
-//     fontFamily: FONT.regular,
-//     fontSize: 14,
-//     display:'flex',
-//     justifyContent:'flex-start',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-//     marginTop: 20
-//   },
-//   userNameInput: {
-//     width:"95%",
-//     lineHeight: 20,
-//     color: "white",
-//     fontFamily: FONT.regular,
-//     padding: 10,
-//     fontSize: 14,
-//     backgroundColor:COLORS.purpleDark,
-//     borderWidth: 1,         
-//     borderColor: COLORS.purple,   
-//     borderRadius: 5,    
-//     margin: 5,
-//     marginEnd: 10,   
-//     opacity:0.5
-    
-
-//   },
-//   inputContainer: {
-//     width: "100%",
-//     flexDirection: 'column',
-//     alignItems:'flex-start',
-//     padding: 20,
-   
-   
-//   },
-//   bottonContainer: {
-//     position: 'absolute',
-//     width: "100%",
-//     flexDirection: 'column',
-//     alignItems:'flex-end',
-//     padding: 20,
-//     margin: 10,
-//     bottom: 20
-
-    
-
-//   },
-//   next: {
-//     color: "white",
-//     width: "100%",
-//     fontFamily: FONT.bold,
-//     backgroundColor: COLORS.green,
-//     borderBottomColor:COLORS.green,
-//     fontSize:14,
-//     padding: 12,
-//     borderRadius: 5,
-//     textAlign:'center'
-//   },
-//   accountAndForgotContainer:{
-//     width: "100%",
-//     flexDirection: 'row',
-//     justifyContent: 'space-evenly',
-    
-//     marginTop: 10,
-//     marginEnd: 10
-    
-//   },
-//   account: {
-//     color: "white",
-//     fontFamily: FONT.regular,
-//     fontSize: 14,
-//     display:'flex',
-//     justifyContent:'center',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-//     marginTop: 20
-//   },
-//   forgot: {
-//     color: "white",
-//     fontFamily: FONT.regular,
-//     fontSize: 14,
-//     display:'flex',
-//     justifyContent:'flex-start',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-//     marginTop: 20
-//   },
-//   googleAuthContainer: {
-//     width:"100%",
-//     lineHeight: 20,
-//     color: "white",
-//     flexDirection:'row',
-//     fontFamily: FONT.semibold,
-//     padding: 10,
-//     fontSize: 14,
-//     backgroundColor:COLORS.purpleDark,
-//     borderWidth: 1,         
-//     borderColor: COLORS.white,   
-//     borderRadius: 5,    
-//     justifyContent:'center',
-    
-//     marginBottom: 20    
-    
-//   },
-//   googleAuth: {
-//     color: "white",
-//     fontFamily: FONT.semibold,
-//     fontSize: 14,
-//     display:'flex',
-//     justifyContent:'flex-start',
-//     alignItems: 'baseline',
-//     marginStart: 10,
-    
-    
-//   },
-//   googleImage:{
-    
-//     width: 25,
-//     height: 25,
-//     resizeMode: "cover", 
-   
-//   }
-
-// });

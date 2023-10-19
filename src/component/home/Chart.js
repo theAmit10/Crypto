@@ -15,24 +15,51 @@ import {
 } from 'react-native-responsive-screen';
 import moment from 'moment';
 import {LineChart} from 'react-native-chart-kit';
+import {useSelector} from 'react-redux';
 
 const Chart = ({containerStyles, chartPrices}) => {
+  const THEME = useSelector(state => state.theme);
   if (chartPrices && chartPrices.length > 0) {
     let startUnixTimeStamp = moment().subtract(7, 'day').unix();
 
     let realTimeChartData = chartPrices.map(value => value);
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={{
+          backgroundColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          ...styles.container,
+        }}>
         <Image
           source={require('../../../assets/image/bitcoin_image.jpg')}
           style={styles.centerImage}
         />
         <View style={styles.containerTop}>
-          <Text style={styles.totalBal}>Total Balance</Text>
-          <Text style={styles.totalBalAmount}>$20,360.34</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.totalBal,
+            }}>
+            Total Balance
+          </Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.totalBalAmount,
+            }}>
+            $20,360.34
+          </Text>
         </View>
-        <Text style={styles.totalVal}>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+            borderColor:
+              THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+            ...styles.totalVal,
+          }}>
           BTC: 0,0035
           <Text className="text-green-500">+5.64%</Text>
         </Text>
@@ -52,8 +79,10 @@ const Chart = ({containerStyles, chartPrices}) => {
             yAxisSuffix="k"
             yAxisInterval={1}
             chartConfig={{
-              backgroundGradientFrom: COLORS.skyBlue,
-              backgroundGradientTo: COLORS.purple,
+              backgroundGradientFrom:
+                THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+              backgroundGradientTo:
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.lightGray,
               decimalPlaces: 2,
 
               color: (opacity = 1) => `rgba(255, 0, 0, 1)`, // Set opacity to 1 (fully opaque)
@@ -66,6 +95,7 @@ const Chart = ({containerStyles, chartPrices}) => {
             style={{
               marginTop: heightPercentageToDP(10),
               borderRadius: 16,
+              paddingRight: 0,
             }}
             withShadow
             withHorizontalLines={false}
@@ -74,33 +104,94 @@ const Chart = ({containerStyles, chartPrices}) => {
             withOuterLines={false}
             withVerticalLabels={false} // Remove vertical labels
             withHorizontalLabels={false} // Remove horizontal labels
+            withVerticalLines={false}
           />
         </View>
 
         <View style={styles.containerBottom}>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1H</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              1H
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1D</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              1D
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1W</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              1W
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1M</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              1M
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1Y</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              1Y
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>All</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightGray,
+                ...styles.bottomContainerContent,
+              }}>
+              All
+            </Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
   } else {
-    return null;
+    return <View style={styles.container}></View>;
   }
 };
 
@@ -109,14 +200,12 @@ export default Chart;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-
     marginTop: heightPercentageToDP(2),
   },
 
   container: {
     display: 'flex',
     position: 'relative',
-    backgroundColor: COLORS.skyBlue,
     width: '100%',
     height: heightPercentageToDP(40),
     flexDirection: 'column',
@@ -125,19 +214,16 @@ const styles = StyleSheet.create({
     marginTop: heightPercentageToDP(3),
   },
   totalBal: {
-    color: 'white',
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(2),
     margin: 10,
     marginTop: 10,
   },
   totalBalAmount: {
-    color: 'white',
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(3),
   },
   totalVal: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.6),
     paddingStart: 30,
@@ -145,9 +231,9 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingStart: 20,
     paddingEnd: 20,
-    backgroundColor: COLORS.purpleDark,
+
     borderWidth: 2,
-    borderColor: COLORS.skyBlue,
+
     borderRadius: 20,
   },
 
@@ -163,21 +249,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     alignItems: 'center',
-    bottom: 10,
+    bottom: heightPercentageToDP(1),
     justifyContent: 'space-evenly',
+    gap: heightPercentageToDP(1),
   },
   bottomContainerContent: {
-    color: 'white',
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(1.6),
-    paddingBottom: 5,
-    paddingTop: 5,
-    paddingStart: 20,
-    paddingEnd: 20,
-    backgroundColor: COLORS.purpleDark,
+    paddingBottom: heightPercentageToDP(0.5),
+    paddingTop: heightPercentageToDP(0.5),
+    paddingHorizontal: heightPercentageToDP(2),
     borderWidth: 2,
-    borderColor: COLORS.skyBlue,
-    borderRadius: 10,
+    borderRadius: heightPercentageToDP(1),
   },
   chart: {
     position: 'absolute',

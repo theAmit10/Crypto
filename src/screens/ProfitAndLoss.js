@@ -1,24 +1,44 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {COLORS} from '../../constants';
 import HeaderTop from '../component/profile/HeaderTop';
 import Graph from '../component/home/Graph';
 import PLTopContainer from '../component/profitAndLoss/PLTopContainer';
 import PLMiddleGraph from '../component/profitAndLoss/PLMiddleGraph';
 import PLAssetAllocation from '../component/profitAndLoss/PLAssetAllocation';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {getHoldings, getCoinMarket} from '../../stores/market/MarketAction';
 import { useFocusEffect  } from "@react-navigation/native"
-import {dummyData} from '../constrants/constrants'
+import {fetchCoinMarket} from '../../stores/coinMarketSlice';
+import {fetchHoldings} from '../../stores/holdingsSlice';
 
-const ProfitAndLoss = ({getHoldings, getCoinMarket, myHoldings, coins}) => {
+const ProfitAndLoss = () => {
   
-  useFocusEffect(
-    React.useCallback(() => {
-      getCoinMarket();
-      // getHoldings(holdings = dummyData)
-    }, [])
-  )
+
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME : ' + THEME.data);
+
+  const dispatch = useDispatch();
+  const myHoldings = useSelector(state => state.holdings.myHoldings);
+  const coins = useSelector(state => state.coinMarket.coins);
+  // Fetch data when the component mounts
+  useEffect(() => {
+    // Fetch your holdings and coin market data
+    // dispatch(fetchHoldings(/* Pass your parameters here */));
+    dispatch(fetchCoinMarket());
+    console.log('Hey from EFFECt');
+
+    coins.map(c => {
+      console.log('DATA : ' + c.name);
+    });
+  }, []);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     getCoinMarket();
+  //     // getHoldings(holdings = dummyData)
+  //   }, [])
+  // )
   
   return (
     <View style={styles.mainContainer}>
@@ -48,60 +68,6 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
-  return {
-    myHoldings: state.marketReducer.myHoldings,
-    coins: state.marketReducer.coins,
-  }
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getHoldings: (
-      holdings,
-      currency,
-      coinList,
-      orderBy,
-      sparkline,
-      priceChangePerc,
-      perPage,
-      page,
-    ) => {
-      return dispatch(
-        getHoldings(
-          holdings,
-          currency,
-          coinList,
-          orderBy,
-          sparkline,
-          priceChangePerc,
-          perPage,
-          page,
-        )
-      );
-    },
-    getCoinMarket: (
-      currency,
-      coinList,
-      orderBy,
-      sparkline,
-      priceChangePerc,
-      perPage,
-      page,
-    ) => {
-      return dispatch(
-        getCoinMarket(
-          currency,
-          coinList,
-          orderBy,
-          sparkline,
-          priceChangePerc,
-          perPage,
-          page,
-        )
-      );
-    },
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfitAndLoss);
+export default ProfitAndLoss;

@@ -1,12 +1,5 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {COLORS, FONT} from '../../../constants';
 import HeaderTop from '../../component/profile/HeaderTop';
 import {
@@ -17,40 +10,132 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import Graph from '../../component/home/Graph';
+import {useDispatch, useSelector} from 'react-redux';
+import Chart from '../../component/home/Chart';
+import {fetchCoinMarket} from '../../../stores/coinMarketSlice';
 
 const KnowYourCrypto = () => {
+  const THEME = useSelector(state => state.theme);
+  const dispatch = useDispatch();
+  const [selectedCoin, setSelectedCoin] = useState(null);
+  const myHoldings = useSelector(state => state.holdings.myHoldings);
+  const coins = useSelector(state => state.coinMarket.coins);
+  // Fetch data when the component mounts
+  useEffect(() => {
+    // Fetch your holdings and coin market data
+    // dispatch(fetchHoldings(/* Pass your parameters here */));
+    dispatch(fetchCoinMarket());
+    console.log('Hey from EFFECt');
+    // coins.map(c => {
+    //   // console.log('DATA : ' + c.name);
+    // });
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = THEME.data === 'DARK' ? 'LIGHT' : 'DARK';
+    dispatch(changeTheme(newTheme));
+  };
   return (
-    <SafeAreaView style={styles.mainCointer}>
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+        ...styles.mainCointer,
+      }}>
       <ScrollView>
         <HeaderTop value={'KnowYourCrypto'} />
 
         {/** Content Container */}
 
-        <Graph />
+        <View>
+          {
+            <Chart
+              containerStyles={{
+                marginTop: heightPercentageToDP(2),
+              }}
+              chartPrices={
+                selectedCoin
+                  ? selectedCoin?.sparkline_in_7d?.price
+                  : coins[0]?.sparkline_in_7d?.price
+              }
+            />
+          }
+        </View>
 
         {/** Middle Container */}
-        <View style={styles.middleContent}>
+        <View
+          style={{
+            ...styles.middleContent,
+          }}>
           <View style={{flex: 1}}>
-            <Text style={styles.subtitle}>Price</Text>
-            <Text style={styles.title} numberOfLines={1}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.gray2,
+                ...styles.subtitle,
+                flex: 1,
+              }}>
+              Price
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}
+              numberOfLines={1}>
               $34,126
             </Text>
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.subtitle}>24h Change</Text>
-            <Text style={styles.title} numberOfLines={1}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.gray2,
+                ...styles.subtitle,
+                flex: 1,
+              }}>
+              24h Change
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}
+              numberOfLines={1}>
               1.11%
             </Text>
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.subtitle}>24h Volume</Text>
-            <Text style={styles.title} numberOfLines={1}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.gray2,
+                ...styles.subtitle,
+                flex: 1,
+              }}>
+              24h Volume
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}
+              numberOfLines={1}>
               $64,126
             </Text>
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.subtitle}>Market Cap</Text>
-            <Text style={styles.title} numberOfLines={1}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.gray2,
+                ...styles.subtitle,
+                flex: 1,
+              }}>
+              Market Cap
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}
+              numberOfLines={1}>
               $34,126
             </Text>
           </View>
@@ -58,10 +143,15 @@ const KnowYourCrypto = () => {
 
         {/** About Coin Container */}
 
-        <View style={styles.aboutCoinContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            ...styles.aboutCoinContainer,
+          }}>
           <Text
             style={{
-              color: COLORS.white,
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
               fontFamily: FONT.bold,
               fontSize: heightPercentageToDP(2.5),
               marginVertical: heightPercentageToDP(1),
@@ -69,7 +159,13 @@ const KnowYourCrypto = () => {
             About Coin
           </Text>
 
-          <View style={styles.aboutContentTopData}>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              borderColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              ...styles.aboutContentTopData,
+            }}>
             <View style={styles.aboutLeft}>
               <MaterialCommunityIcons
                 name="bitcoin"
@@ -79,8 +175,21 @@ const KnowYourCrypto = () => {
               />
             </View>
             <View style={styles.aboutMiddle}>
-              <Text style={styles.aboutMiddleTitle}>Digital Cash</Text>
-              <Text style={styles.subtitle} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.aboutMiddleTitle,
+                }}>
+                Digital Cash
+              </Text>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.subtitle,
+                }}
+                numberOfLines={1}>
                 1 BTC = 68.58 USD
               </Text>
             </View>
@@ -89,7 +198,12 @@ const KnowYourCrypto = () => {
             </View>
           </View>
 
-          <Text style={styles.subtitle} className="mt-2 mb-2">
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}
+            className="mt-2 mb-2">
             Dash is an open source cryptocurrency. It is an altcoin that was
             forked from the Bitcoin from the Bitcoin Protocol. It is also a
             decentralized autonomous organization (DAO) run by a subset of its
@@ -127,10 +241,22 @@ const KnowYourCrypto = () => {
 
         {/** new data */}
 
-        <View style={styles.newsContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            borderColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+            ...styles.newsContainer,
+          }}>
           <View style={styles.newsLeft}></View>
           <View style={styles.newsRight}>
-            <Text style={styles.newsDescription} className="mt-2 mb-2" numberOfLines={3}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}
+              className="mt-2 mb-2"
+              numberOfLines={3}>
               It is an altcoin that was forked from the Bitcoin from the Bitcoin
               Protocol. It is also a
               <Text style={styles.showmore}> Show more</Text>
@@ -138,11 +264,22 @@ const KnowYourCrypto = () => {
           </View>
         </View>
 
-
-        <View style={styles.newsContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            borderColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+            ...styles.newsContainer,
+          }}>
           <View style={styles.newsLeft}></View>
           <View style={styles.newsRight}>
-            <Text style={styles.newsDescription} className="mt-2 mb-2" numberOfLines={3}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}
+              className="mt-2 mb-2"
+              numberOfLines={3}>
               It is an altcoin that was forked from the Bitcoin from the Bitcoin
               Protocol. It is also a
               <Text style={styles.showmore}> Show more</Text>
@@ -150,19 +287,28 @@ const KnowYourCrypto = () => {
           </View>
         </View>
 
-        <View style={styles.newsContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            borderColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+            ...styles.newsContainer,
+          }}>
           <View style={styles.newsLeft}></View>
           <View style={styles.newsRight}>
-            <Text style={styles.newsDescription} className="mt-2 mb-2" numberOfLines={3}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}
+              className="mt-2 mb-2"
+              numberOfLines={3}>
               It is an altcoin that was forked from the Bitcoin from the Bitcoin
               Protocol. It is also a
               <Text style={styles.showmore}> Show more</Text>
             </Text>
           </View>
         </View>
-
-
-
       </ScrollView>
     </SafeAreaView>
   );
@@ -173,10 +319,8 @@ export default KnowYourCrypto;
 const styles = StyleSheet.create({
   mainCointer: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   middleContent: {
-    height: heightPercentageToDP(10),
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1),
     borderRadius: heightPercentageToDP(2),
@@ -187,7 +331,6 @@ const styles = StyleSheet.create({
   aboutCoinContainer: {
     margin: heightPercentageToDP(2),
     padding: heightPercentageToDP(1),
-    backgroundColor: COLORS.skyBlue,
     borderRadius: heightPercentageToDP(2),
   },
   aboutContentTopData: {
@@ -195,7 +338,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     borderRadius: heightPercentageToDP(2),
-    borderColor: COLORS.purple,
+
     borderWidth: 1,
   },
   leftContainer: {
@@ -208,15 +351,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: COLORS.white,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
   },
   subtitle: {
-    color: COLORS.gray2,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
-    opacity: 0.5,
   },
   tradeBtn: {
     color: COLORS.white,
@@ -251,7 +391,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   aboutMiddleTitle: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
   },
@@ -264,13 +403,12 @@ const styles = StyleSheet.create({
   newsContainer: {
     height: heightPercentageToDP(15),
     margin: heightPercentageToDP(2),
-    backgroundColor: COLORS.skyBlue,
     borderRadius: heightPercentageToDP(2),
     flexDirection: 'row',
   },
   newsRight: {
     flex: 3,
-    
+
     borderRadius: heightPercentageToDP(2),
     margin: heightPercentageToDP(2),
   },
@@ -280,10 +418,8 @@ const styles = StyleSheet.create({
     borderRadius: heightPercentageToDP(2),
     margin: heightPercentageToDP(2),
   },
-  newsDescription:{
-    color: COLORS.gray2,
+  newsDescription: {
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
-  
-  }
+  },
 });

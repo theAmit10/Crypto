@@ -10,16 +10,23 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SavedCardItem from './SavedCardItem';
+import {useSelector} from 'react-redux';
 
 const SavedCards = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View className="flex-1" style={{backgroundColor: COLORS.purpleDark}}>
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+      }}>
       <ScrollView>
-        <SavedCardItem/>
-        <SavedCardItem/>
-        <SavedCardItem/>
-        <SavedCardItem/>
-        <SavedCardItem/>
+        <SavedCardItem />
+        <SavedCardItem />
+        <SavedCardItem />
+        <SavedCardItem />
+        <SavedCardItem />
       </ScrollView>
     </View>
   );

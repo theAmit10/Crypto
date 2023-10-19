@@ -11,9 +11,11 @@ import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import WithdrawItem from './withdraw/WithdrawItem';
+import { useSelector } from 'react-redux';
 
 
 const HistoryWithdraw = () => {
+  const THEME = useSelector(state => state.theme);
   
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -67,16 +69,22 @@ const HistoryWithdraw = () => {
   
 
   return (
-    <View className="flex-1" style={{backgroundColor: COLORS.purpleDark}}>
+    <View className="flex-1" style={{backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,}}>
       <View style={styles.dateContainer}>
         {/** Calender container */}
-        <View style={styles.dateContainerLeft}>
+        <View style={{
+          backgroundColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          borderColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          ...styles.dateContainerLeft,
+        }}>
           <Feather name="calendar" size={20} color={COLORS.green} />
           {/** From Calender  */}
           <View>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 opacity: 0.5,
                 fontFamily: FONT.regular,
@@ -85,7 +93,7 @@ const HistoryWithdraw = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
               }}
@@ -95,12 +103,12 @@ const HistoryWithdraw = () => {
             </Text>
           </View>
 
-          <Text style={{color: 'white', textAlignVertical: 'center'}}>-</Text>
+          <Text style={{color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark, textAlignVertical: 'center'}}>-</Text>
           {/** To Calender  */}
           <View>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 opacity: 0.5,
                 fontFamily: FONT.regular,
@@ -109,7 +117,7 @@ const HistoryWithdraw = () => {
             </Text>
             <Text
               style={{
-                color: 'white',
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
               }}
@@ -142,7 +150,11 @@ const HistoryWithdraw = () => {
           )}
         </View>
 
-        <View style={styles.dateContainerRight}>
+        <View style={{
+          borderColor:
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+          ...styles.dateContainerRight,
+        }}>
           <Feather
             name="download"
             size={25}
@@ -187,11 +199,11 @@ const styles = StyleSheet.create({
   },
   dateContainerLeft: {
     width: widthPercentageToDP(75),
-    backgroundColor: COLORS.skyBlue,
+    
     padding: heightPercentageToDP(3),
     borderWidth: 2,
-    borderRadius: 10,
-    marginHorizontal: 10,
+    borderRadius: heightPercentageToDP(2),
+    marginHorizontal: heightPercentageToDP(2),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',

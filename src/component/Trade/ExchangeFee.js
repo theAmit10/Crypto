@@ -1,95 +1,99 @@
-import { SafeAreaView, StyleSheet, Text, View,Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { COLORS,FONT } from '../../../constants'
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {COLORS, FONT} from '../../../constants';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const ExchangeFee = ({from, value}) => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <SafeAreaView style={styles.container}>
-    
-        <View style={styles.containerLeft}>
-            <Text style={styles.title}>Exchange Fees :</Text>  
-            <Text style={styles.titleDescription}>Read term and conditions</Text>   
-        </View>
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+        ...styles.container,
+        borderColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+      }}>
+      <View style={styles.containerLeft}>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.title,
+          }}>
+          Exchange Fees :
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.titleDescription,
+          }}>
+          Read term and conditions
+        </Text>
+      </View>
 
-            
-        <Text style={styles.tradeValue}>$75.89</Text>     
-       
-        
-
-
-        
-      
+      <Text style={{
+        color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+        ...styles.tradeValue,
+      }} numberOfLines={1}>
+        $75.89
+      </Text>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default ExchangeFee
+export default ExchangeFee;
 
 const styles = StyleSheet.create({
-
   container: {
-    display:'flex',
-    backgroundColor: COLORS.skyBlue,
-    
-    height:60,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginTop: 15,
-    marginBottom: 25,
-    marginStart:10,
-    marginEnd:10,
-    borderWidth: 1,         
-    borderColor: COLORS.skyBlue,   
+    display: 'flex',
+
+    height: heightPercentageToDP(8),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: heightPercentageToDP(2),
+    marginBottom: heightPercentageToDP(2),
+    marginStart: heightPercentageToDP(1),
+    marginEnd: heightPercentageToDP(1),
+    borderWidth: 1,
+    borderColor: COLORS.skyBlue,
     borderRadius: 5,
-    paddingEnd:10
-    
-    
-    
+    padding: heightPercentageToDP(1),
   },
   titleDescription: {
-    color: "white",
     fontFamily: FONT.regular,
-    fontSize: 12,  
-    
+    fontSize: heightPercentageToDP(1.5),
   },
   title: {
-    color: "white",
-    fontFamily: FONT.bold,
-    fontSize: heightPercentageToDP(2.5),
-    textAlignVertical: 'center'
-   
-    
+    fontFamily: FONT.medium,
+    fontSize: heightPercentageToDP(2),
+    textAlignVertical: 'center',
   },
-  
+
   containerLeft: {
-    
-    flexDirection:'column',
-    justifyContent:'center',
-    padding:10
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: 10,
   },
   containerRight: {
-    flexDirection:'row',
-    flex:1,
-    justifyContent:'flex-end'
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-end',
   },
-  profileImage:{
-    width: 50,
-    height: 50,
-    resizeMode: "cover",  
-    tintColor: "white" ,
-    alignSelf:'center'
+
+  tradeValue: {
     
-
-  },
-  tradeValue:{
-    color: "white",
     fontFamily: FONT.semibold,
-    fontSize: heightPercentageToDP(2.5),
-    textAlignVertical: 'center'
-  }
-
-  
-  
-
-})
+    fontSize: heightPercentageToDP(2),
+    textAlignVertical: 'center',
+  },
+});

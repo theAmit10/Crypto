@@ -9,15 +9,23 @@ import {
   StatusBar,
   TouchableOpacity,
   Dimensions,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import { COLORS, SIZES, FONT, images } from '../../constants'
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {COLORS, SIZES, FONT, images} from '../../constants';
+import {useSelector} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 const {width, height} = Dimensions.get('window');
 
 const COLOR = {primary: '#282534', white: '#fff'};
+
+const THEME = '';
 
 const slides = [
   {
@@ -30,7 +38,7 @@ const slides = [
     id: '2',
     image: require('../../assets/image/wallet_two.png'),
     title: 'Receive and Send Money to frends!',
-    subtitle: "Keep BTC ETC,XRP and many other ERC-20 based tokens",
+    subtitle: 'Keep BTC ETC,XRP and many other ERC-20 based tokens',
   },
   {
     id: '3',
@@ -41,32 +49,64 @@ const slides = [
 ];
 
 const Slide = ({item}) => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View style={{width: wp(100), alignItems: 'center', justifyContent: 'center', alignContent:'center'}}>
-      
-        <View className="rounded-full p-10 " style={{backgroundColor: COLORS.skyBlue}}>
-                <Image
-                source={item?.image}
-                style={{
-                    
-                    width: wp(25),
-                    height: hp(15),    
-                    resizeMode: "center", 
-            
-                }}
-            />
-        
+    <View
+      style={{
+        width: wp(100),
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+        <LinearGradient
+          colors={[
+            THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+            THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+          ]}
+          className="rounded-full p-10">
+          <Image
+            source={item?.image}
+            style={{
+              width: hp(10),
+              height: hp(10),
+              resizeMode: 'center',
+            }}
+          />
+        </LinearGradient>
+      </View>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <LinearGradient
+          colors={[
+            THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+            THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+          ]}
+          className="rounded-full p-10"
+          style={{
+            position: 'absolute',
+            top: heightPercentageToDP(10),
+            left: widthPercentageToDP(-10),
+          }}
+        />
+        <View>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.title,
+            }}>
+            {item?.title}
+          </Text>
+          <Text style={styles.subtitle}>{item?.subtitle}</Text>
         </View>
-       
-      <View>
-        <Text style={styles.title}>{item?.title}</Text>
-        <Text style={styles.subtitle}>{item?.subtitle}</Text>
       </View>
     </View>
   );
 };
 
 const OnboardingScreen = ({navigation}) => {
+  const THEME = useSelector(state => state.theme);
+  // THEME = 'LIGHT';
+  console.log('THEME OB : ' + THEME.data);
+
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef();
   const updateCurrentSlideIndex = e => {
@@ -98,6 +138,8 @@ const OnboardingScreen = ({navigation}) => {
           height: height * 0.25,
           justifyContent: 'space-between',
           paddingHorizontal: 20,
+          backgroundColor:
+            THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
         }}>
         {/* Indicator container */}
         <View
@@ -128,8 +170,13 @@ const OnboardingScreen = ({navigation}) => {
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.replace('Login')}>
-                <Text style={{fontFamily: FONT.bold , fontSize: hp(2), color: COLORS.white}}>
-                Let's Get Started
+                <Text
+                  style={{
+                    fontFamily: FONT.bold,
+                    fontSize: hp(2),
+                    color: COLORS.white,
+                  }}>
+                  Let's Get Started
                 </Text>
               </TouchableOpacity>
             </View>
@@ -140,7 +187,7 @@ const OnboardingScreen = ({navigation}) => {
                 style={[
                   styles.btn,
                   {
-                    borderColor: "red",
+                    borderColor: 'red',
                     borderWidth: 1,
                     backgroundColor: 'transparent',
                   },
@@ -148,7 +195,10 @@ const OnboardingScreen = ({navigation}) => {
                 onPress={skip}>
                 <Text
                   style={{
-                    fontFamily: FONT.bold , fontSize: hp(2), color: COLORS.white
+                    fontFamily: FONT.bold,
+                    fontSize: hp(2),
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   }}>
                   Skip
                 </Text>
@@ -161,9 +211,9 @@ const OnboardingScreen = ({navigation}) => {
                 style={styles.btn}>
                 <Text
                   style={{
-                    
-                    fontFamily: FONT.bold , fontSize: hp(2), color: COLORS.white
-                    
+                    fontFamily: FONT.bold,
+                    fontSize: hp(2),
+                    color: COLORS.white,
                   }}>
                   NEXT
                 </Text>
@@ -176,7 +226,12 @@ const OnboardingScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.purpleDark}}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+      }}>
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
         ref={ref}
@@ -195,19 +250,16 @@ const OnboardingScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   subtitle: {
-    color: COLORS.white,
-    fontSize: 13,
-    marginTop: 10,
+    color: COLORS.gray2,
+    marginTop: heightPercentageToDP(2),
     maxWidth: '70%',
     textAlign: 'center',
     fontFamily: FONT.regular,
-    fontSize: 14,
-    opacity:0.5
+    fontSize: heightPercentageToDP(2),
   },
   title: {
-    color: COLORS.white,
     fontFamily: FONT.extrabold,
-    fontSize: hp(3),
+    fontSize: hp(2.5),
     maxWidth: '70%',
     marginTop: 20,
     textAlign: 'center',
@@ -216,9 +268,8 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'contain',
-   
   },
-  
+
   indicator: {
     height: 2.5,
     width: 10,
@@ -233,8 +284,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.green
-    
+    backgroundColor: COLORS.green,
   },
 });
 export default OnboardingScreen;

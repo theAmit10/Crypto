@@ -4,15 +4,28 @@ import {COLORS, FONT} from '../../../constants';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useSelector} from 'react-redux';
 
 const AccountDetails = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View className="flex-1" style={{backgroundColor: COLORS.purpleDark}}>
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+      }}>
       <ScrollView>
         {/** Top container */}
         <View style={styles.accountDetailsTopContainer}>
           <View style={styles.topContainerLeft}>
-            <Text style={styles.title}>Account Details</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}>
+              Account Details
+            </Text>
           </View>
 
           <View style={styles.topContainerRight}>
@@ -22,9 +35,22 @@ const AccountDetails = () => {
         </View>
 
         {/** SecondTop container */}
-        <View style={styles.secondTopContainer}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            borderColor:
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+            ...styles.secondTopContainer,
+          }}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.subtitle}>Bank Account Verified</Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}>
+              Bank Account Verified
+            </Text>
             <MaterialIcons
               name="verified-user"
               size={heightPercentageToDP(2)}
@@ -32,14 +58,22 @@ const AccountDetails = () => {
               style={{alignSelf: 'center', opacity: 0.9, marginStart: 2}}
             />
           </View>
-          <Text style={styles.subSubTitle}>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subSubTitle,
+            }}>
             You can now make deposits and withdrawals
           </Text>
         </View>
 
         {/** ThirdTop container */}
         <View style={styles.thirdTopContainer}>
-          <Text style={styles.semiTitle}>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.subtitle,
+            }}>
             You can now make deposits and withdrawals
           </Text>
 
@@ -48,8 +82,17 @@ const AccountDetails = () => {
           <Text style={styles.titleGreen}>Account Holder Name</Text>
           <View>
             <TextInput
-              style={styles.userInput}
-              placeholderTextColor="gray"
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
+              placeholderTextColor={
+                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+              }
               inputMode="text"
             />
           </View>
@@ -57,8 +100,17 @@ const AccountDetails = () => {
           <Text style={styles.titleGreen}>Bank Name</Text>
           <View>
             <TextInput
-              style={styles.userInput}
-              placeholderTextColor="gray"
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
+              placeholderTextColor={
+                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+              }
               inputMode="text"
             />
           </View>
@@ -66,8 +118,17 @@ const AccountDetails = () => {
           <Text style={styles.titleGreen}>IBAN</Text>
           <View>
             <TextInput
-              style={styles.userInput}
-              placeholderTextColor="gray"
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
+              placeholderTextColor={
+                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+              }
               inputMode="text"
             />
           </View>
@@ -75,8 +136,17 @@ const AccountDetails = () => {
           <Text style={styles.titleGreen}>SWIFT/BIC Code</Text>
           <View>
             <TextInput
-              style={styles.userInput}
-              placeholderTextColor="gray"
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                ...styles.userInput,
+              }}
+              placeholderTextColor={
+                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+              }
               inputMode="text"
             />
           </View>
@@ -112,48 +182,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    color: 'white',
     fontFamily: FONT.bold,
     fontSize: heightPercentageToDP(2.5),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
   subtitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
   subSubTitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',
     alignItems: 'baseline',
-    opacity: 0.5,
   },
   topRightDefault: {
-    borderRadius: 10,
+    height: heightPercentageToDP(5),
+    borderRadius: heightPercentageToDP(1),
     borderColor: COLORS.gray,
     borderWidth: 2,
     padding: heightPercentageToDP(1),
     color: COLORS.gray,
-    fontFamily: FONT.regular
+    fontFamily: FONT.regular,
   },
   topRightVerified: {
-    borderRadius: 10,
+    height: heightPercentageToDP(5),
+    borderRadius: heightPercentageToDP(1),
     borderColor: COLORS.green,
     borderWidth: 2,
     padding: heightPercentageToDP(1),
     color: COLORS.green,
-    fontFamily: FONT.regular
+    fontFamily: FONT.regular,
   },
   secondTopContainer: {
-    backgroundColor: COLORS.purple,
     height: heightPercentageToDP(10),
     borderRadius: 10,
-    borderColor: COLORS.purple,
+
     borderWidth: 2,
     marginHorizontal: 10,
     padding: 10,
@@ -169,12 +236,9 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   userInput: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2.5),
-    backgroundColor: COLORS.purple,
     borderWidth: 1,
-    borderColor: COLORS.purple,
     borderRadius: 5,
     paddingStart: 10,
   },
@@ -187,33 +251,33 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   bottomContainer: {
-    flexDirection:'row',
-    alignItems:'stretch',
+    flexDirection: 'row',
+    alignItems: 'stretch',
     height: heightPercentageToDP(10),
-    padding: 10,
+    padding: heightPercentageToDP(2),
     marginBottom: heightPercentageToDP(10),
-    gap: 10
+    gap: heightPercentageToDP(1),
   },
-  addNewAccount:{
+  addNewAccount: {
     backgroundColor: COLORS.green,
     flex: 1,
-    textAlign:'center',
-    textAlignVertical:'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
     fontFamily: FONT.semibold,
     color: COLORS.white,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: COLORS.green
+    borderColor: COLORS.green,
   },
-  removeAccount:{
+  removeAccount: {
     backgroundColor: COLORS.red,
     flex: 1,
-    textAlign:'center',
-    textAlignVertical:'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
     fontFamily: FONT.semibold,
     color: COLORS.white,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: COLORS.red
-  }
+    borderColor: COLORS.red,
+  },
 });

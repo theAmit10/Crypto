@@ -1,4 +1,4 @@
-import {StatusBar} from 'react-native';
+import {StatusBar, Switch} from 'react-native';
 import {
   StyleSheet,
   Text,
@@ -25,44 +25,86 @@ import {
 import Modal from 'react-native-modal';
 import {useState} from 'react';
 import CoinItem from '../component/Coinitems';
+import {useDispatch, useSelector} from 'react-redux';
+import {changeTheme} from '../../stores/ThemeSlice';
+import {storeData, getData} from '../../stores/AsyncLocalStorage';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Setting = () => {
+  const THEME = useSelector(state => state.theme);
+  console.log('THEME : ' + THEME.data);
+  const dispatch = useDispatch();
+
+  const [isDark, setIsDark] = useState(THEME.data);
+
+  const toggleTheme = () => {
+    const newTheme = THEME.data === 'DARK' ? 'LIGHT' : 'DARK';
+    dispatch(changeTheme(newTheme));
+    setIsDark(newTheme);
+    storeData('currentTheme', newTheme);
+
+    console.log('COOL : ' + newTheme);
+  };
+
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const [emailVisible, setEmailVisible] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+        ...styles.container,
+      }}>
       <StatusBar style="light" hidden={false} />
       <HeaderTop value={'Setting'} />
       <ScrollView>
         <View style={styles.settingContent}>
           {/** Personal Information */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => setVisible(true)}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center',  backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="user"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Account ID</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Account ID
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -70,30 +112,49 @@ const Setting = () => {
           </View>
 
           {/** Email id */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => setEmailVisible(true)}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <Fontisto
                     name="email"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Change Email ID</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Change Email ID
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -101,30 +162,49 @@ const Setting = () => {
           </View>
 
           {/** Change Password */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => setPasswordVisible(true)}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="lock"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Change Password</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Change Password
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -132,30 +212,49 @@ const Setting = () => {
           </View>
 
           {/** My Wallets */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => navigation.navigate('Wallet')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="wallet"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>My Wallets</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  My Wallets
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -163,30 +262,49 @@ const Setting = () => {
           </View>
 
           {/** Notification */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
+              onPress={() => navigation.navigate('NotificationTab')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="bells"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Notification</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Notification
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -194,63 +312,99 @@ const Setting = () => {
           </View>
 
           {/** History */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
+              onPress={() => navigation.navigate('History')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="clockcircleo"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>History</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  History
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
             </TouchableOpacity>
           </View>
 
-          
-
           {/** Payment */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => navigation.navigate('Payment')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="carryout"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Payment</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Payment
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -258,30 +412,49 @@ const Setting = () => {
           </View>
 
           {/** Rate Us */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
+              onPress={() => navigation.navigate('Rewards')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="gift"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Rate Us</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Rate Us
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -289,30 +462,49 @@ const Setting = () => {
           </View>
 
           {/** Refer & Earn */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => navigation.navigate('Rewards')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center', backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="addusergroup"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Refer & Earn</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Refer & Earn
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -320,30 +512,49 @@ const Setting = () => {
           </View>
 
           {/** About Us */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => navigation.navigate('KnowYourCrypto')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="questioncircleo"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>About Us</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  About Us
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -351,93 +562,144 @@ const Setting = () => {
           </View>
 
           {/** Helpdesk */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
               onPress={() => navigation.navigate('HelpDesk')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
-                    name="infocirlceo"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    name="clockcircleo"
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Helpdesk</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Helpdesk
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
             </TouchableOpacity>
           </View>
 
-
           {/** Dark Mode */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <MaterialIcons
                     name="dark-mode"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Dark Mode</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Dark Mode
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
-                <AntDesign
-                  name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
-                  style={styles.centerImage}
+                <Switch
+                  value={THEME.data === 'DARK'}
+                  onValueChange={toggleTheme}
                 />
               </Text>
             </TouchableOpacity>
           </View>
 
           {/** Logout */}
+
           <View>
             <TouchableOpacity
-              style={styles.contentContainer}
-              onPress={() => navigation.navigate('Payment')}>
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
+              onPress={() => navigation.navigate('History')}>
               <View style={{flexDirection: 'row'}}>
-                <Text
-                  style={{textAlignVertical: 'center' , backgroundColor: COLORS.purple}}
-                  className="rounded-full bg-white p-3">
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
                   <AntDesign
                     name="logout"
-                    size={heightPercentageToDP(3)}
-                    color={'white'}
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
                     style={styles.centerImage}
                   />
-                </Text>
+                </LinearGradient>
 
-                <Text style={styles.title}>Logout</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Logout
+                </Text>
               </View>
 
               <Text style={{textAlignVertical: 'center'}}>
                 <AntDesign
                   name="right"
-                  size={heightPercentageToDP(3)}
-                  color={'white'}
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
                   style={styles.centerImage}
                 />
               </Text>
@@ -466,17 +728,34 @@ const Setting = () => {
                 flex: 1,
                 position: 'absolute',
                 bottom: 0,
-                backgroundColor: COLORS.skyBlue,
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 width: '100%',
                 borderTopRightRadius: heightPercentageToDP(6),
                 borderTopLeftRadius: heightPercentageToDP(6),
               }}>
               <View style={styles.topView}></View>
               <View style={styles.modelContent}>
-                <Text style={styles.modelParentTitle}>Account ID</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelParentTitle,
+                  }}>
+                  Account ID
+                </Text>
 
                 <Text style={styles.modeltitle}>Account ID</Text>
-                <Text style={styles.modelSubtitle}>19876121249</Text>
+                <Text
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}>
+                  19876121249
+                </Text>
 
                 <Text style={styles.copybtn}>Copy</Text>
               </View>
@@ -503,24 +782,49 @@ const Setting = () => {
                 flex: 1,
                 position: 'absolute',
                 bottom: 0,
-                backgroundColor: COLORS.skyBlue,
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 width: '100%',
                 borderTopRightRadius: heightPercentageToDP(6),
                 borderTopLeftRadius: heightPercentageToDP(6),
               }}>
               <View style={styles.topView}></View>
               <View style={styles.modelContent}>
-                <Text style={styles.modelParentTitle}>New Email Address</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelParentTitle,
+                  }}>
+                  New Email Address
+                </Text>
 
                 <Text style={styles.modeltitle}>Current Email</Text>
-                <Text style={styles.modelSubtitle}>wasu@gmail.com</Text>
+                <Text
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}>
+                  wasu@gmail.com
+                </Text>
 
                 <Text style={styles.modeltitle}>Enter New Email</Text>
                 <TextInput
-                  style={styles.modelSubtitle}
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}
                   inputMode="email"
                   placeholder="wasu@gmail.com"
-                  placeholderTextColor={COLORS.gray}></TextInput>
+                  placeholderTextColor={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }></TextInput>
 
                 <Text style={styles.copybtn}>Continue</Text>
               </View>
@@ -547,27 +851,53 @@ const Setting = () => {
                 flex: 1,
                 position: 'absolute',
                 bottom: 0,
-                backgroundColor: COLORS.skyBlue,
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 width: '100%',
                 borderTopRightRadius: heightPercentageToDP(6),
                 borderTopLeftRadius: heightPercentageToDP(6),
               }}>
               <View style={styles.topView}></View>
               <View style={styles.modelContent}>
-                <Text style={styles.modelParentTitle}>Change Password</Text>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelParentTitle,
+                  }}>
+                  Change Password
+                </Text>
 
                 <TextInput
-                  style={styles.modelSubtitle}
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}
                   placeholder="Current Password"
                   placeholderTextColor={COLORS.gray}></TextInput>
 
                 <TextInput
-                  style={styles.modelSubtitle}
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}
                   placeholder="New Password"
                   placeholderTextColor={COLORS.gray}></TextInput>
 
                 <TextInput
-                  style={styles.modelSubtitle}
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}
                   placeholder="Confirm Password"
                   placeholderTextColor={COLORS.gray}></TextInput>
 
@@ -589,7 +919,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: COLORS.purpleDark,
     alignItems: 'stretch',
   },
   settingContent: {
@@ -597,13 +926,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     display: 'flex',
-    backgroundColor: COLORS.skyBlue,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 10,
   },
   title: {
-    color: 'white',
     fontFamily: FONT.extrabold,
     fontSize: 15,
     textAlignVertical: 'center',
@@ -621,7 +949,6 @@ const styles = StyleSheet.create({
     margin: heightPercentageToDP(2),
   },
   modelParentTitle: {
-    color: 'white',
     fontFamily: FONT.extrabold,
     fontSize: 15,
     textAlignVertical: 'center',
@@ -634,8 +961,6 @@ const styles = StyleSheet.create({
     marginHorizontal: heightPercentageToDP(2),
   },
   modelSubtitle: {
-    color: COLORS.white,
-    backgroundColor: COLORS.purple,
     marginHorizontal: heightPercentageToDP(2),
     marginBottom: heightPercentageToDP(2),
     padding: heightPercentageToDP(2),
