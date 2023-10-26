@@ -18,12 +18,49 @@ import {
 } from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import URLHelper from '../api/URLhelper/URLHelper';
+import axios from 'axios';
+import {useState} from 'react';
 
 const Login = () => {
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
-  // THEME = 'LIGHT';
-  console.log('THEME LOGIN : ' + THEME.data);
+
+  const [emailVal, setEmail] = useState('');
+  const [passwordVal, setPassword] = useState('');
+
+  const signIn = async () => {
+    if (!emailVal) {
+      console.error('Enter email address');
+    } else if (passwordVal.length <= 8) {
+      console.error('Password must contains 8 character');
+    } else {
+      console.log('Else : ' + emailVal + ' | ' + passwordVal + ' | ');
+
+      const apiUrl = URLHelper.BASE_URL + URLHelper.SIGN_IN;
+      const headers = {
+        userapisecret: URLHelper.USER_SECRET_KEY,
+      };
+      const formData = new FormData();
+      formData.append('email', emailVal);
+      formData.append('password', passwordVal);
+
+      try {
+        const response = await axios.post(apiUrl, formData, {headers});
+        console.log('REGISTERING STARTED');
+        console.log('Response:', response.data);
+        console.log('REGISTERING STOP');
+        
+      } catch (error) {
+        if (error.response) {
+          console.error('Error:', error.response.data); 
+          console.log('ERROR : ' + error.response.data.errors.email);
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,19 +79,18 @@ const Login = () => {
           justifyContent: 'center',
         }}>
         <LinearGradient
-        colors={[
-          THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
-          THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
-        ]}
-        className="rounded-full p-6"
-        style={{
-          position: 'absolute',
-          zIndex: 1,
-          top: heightPercentageToDP(15),
-          left: widthPercentageToDP(50)
-          
-        }}
-      />
+          colors={[
+            THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+            THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+          ]}
+          className="rounded-full p-6"
+          style={{
+            position: 'absolute',
+            zIndex: 1,
+            top: heightPercentageToDP(15),
+            left: widthPercentageToDP(50),
+          }}
+        />
         <LinearGradient
           colors={[
             THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -80,7 +116,7 @@ const Login = () => {
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.subtitle,
           }}>
-          Username
+          Email
         </Text>
         <TextInput
           style={{
@@ -90,10 +126,13 @@ const Login = () => {
             borderColor: THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.gray2,
             ...styles.userNameInput,
           }}
-          placeholder="Type Username here"
+          placeholder="Type email here"
           placeholderTextColor={
             THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-          }></TextInput>
+          }
+          onChangeText={setEmail}
+          value={emailVal}
+          keyboardType="email-address"></TextInput>
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
@@ -112,7 +151,10 @@ const Login = () => {
           placeholder="Type Password here"
           placeholderTextColor={
             THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-          }></TextInput>
+          }
+          onChangeText={setPassword}
+          value={passwordVal}
+          secureTextEntry={true}></TextInput>
         <View style={styles.accountAndForgotContainer}>
           <TouchableOpacity>
             <Text
@@ -138,9 +180,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={styles.bottonContainer}
-          onPress={() => navigation.navigate('Hcontainer')}>
+        <TouchableOpacity style={styles.bottonContainer} onPress={() => navigation.navigate('Hcontainer')}>
           <Text style={styles.next}>Continue</Text>
         </TouchableOpacity>
 
@@ -168,7 +208,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    
+
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -192,7 +232,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(1.5),
+    fontSize: heightPercentageToDP(2),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'baseline',
@@ -203,7 +243,7 @@ const styles = StyleSheet.create({
     width: '95%',
     fontFamily: FONT.regular,
     padding: heightPercentageToDP(1),
-    fontSize: heightPercentageToDP(1.5),
+    fontSize: heightPercentageToDP(2),
     borderWidth: 2,
     borderRadius: heightPercentageToDP(1),
     margin: heightPercentageToDP(1),

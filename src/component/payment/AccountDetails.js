@@ -84,10 +84,10 @@ const AccountDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor={
@@ -102,10 +102,10 @@ const AccountDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor={
@@ -120,10 +120,10 @@ const AccountDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor={
@@ -138,10 +138,10 @@ const AccountDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor={

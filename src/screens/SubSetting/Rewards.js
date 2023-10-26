@@ -23,7 +23,8 @@ const Rewards = () => {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
         ...styles.mainCointer,
       }}>
       <HeaderTop value={'Rewards'} />
@@ -53,7 +54,7 @@ const Rewards = () => {
           <View
             style={{
               backgroundColor:
-                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.white,
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               ...styles.referralContainer,
             }}>
             <Text
@@ -81,7 +82,7 @@ const Rewards = () => {
           <View
             style={{
               backgroundColor:
-                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.white,
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               ...styles.referralContainer,
             }}>
             <Text
@@ -166,7 +167,7 @@ const Rewards = () => {
         <View
           style={{
             backgroundColor:
-              THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+              THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
             ...styles.middleComponent,
           }}>
           <View
@@ -368,7 +369,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 #1
               </Text>
             </View>
@@ -380,7 +387,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 8%
               </Text>
             </View>
@@ -392,7 +405,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 3
               </Text>
             </View>
@@ -404,7 +423,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 (0.01 BTC)
               </Text>
             </View>
@@ -420,7 +445,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 #2
               </Text>
             </View>
@@ -432,7 +463,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 6%
               </Text>
             </View>
@@ -444,7 +481,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 13
               </Text>
             </View>
@@ -456,7 +499,13 @@ const Rewards = () => {
                 alignItems: 'center',
                 padding: heightPercentageToDP(2),
               }}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.title,
+                }}
+                numberOfLines={1}>
                 (0.03 BTC)
               </Text>
             </View>

@@ -40,10 +40,12 @@ import HelpDesk from '../screens/SubSetting/HelpDesk';
 import Market from '../screens/Market';
 import TradeListing from '../screens/TradeListing';
 import Store from '../../stores/Store';
+import AssetDetails from '../screens/AssetDetails';
+import UpdateProfile from '../screens/SubSetting/UpdateProfile';
+import DepositScreen from '../screens/SubSetting/DepositScreen';
+import WithdrawScreen from '../screens/SubSetting/WithdrawScreen';
 
 const Stack = createNativeStackNavigator();
-
-
 
 const AppNavigation = () => {
   return (
@@ -51,7 +53,7 @@ const AppNavigation = () => {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="Hcontainer">
+          initialRouteName="SplashScreen">
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
@@ -87,7 +89,6 @@ const AppNavigation = () => {
             name="ActionSheetParent"
             component={ActionSheetParent}
           />
-
           <Stack.Screen name="Verification" component={Verification} />
           <Stack.Screen name="KnowYourCrypto" component={KnowYourCrypto} />
           <Stack.Screen name="Rewards" component={Rewards} />
@@ -95,6 +96,10 @@ const AppNavigation = () => {
           <Stack.Screen name="Market" component={Market} />
           <Stack.Screen name="TradeListing" component={TradeListing} />
           <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="AssetDetails" component={AssetDetails} />
+          <Stack.Screen name="UpdateProfile" component={UpdateProfile} />
+          <Stack.Screen name="DepositScreen" component={DepositScreen} />
+          <Stack.Screen name="WithdrawScreen" component={WithdrawScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

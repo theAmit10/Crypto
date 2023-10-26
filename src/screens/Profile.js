@@ -37,7 +37,7 @@ const Profile = () => {
       <StatusBar style="light" hidden={false} />
       <HeaderTop value={'Profile'} />
       <ScrollView>
-        <View style={styles.container}>
+        <View >
           <ProfileAbout />
         </View>
 
@@ -476,6 +476,9 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     alignItems: 'stretch',
+
+    paddingBottom: heightPercentageToDP(10)
+    
   },
   contentContainer: {
     display: 'flex',
@@ -483,6 +486,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: heightPercentageToDP(1),
+    
   },
   title: {
     fontFamily: FONT.extrabold,

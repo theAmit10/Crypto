@@ -1,4 +1,4 @@
-import {ScrollView, StatusBar} from 'react-native';
+import {ScrollView, StatusBar, ToastAndroid} from 'react-native';
 import {
   StyleSheet,
   Text,
@@ -12,18 +12,76 @@ import {
 } from 'react-native';
 import {COLORS, SIZES, FONT, images} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import axios from 'axios';
+import URLHelper from '../api/URLhelper/URLHelper';
+import {useState} from 'react';
+import Toast from 'react-native-toast-message';
+import {err} from 'react-native-svg/lib/typescript/xml';
 
 const Register = () => {
+  // For Registering
+  const [emailVal, setEmail] = useState('');
+  const [passwordVal, setPassword] = useState('');
+  const [confirmPasswordVal, setConfirmPassword] = useState('');
+
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
-  console.log('THEME : ' + THEME);
+  console.log('THEME O : ' + THEME.data);
+
+  const signUp = async () => {
+    if (!emailVal || !emailVal.includes('@')) {
+      console.error('Enter valid email');
+    } else if (passwordVal.length <= 7) {
+      console.error('Password must contains 8 character');
+    } else if (confirmPasswordVal <= 7) {
+      console.error('Password must contains 8 character');
+    } else if (passwordVal != confirmPasswordVal) {
+      console.error('Password and Confirm Password Not Matched');
+    } else {
+      console.log(
+        'Else : ' + emailVal + ' | ' + passwordVal + ' | ' + confirmPasswordVal,
+      );
+
+      const apiUrl = URLHelper.BASE_URL + URLHelper.SIGN_UP;
+      const headers = {
+        userapisecret: URLHelper.USER_SECRET_KEY,
+      };
+      const formData = new FormData();
+      formData.append('email', emailVal);
+      formData.append('password', passwordVal);
+      formData.append('first_name', 'Wasu');
+      formData.append('last_name', 'Dev');
+      formData.append('password_confirmation', confirmPasswordVal);
+
+      try {
+        const response = await axios.post(apiUrl, formData, {headers});
+        console.log('REGISTERING STARTED');
+        console.log('Response:', response.data);
+
+        navigation.navigate('OtpAuth')
+
+        console.log('REGISTERING STOP');
+        // Handle the response as needed in your app
+      } catch (error) {
+        navigation.navigate('OtpAuth')
+        if (error.response) {
+          console.log('Error:', error.response.data); // This will contain the server's error response
+          console.log('ERROR : ' + error.response.data.errors.email);
+          // console.error('ERROR : ' + error.response.data.errors.email);
+        } else {
+          // console.error('Error:', error.message);
+          console.log('Error:', error.message);
+        }
+      }
+    }
+  };
 
   return (
     <SafeAreaView
@@ -84,10 +142,13 @@ const Register = () => {
                     THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
                   ...styles.userNameInput,
                 }}
-                placeholder="example@gmail.com"
+                placeholder="Enter your email"
                 placeholderTextColor={
-                  THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-                }></TextInput>
+                  THEME.data === 'DARK' ? COLORS.gray2 : COLORS.gray2
+                }
+                onChangeText={setEmail}
+                value={emailVal}
+                keyboardType="email-address"></TextInput>
             </View>
 
             <View>
@@ -109,10 +170,13 @@ const Register = () => {
                     THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
                   ...styles.userNameInput,
                 }}
-                placeholder="@12345678"
+                placeholder="Create password"
                 placeholderTextColor={
-                  THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-                }></TextInput>
+                  THEME.data === 'DARK' ? COLORS.gray2 : COLORS.gray2
+                }
+                onChangeText={setPassword}
+                value={passwordVal}
+                secureTextEntry={true}></TextInput>
             </View>
 
             <View>
@@ -134,10 +198,14 @@ const Register = () => {
                     THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.gray2,
                   ...styles.userNameInput,
                 }}
-                placeholder="@12345678"
+                placeholder="Confirm password"
                 placeholderTextColor={
-                  THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-                }></TextInput>
+                  THEME.data === 'DARK' ? COLORS.gray2 : COLORS.gray2
+                }
+                onChangeText={setConfirmPassword}
+                value={confirmPasswordVal}
+                secureTextEntry={true}
+              />
             </View>
           </View>
 
@@ -162,9 +230,7 @@ const Register = () => {
             </Text>
           </View>
 
-          <Text
-            style={styles.continue}
-            onPress={() => navigation.navigate('OtpAuth')}>
+          <Text style={styles.continue} onPress={signUp}>
             Continue
           </Text>
         </View>
@@ -212,7 +278,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   userNameInput: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     borderWidth: 1,

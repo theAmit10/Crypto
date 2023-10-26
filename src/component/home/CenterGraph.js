@@ -105,8 +105,10 @@ const CenterGraph = props => {
             yAxisSuffix="k"
             yAxisInterval={1}
             chartConfig={{
-              backgroundGradientFrom: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-              backgroundGradientTo: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              backgroundGradientFrom:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              backgroundGradientTo:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
               decimalPlaces: 1,
 
               color: (opacity = 1) => itemColor,
@@ -151,6 +153,7 @@ const styles = StyleSheet.create({
     marginVertical: heightPercentageToDP(2),
     marginHorizontal: widthPercentageToDP(2),
     padding: heightPercentageToDP(1),
+    borderRadius: heightPercentageToDP(3),
   },
   contentTitle: {
     fontFamily: FONT.medium,

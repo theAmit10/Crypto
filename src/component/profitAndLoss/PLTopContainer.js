@@ -14,6 +14,7 @@ import {
 } from 'react-native-responsive-screen';
 import {BarChart, LineChart, PieChart} from 'react-native-gifted-charts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
 
 const data = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
 const lineData = [
@@ -52,37 +53,97 @@ const lineData = [
 ];
 
 const PLTopContainer = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+        ...styles.container,
+      }}>
       <Image
         source={require('../../../assets/image/bitcoin_image.jpg')}
         style={styles.centerImage}
       />
       <View>
-        <Text style={styles.totalBal}>Total Balance</Text>
-        <Text style={styles.totalBalAmount}>$20,360.34</Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.totalBal,
+          }}>
+          Total Balance
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.totalBalAmount,
+          }}>
+          $20,360.34
+        </Text>
       </View>
 
       <View style={styles.totalValContainer}>
         <MaterialCommunityIcons name="bitcoin" size={20} color="orange" />
-        <Text style={styles.totalValText}>0,0035</Text>
-        <Text style={styles.totalValText}>BTC</Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.totalValText,
+          }}>
+          0,0035
+        </Text>
+        <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            ...styles.totalValText,
+          }}>
+          BTC
+        </Text>
       </View>
 
       <View style={styles.containerBottom}>
         <TouchableOpacity>
-          <View style={styles.bottomContainerLeft}>
-            <Text style={styles.bottomContainerContent}>YESTERDAY’S P&L</Text>
-            <Text style={styles.bottomContainerLoss}>
-              -$58234979.68
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              ...styles.bottomContainerLeft,
+            }}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.bottomContainerContent,
+              }}>
+              YESTERDAY’S P&L
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.bottomContainerLoss,
+              }}>
+              -$5979.68
               <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
             </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity>
-          <View style={styles.bottomContainerRight}>
-            <Text style={styles.bottomContainerContent}>YESTERDAY’S P&L</Text>
-            <Text style={styles.bottomContainerProfit}>
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              ...styles.bottomContainerRight,
+            }}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.bottomContainerContent,
+              }}>
+              YESTERDAY’S P&L
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.bottomContainerProfit,
+              }}>
               +$465.37{' '}
               <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
             </Text>
@@ -99,7 +160,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     position: 'relative',
-    backgroundColor: COLORS.skyBlue,
     width: '100%',
     height: heightPercentageToDP(25),
     flexDirection: 'column',
@@ -108,18 +168,16 @@ const styles = StyleSheet.create({
     marginTop: heightPercentageToDP(3),
   },
   totalBal: {
-    color: COLORS.white,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(2),
     margin: heightPercentageToDP(2),
-    alignSelf:'center'
+    alignSelf: 'center',
   },
 
   totalBalAmount: {
-    color: COLORS.white,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(3),
-    alignSelf:'center'
+    alignSelf: 'center',
   },
   totalValContainer: {
     fontFamily: FONT.regular,
@@ -130,7 +188,7 @@ const styles = StyleSheet.create({
   totalValText: {
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.6),
-    color: COLORS.white,
+
     textAlignVertical: 'center',
   },
   totalVal: {
@@ -140,64 +198,50 @@ const styles = StyleSheet.create({
 
   centerImage: {
     position: 'absolute',
-    left: -40,
-    width: '50%',
     height: '100%',
     resizeMode: 'cover',
-    opacity: 0.5,
+    opacity: 0.1,
   },
   containerBottom: {
     flex: 1,
     width: widthPercentageToDP(100),
     height: heightPercentageToDP(100),
     flexDirection: 'row',
-    justifyContent:'space-evenly'
+    justifyContent: 'space-evenly',
   },
   bottomContainerLeft: {
-    flex:1,
+    flex: 1,
     width: widthPercentageToDP(40),
     height: heightPercentageToDP(100),
-    backgroundColor: COLORS.purpleDark,
-    margin:heightPercentageToDP(1),
+    margin: heightPercentageToDP(1),
     borderRadius: heightPercentageToDP(1),
-    padding:heightPercentageToDP(1),
-    alignItems:'center',
-   
-   
+    padding: heightPercentageToDP(2),
+    alignItems: 'center',
   },
-  bottomContainerRight:{
-    flex:1,
+  bottomContainerRight: {
+    flex: 1,
+
     width: widthPercentageToDP(40),
     height: heightPercentageToDP(100),
-    backgroundColor: COLORS.purpleDark,
-    margin:heightPercentageToDP(1),
+    margin: heightPercentageToDP(1),
     borderRadius: heightPercentageToDP(1),
-    padding:heightPercentageToDP(1),
-    alignItems:'center',
-  
+    padding: heightPercentageToDP(2),
+    alignItems: 'center',
   },
   bottomContainerContent: {
-    color: 'white',
     fontFamily: FONT.medium,
-    fontSize: heightPercentageToDP(1.8),
-   
+    fontSize: heightPercentageToDP(1.5),
   },
   bottomContainerLoss: {
-    flex:1,
+    flex: 1,
     color: COLORS.red,
     fontFamily: FONT.medium,
-    fontSize: heightPercentageToDP(2),
-   
-   
+    fontSize: heightPercentageToDP(1.8),
   },
   bottomContainerProfit: {
-    flex:1,
+    flex: 1,
     color: COLORS.green,
     fontFamily: FONT.medium,
-    fontSize: heightPercentageToDP(2),
-    
+    fontSize: heightPercentageToDP(1.8),
   },
- 
 });
-
-

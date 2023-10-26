@@ -17,7 +17,7 @@ import React, {
   useState,
 } from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {getCoinMarket} from '../../stores/market/MarketAction';
+// import {getCoinMarket} from '../../stores/market/MarketAction';
 import {COLORS, FONT, SIZES, icons} from '../../constants';
 import {
   heightPercentageToDP,
@@ -189,9 +189,11 @@ const Market = () => {
     });
   });
 
-  useEffect(() => {
-    getCoinMarket();
-  }, []);
+  // useEffect(() => {
+    
+  // }, []);
+
+ 
 
   function renderTabBar() {
     const THEME = useSelector(state => state.theme);
@@ -404,7 +406,7 @@ const Market = () => {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
         ...styles.parentContainer,
       }}>
       {/** Header */}

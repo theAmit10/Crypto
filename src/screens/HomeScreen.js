@@ -24,7 +24,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import CoinItem from '../component/Coinitems';
 import cryptocurrencies from '../../assets/data/cryptocurrencies.json';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {getHoldings, getCoinMarket} from '../../stores/market/MarketAction';
+// import {getHoldings, getCoinMarket} from '../../stores/market/MarketAction';
 import {useFocusEffect} from '@react-navigation/native';
 import {dummyData} from '../constrants/constrants';
 import Chart from '../component/home/Chart';
@@ -37,6 +37,8 @@ import {changeTheme} from '../../stores/ThemeSlice';
 import LinearGradient from 'react-native-linear-gradient';
 import Search from './Search';
 import Market from './Market';
+import AssetDetails from './AssetDetails';
+import {fetchwalletMarket} from '../../stores/walletDataSlice';
 
 // flatlist data
 const dailyStatus = ['Top Gainers', 'Top Losers'];
@@ -47,22 +49,26 @@ const HomeScreen = () => {
   const [selectedCoin, setSelectedCoin] = useState(null);
 
   const THEME = useSelector(state => state.theme);
-  console.log('THEME : ' + THEME.data);
+  console.log('THEMEAAA : ' + THEME.currentTheme);
 
   const dispatch = useDispatch();
   const myHoldings = useSelector(state => state.holdings.myHoldings);
   const coins = useSelector(state => state.coinMarket.coins);
+  // const wallets = useSelector(state => state.walletMarket.wallets);
   // Fetch data when the component mounts
   useEffect(() => {
     // Fetch your holdings and coin market data
     // dispatch(fetchHoldings(/* Pass your parameters here */));
     dispatch(fetchCoinMarket());
+    // dispatch(fetchwalletMarket())
     console.log('Hey from EFFECt');
 
     // coins.map(c => {
     //   // console.log('DATA : ' + c.name);
     // });
   }, []);
+
+  // console.log("COOL WALLET :  "+wallets)
 
   const toggleTheme = () => {
     const newTheme = THEME.data === 'DARK' ? 'LIGHT' : 'DARK';
@@ -117,7 +123,7 @@ const HomeScreen = () => {
       }}
       className="flex-1">
       {/** Header */}
-      <StatusBar barStyle={'dark-content'} />
+
       <View
         style={{
           backgroundColor:
@@ -145,7 +151,7 @@ const HomeScreen = () => {
           <TouchableOpacity
             style={styles.imageContainer}
             className="rounded-full"
-            onPress={() => navigation.navigate(Market)}>
+            onPress={() => navigation.navigate('TradeListing')}>
             <LinearGradient
               colors={[
                 THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -235,30 +241,39 @@ const HomeScreen = () => {
             {/**Middle Chart Coponent */}
 
             <ScrollView horizontal={true}>
-              <CenterGraph
-                image={'wallet'}
-                title={'Total Balance'}
-                amount={'$8,060.34'}
-                itemColor={'red'}
-                chartColor={'rgba(255, 0, 0, 1)'}
-                chartPrices={coins[0]?.sparkline_in_7d?.price}
-              />
-              <CenterGraph
-                image={'barschart'}
-                title={'Profit & Loss'}
-                amount={'$6,640.34'}
-                itemColor={'orange'}
-                chartColor={'rgba(255, 165, 0, 1)'}
-                chartPrices={coins[0]?.sparkline_in_7d?.price}
-              />
-              <CenterGraph
-                image={'gift'}
-                title={'Rewards'}
-                amount={'$1,050.14'}
-                itemColor={'rgba(0, 255, 0, 1)'}
-                chartColor={'rgba(0,255, 0, 1)'}
-                chartPrices={coins[0]?.sparkline_in_7d?.price}
-              />
+              <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
+                <CenterGraph
+                  image={'wallet'}
+                  title={'Total Balance'}
+                  amount={'$8,060.34'}
+                  itemColor={'red'}
+                  chartColor={'rgba(255, 0, 0, 1)'}
+                  chartPrices={coins[0]?.sparkline_in_7d?.price}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ProfitAndLoss')}>
+                <CenterGraph
+                  image={'barschart'}
+                  title={'Profit & Loss'}
+                  amount={'$6,640.34'}
+                  itemColor={'orange'}
+                  chartColor={'rgba(255, 165, 0, 1)'}
+                  chartPrices={coins[0]?.sparkline_in_7d?.price}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Rewards')}>
+                <CenterGraph
+                  image={'gift'}
+                  title={'Rewards'}
+                  amount={'$1,050.14'}
+                  itemColor={'rgba(0, 255, 0, 1)'}
+                  chartColor={'rgba(0,255, 0, 1)'}
+                  chartPrices={coins[0]?.sparkline_in_7d?.price}
+                />
+              </TouchableOpacity>
             </ScrollView>
 
             {/** Active Status Gainer OR Looser */}
@@ -273,6 +288,7 @@ const HomeScreen = () => {
               }}>
               <FlatList
                 data={dailyStatus}
+                keyExtractor={item => item}
                 renderItem={({item}) => (
                   <TouchableOpacity
                     style={styles.tab(activeDayStatus, item)}
@@ -284,7 +300,6 @@ const HomeScreen = () => {
                     </Text>
                   </TouchableOpacity>
                 )}
-                keyExtractor={item => item}
                 contentContainerStyle={{columnGap: 10}}
                 width={widthPercentageToDP(100)}
                 horizontal
@@ -292,7 +307,7 @@ const HomeScreen = () => {
             </View>
           </View>
         }
-        renderItem={({item}) => {
+        renderItem={({item, index}) => {
           let priceColor =
             item.price_change_percentage_7d_in_currency == 0
               ? COLORS.gray
@@ -315,7 +330,14 @@ const HomeScreen = () => {
                 marginHorizontal: heightPercentageToDP(1),
               }}
               // on press
-              onPress={() => setSelectedCoin(item)}>
+              // onPress={() => setSelectedCoin(item)}
+              onPress={() => {
+                console.log(item.id);
+                navigation.navigate('AssetDetails', {
+                  itemId: item,
+                  itemIndex: index,
+                });
+              }}>
               {/** LOGO */}
               <View
                 style={{

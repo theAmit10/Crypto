@@ -46,10 +46,10 @@ const CardDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor="gray"
@@ -62,10 +62,10 @@ const CardDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor="gray"
@@ -78,10 +78,10 @@ const CardDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor="gray"
@@ -94,10 +94,10 @@ const CardDetails = () => {
             <TextInput
               style={{
                 backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 borderColor:
-                  THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+                  THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                 ...styles.userInput,
               }}
               placeholderTextColor="gray"
@@ -110,9 +110,9 @@ const CardDetails = () => {
         <View
           style={{
             backgroundColor:
-              THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
             borderColor:
-              THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
 
             ...styles.cardContainer,
           }}>

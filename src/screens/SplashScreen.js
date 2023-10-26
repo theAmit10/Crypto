@@ -1,29 +1,76 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {COLORS} from '../../constants';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import LinearGradient from 'react-native-linear-gradient';
+import {getData, storeData} from '../../stores/AsyncLocalStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import constants from '../constrants/constrants';
+import {changeTheme} from '../../stores/ThemeSlice';
+import {current} from '@reduxjs/toolkit';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Navigate to HomeScreen after 3000 milliseconds (3 seconds)
+    fetStoredTheme();
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate('Onboard');
     }, 3000);
 
-    return () => clearTimeout(timer); // Clean up the timer
+    return () => clearTimeout(timer);
   }, [navigation]);
 
-  let THEME = useSelector(state => state.theme);
-  // THEME = 'LIGHT';
-  console.log('THEME SS : ' + THEME.data);
+  const THEME = useSelector(state => state.theme);
+  const dispatch = useDispatch();
+
+  const updateTheme = (newTheme) => {
+    const [theme, setTheme] = useState(THEME.data);
+
+    console.log("SS update : "+newTheme)
+
+    let mode;
+    if (!newTheme) {
+      mode = THEME.data === 'DARK' ? 'DARK' : 'LIGHT';
+    }
+
+    setTheme(newTheme);
+    storeData('currentTheme', newTheme);
+  };
+
+  const fetStoredTheme = async () => {
+    try {
+      console.log('THEME SS started: ');
+      const themeData = await getData('currentTheme');
+      console.log('THEME SS themeData : ' + themeData);
+      dispatch(changeTheme(themeData));
+
+      if (themeData) {
+        updateTheme(themeData);
+        console.log('THEME SS themeData if : ' + themeData);
+      }
+    } catch (error) {
+      console.log(error);
+    }finally {
+      navigation.navigate('SplashScreen')
+    }
+  };
+
+
+  const abc = getData('currentTheme');
+  console.log(abc)
+
+  
+
+  console.log('THEME SS THEME.data : ' + THEME.data);
 
   return (
     <View

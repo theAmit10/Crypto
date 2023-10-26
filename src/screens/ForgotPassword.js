@@ -16,11 +16,44 @@ import {
 } from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import {useState} from 'react';
+import axios from 'axios';
+import URLHelper from '../api/URLhelper/URLHelper';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
-  console.log('THEME ForgotPassword : ' + THEME);
+  const [emailVal, setEmail] = useState('');
+
+  // to activate forgot password
+  const forgotPassword = async () => {
+    if (!emailVal) {
+      console.error('Enter email address');
+    } else {
+      console.log('Else : ' + emailVal + ' | ');
+
+      const apiUrl = URLHelper.BASE_URL + URLHelper.FORGOT_PASSWORD;
+      const headers = {
+        userapisecret: URLHelper.USER_SECRET_KEY,
+      };
+      const formData = new FormData();
+      formData.append('email', emailVal);
+
+      try {
+        const response = await axios.post(apiUrl, formData, {headers});
+        console.log('FORGOT PASSWORD STARTED');
+        console.log('Response:', response.data);
+        console.log('FORGOT PASSWORD STOP');
+      } catch (error) {
+        if (error.response) {
+          console.error('Error:', error.response.data);
+          console.log('ERROR : ' + error.response.data.errors.email);
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
+    }
+  };
 
   return (
     <SafeAreaView
@@ -53,10 +86,11 @@ const ForgotPassword = () => {
             }}>
             Forgot Password
           </Text>
-          <Text style={{
-            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.titleDescription,
-          }}>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.titleDescription,
+            }}>
             Enter your Email address to recovert your password
           </Text>
 
@@ -82,8 +116,12 @@ const ForgotPassword = () => {
                 }}
                 placeholder="example@gmail.com"
                 placeholderTextColor={
-                  THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-                }></TextInput>
+                  THEME.data === 'DARK' ? COLORS.gray2 : COLORS.gray2
+                }
+                onChangeText={setEmail}
+                value={emailVal}
+                keyboardType="email-address"
+              />
             </View>
           </View>
 
@@ -109,7 +147,7 @@ const ForgotPassword = () => {
 
           <Text
             style={styles.continue}
-            onPress={() => navigation.navigate('OtpAuth')}>
+            onPress={forgotPassword}>
             Continue
           </Text>
         </View>
@@ -155,7 +193,6 @@ const styles = StyleSheet.create({
     margin: heightPercentageToDP(1),
   },
   userNameInput: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     borderWidth: 1,

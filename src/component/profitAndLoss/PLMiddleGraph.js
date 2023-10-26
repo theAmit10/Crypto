@@ -1,11 +1,12 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {COLORS, FONT} from '../../../constants';
 import {BarChart, LineChart, PieChart} from 'react-native-gifted-charts';
+import {useDispatch, useSelector} from 'react-redux';
 
 const lineData = [
   {value: 0, dataPointText: '0'},
@@ -42,23 +43,68 @@ const lineData = [
   {value: 85, dataPointText: '85'},
 ];
 
+
+
 const PLMiddleGraph = () => {
+  const THEME = useSelector(state => state.theme);
+
   return (
-    <View style={styles.mainContainer}>
+    <View
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+        ...styles.mainContainer,
+      }}>
       {/** TOP CONTAINER */}
       <View style={styles.topContainer}>
         <View style={styles.topContainerLeft}>
-          <Text style={styles.topContainerLeftTitle}>Profit & Loss</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.topContainerLeftTitle,
+            }}>
+            Profit & Loss
+          </Text>
         </View>
         <View style={styles.topContainerRight}>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1D</Text>
+            <Text
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                ...styles.bottomContainerContent,
+              }}>
+              1D
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1W</Text>
+            <Text
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                ...styles.bottomContainerContent,
+              }}>
+              1W
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text style={styles.bottomContainerContent}>1M</Text>
+            <Text
+              style={{
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                borderColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                ...styles.bottomContainerContent,
+              }}>
+              1M
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -124,8 +170,8 @@ export default PLMiddleGraph;
 const styles = StyleSheet.create({
   mainContainer: {
     height: heightPercentageToDP(40),
-    backgroundColor: COLORS.skyBlue,
     marginTop: heightPercentageToDP(2),
+
   },
   topContainer: {
     height: heightPercentageToDP(5),
@@ -142,25 +188,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   topContainerLeftTitle: {
-    color: COLORS.white,
     fontFamily: FONT.extrabold,
     alignSelf: 'flex-start',
     fontSize: heightPercentageToDP(2.5),
   },
   bottomContainerContent: {
-    color: COLORS.white,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(1.6),
-    backgroundColor: COLORS.purpleDark,
+
     borderWidth: 2,
-    borderColor: COLORS.skyBlue,
-    borderRadius: 10,
+
+    borderRadius: heightPercentageToDP(1),
     paddingHorizontal: heightPercentageToDP(1.5),
     textAlignVertical: 'center',
     fontSize: heightPercentageToDP(1.8),
-    paddingVertical: heightPercentageToDP(0.5),
+    paddingVertical: heightPercentageToDP(0.2),
   },
   graphContainer: {
     flex: 1,
+    padding: heightPercentageToDP(1)
   },
 });

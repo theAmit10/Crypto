@@ -3,41 +3,76 @@ import React from 'react';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {COLORS, FONT} from '../../../constants';
 import {BarChart, LineChart, PieChart} from 'react-native-gifted-charts';
+import {useSelector} from 'react-redux';
 
 const data = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
 
 const PLAssetAllocation = () => {
+  const THEME = useSelector(state => state.theme);
   return (
-    <View style={styles.mainContainer}>
+    <View
+      style={{
+        backgroundColor:
+          THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+        ...styles.mainContainer,
+      }}>
       {/** Top left container */}
       <View style={styles.leftContainer}>
+        
+
         <PieChart
           radius={heightPercentageToDP(10)}
-          innerCircleColor={COLORS.skyBlue}
+          innerCircleColor={
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue
+          }
           innerRadius={heightPercentageToDP(8)}
           data={data}
           donut
+          showGradient
+          initialAngle={2}
+          strokeWidth={5}
+          strokeColor={
+            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue
+          }
+          showText
         />
       </View>
       {/** Top Right container */}
       <View style={styles.rightContainer}>
         {/** Top Right Top container */}
         <View style={styles.rightContainerTop}>
-          <Text style={styles.rightContainerTopText}>Assets Allocation</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              ...styles.rightContainerTopText,
+            }}>
+            Assets Allocation
+          </Text>
         </View>
 
         {/** Top Right Top Content container */}
         <View style={styles.rightContainerContent}>
           {/** Top Right Top Content Data container */}
+
           <View style={styles.rightContainerContentData}>
             <View style={styles.rightContainerContentLeft}>
               <View className="rounded-full bg-yellow-300 h-2 w-2"></View>
-              <Text style={styles.rightContainerContentLeftText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentLeftText,
+                }}>
                 XTZ (30%)
               </Text>
             </View>
             <View style={styles.rightContainerContentRight}>
-              <Text style={styles.rightContainerContentRightText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentRightText,
+                }}>
                 $2,854,51
               </Text>
             </View>
@@ -47,12 +82,22 @@ const PLAssetAllocation = () => {
           <View style={styles.rightContainerContentData}>
             <View style={styles.rightContainerContentLeft}>
               <View className="rounded-full bg-yellow-300 h-2 w-2"></View>
-              <Text style={styles.rightContainerContentLeftText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentLeftText,
+                }}>
                 XTZ (30%)
               </Text>
             </View>
             <View style={styles.rightContainerContentRight}>
-              <Text style={styles.rightContainerContentRightText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentRightText,
+                }}>
                 $2,854,51
               </Text>
             </View>
@@ -62,36 +107,51 @@ const PLAssetAllocation = () => {
           <View style={styles.rightContainerContentData}>
             <View style={styles.rightContainerContentLeft}>
               <View className="rounded-full bg-yellow-300 h-2 w-2"></View>
-              <Text style={styles.rightContainerContentLeftText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentLeftText,
+                }}>
                 XTZ (30%)
               </Text>
             </View>
             <View style={styles.rightContainerContentRight}>
-              <Text style={styles.rightContainerContentRightText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentRightText,
+                }}>
                 $2,854,51
               </Text>
             </View>
           </View>
-
 
           {/** Top Right Top Content Data container */}
           <View style={styles.rightContainerContentData}>
             <View style={styles.rightContainerContentLeft}>
               <View className="rounded-full bg-yellow-300 h-2 w-2"></View>
-              <Text style={styles.rightContainerContentLeftText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentLeftText,
+                }}>
                 XTZ (30%)
               </Text>
             </View>
             <View style={styles.rightContainerContentRight}>
-              <Text style={styles.rightContainerContentRightText}>
+              <Text
+                style={{
+                  color:
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                  ...styles.rightContainerContentRightText,
+                }}>
                 $2,854,51
               </Text>
             </View>
           </View>
-
-
-          
-
         </View>
       </View>
     </View>
@@ -102,17 +162,15 @@ export default PLAssetAllocation;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    
-    backgroundColor: COLORS.skyBlue,
     marginTop: heightPercentageToDP(2),
     flexDirection: 'row',
-    padding: heightPercentageToDP(1)
+    padding: heightPercentageToDP(1),
   },
   leftContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: heightPercentageToDP(2)
+    marginTop: heightPercentageToDP(2),
   },
   rightContainer: {
     flex: 1,
@@ -126,7 +184,6 @@ const styles = StyleSheet.create({
     flex: 4,
   },
   rightContainerTopText: {
-    color: COLORS.white,
     fontFamily: FONT.bold,
     fontSize: heightPercentageToDP(2.5),
   },
@@ -149,12 +206,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rightContainerContentLeftText: {
-    color: COLORS.white,
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
   },
   rightContainerContentRightText: {
-    color: COLORS.white,
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
   },

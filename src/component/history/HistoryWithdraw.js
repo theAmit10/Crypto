@@ -44,17 +44,17 @@ const HistoryWithdraw = () => {
   };
 
   const showMode = currentMode => {
-    setMode(currentMode);
+    // setMode(currentMode);
   };
 
   const showModeFrom = currentMode => {
     setShowFrom(true);
-    setMode(currentMode);
+    // setMode(currentMode);
   };
 
   const showModeTo = currentMode => {
     setShowTo(true);
-    setMode(currentMode);
+    // setMode(currentMode);
   };
 
 

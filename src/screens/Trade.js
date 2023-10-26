@@ -35,7 +35,7 @@ const Trade = () => {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+        backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
         ...styles.container,
       }}>
       <StatusBar style="light" hidden={false} />

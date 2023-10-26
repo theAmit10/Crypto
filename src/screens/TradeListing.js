@@ -40,10 +40,15 @@ const TradeListing = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+        ...styles.container,
+      }}>
       <View style={styles.searchContainer}>
         <TouchableOpacity
-        onPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
           style={{
             width: widthPercentageToDP(10),
             alignItems: 'center',
@@ -52,13 +57,18 @@ const TradeListing = () => {
           <AntDesign
             name={'arrowleft'}
             size={heightPercentageToDP(3)}
-            color={'white'}
+            color={THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark}
           />
         </TouchableOpacity>
 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <TextInput
-            style={styles.searchInput}
+            style={{
+              backgroundColor:
+                THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
+              ...styles.searchInput,
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            }}
             placeholder="Search"
             placeholderTextColor={COLORS.gray2}></TextInput>
         </View>
@@ -84,7 +94,7 @@ const TradeListing = () => {
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: COLORS.skyBlue,
+                  backgroundColor: THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
                   marginVertical: heightPercentageToDP(1),
                   borderRadius: heightPercentageToDP(1),
                   padding: heightPercentageToDP(1),
@@ -101,7 +111,7 @@ const TradeListing = () => {
                   }}>
                   <View
                     style={{
-                      backgroundColor: COLORS.purpleDark,
+                      backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
                       padding: heightPercentageToDP(1),
                     }}
                     className="rounded-full ">
@@ -124,7 +134,7 @@ const TradeListing = () => {
                   }}>
                   <Text
                     style={{
-                      color: COLORS.white,
+                      color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                       fontFamily: FONT.semibold,
                       fontSize: heightPercentageToDP(2),
                     }}>
@@ -139,7 +149,7 @@ const TradeListing = () => {
                     style={{
                       textAlign: 'right',
                       fontSize: heightPercentageToDP(1.5),
-                      color: COLORS.white,
+                      color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                       fontFamily: FONT.regular,
                     }}>
                     {item.symbol.toUpperCase()}
@@ -160,7 +170,6 @@ export default TradeListing;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.purpleDark,
   },
   searchContainer: {
     height: heightPercentageToDP(10),
@@ -169,11 +178,9 @@ const styles = StyleSheet.create({
     padding: heightPercentageToDP(1),
   },
   searchInput: {
-    backgroundColor: COLORS.skyBlue,
     alignSelf: 'stretch',
     borderRadius: heightPercentageToDP(2),
     paddingStart: heightPercentageToDP(1),
-    color: COLORS.white,
   },
   contentContainer: {
     flexDirection: 'row',
