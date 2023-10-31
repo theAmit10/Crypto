@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View, Image} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {COLORS, FONT} from '../../../constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -9,10 +9,15 @@ import {
 import {useSelector} from 'react-redux';
 import axios from 'axios';
 import URLHelper from '../../api/URLhelper/URLHelper';
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 const ProfileAbout = () => {
   const THEME = useSelector(state => state.theme);
   const [profileData, setProfileData] = useState(null) 
+  const navigation = useNavigation();
 
   useEffect(() => {
     getProfile();
@@ -69,13 +74,13 @@ const ProfileAbout = () => {
             style={styles.profileImage}
           />
 
-          <View style={styles.profileImageEdit} className="rounded-full p-2">
+          <TouchableOpacity style={styles.profileImageEdit} className="rounded-full p-2" onPress={() => navigation.navigate('UpdateProfile')}>
             <AntDesign
               name="edit"
               size={heightPercentageToDP(2)}
               color={'white'}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -92,7 +97,7 @@ const ProfileAbout = () => {
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.email,
           }}>
-          wasu@gmail.com
+          {profileData == null ? '' : profileData.email}
         </Text>
         <Text
           style={{

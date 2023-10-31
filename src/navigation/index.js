@@ -44,6 +44,13 @@ import AssetDetails from '../screens/AssetDetails';
 import UpdateProfile from '../screens/SubSetting/UpdateProfile';
 import DepositScreen from '../screens/SubSetting/DepositScreen';
 import WithdrawScreen from '../screens/SubSetting/WithdrawScreen';
+import Investment from '../screens/Investment';
+import InvestmentDetails from '../screens/InvestmentDetails';
+import CryptoDeposit from '../screens/SubSetting/deposit/CryptoDeposit';
+import UpiDeposit from '../screens/SubSetting/deposit/UpiDeposit';
+import BankDeposit from '../screens/SubSetting/deposit/BankDeposit';
+import WithdrawCrypto from '../screens/SubSetting/withdraw/WithdrawCrypto';
+import WithdrawBank from '../screens/SubSetting/withdraw/WithdrawBank';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +60,7 @@ const AppNavigation = () => {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="SplashScreen">
+          initialRouteName="Hcontainer">
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />
@@ -100,6 +107,16 @@ const AppNavigation = () => {
           <Stack.Screen name="UpdateProfile" component={UpdateProfile} />
           <Stack.Screen name="DepositScreen" component={DepositScreen} />
           <Stack.Screen name="WithdrawScreen" component={WithdrawScreen} />
+          <Stack.Screen name="Investment" component={Investment} />
+          <Stack.Screen name="InvestmentDetails" component={InvestmentDetails} />
+
+          <Stack.Screen name="CryptoDeposit" component={CryptoDeposit} />
+          <Stack.Screen name="UpiDeposit" component={UpiDeposit} />
+          <Stack.Screen name="BankDeposit" component={BankDeposit} />
+
+          <Stack.Screen name="WithdrawCrypto" component={WithdrawCrypto} />
+          <Stack.Screen name="WithdrawBank" component={WithdrawBank} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

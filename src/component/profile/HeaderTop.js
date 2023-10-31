@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import React from 'react';
 import {COLORS, FONT} from '../../../constants';
@@ -23,6 +24,13 @@ const HeaderTop = ({value}) => {
         backgroundColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
         ...styles.container,
       }}>
+      <StatusBar
+        hidden={false}
+        backgroundColor={
+          THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray
+        }
+        barStyle={THEME.data === 'DARK' ? 'light-content' : 'dark-content'}
+      />
       <View style={styles.containerLeft}>
         <TouchableOpacity
           onPress={() => {
@@ -43,6 +51,11 @@ const HeaderTop = ({value}) => {
           {value}
         </Text>
       </View>
+
+
+     
+
+      
     </SafeAreaView>
   );
 };

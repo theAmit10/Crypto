@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Trade from '../screens/Trade';
-import Transfer from '../screens/Transfer';
+import Investment from '../screens/Investment';
 import Wallet from '../screens/Wallet';
 import {COLORS} from '../../constants';
 import HomeScreen from '../screens/HomeScreen';
@@ -137,7 +137,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Trade"
-        component={Trade}
+        component={Investment}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>

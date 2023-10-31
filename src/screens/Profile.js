@@ -3,21 +3,14 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   SafeAreaView,
-  ImageBackground,
   TouchableOpacity,
-  TextInput,
-  Button,
   ScrollView,
 } from 'react-native';
-import {COLORS, SIZES, FONT, images} from '../../constants';
+import {COLORS, FONT} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import NavigationContainer from '../component/home/NavigationContainer';
 import HeaderTop from '../component/profile/HeaderTop';
 import ProfileAbout from '../component/profile/ProfileAbout';
-import ProfileContent from '../component/profile/ProfileContent';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
@@ -26,7 +19,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const Profile = () => {
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
-  console.log('THEME PROFILE : ' + THEME.data);
+  
 
   return (
     <SafeAreaView
@@ -37,7 +30,7 @@ const Profile = () => {
       <StatusBar style="light" hidden={false} />
       <HeaderTop value={'Profile'} />
       <ScrollView>
-        <View >
+        <View>
           <ProfileAbout />
         </View>
 
@@ -477,8 +470,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'stretch',
 
-    paddingBottom: heightPercentageToDP(10)
-    
+    paddingBottom: heightPercentageToDP(10),
   },
   contentContainer: {
     display: 'flex',
@@ -486,7 +478,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: heightPercentageToDP(1),
-    
   },
   title: {
     fontFamily: FONT.extrabold,

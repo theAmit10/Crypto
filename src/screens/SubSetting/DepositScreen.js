@@ -1,4 +1,11 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import HeaderTop from '../../component/profile/HeaderTop';
 import {useSelector} from 'react-redux';
@@ -8,9 +15,11 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 
 const DepositScreen = () => {
   const THEME = useSelector(state => state.theme);
+  const navigation = useNavigation();
   return (
     <SafeAreaView
       style={{
@@ -20,15 +29,16 @@ const DepositScreen = () => {
       }}>
       <HeaderTop value={'Deposit'} />
       <ScrollView style={{flex: 1}}>
-        {/** Withdraw Crypto */}
-        <View
+        {/** Deposit Crypto */}
+        <TouchableOpacity
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             borderColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
-          }}>
+          }}
+          onPress={() => navigation.navigate('CryptoDeposit')}>
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -36,7 +46,8 @@ const DepositScreen = () => {
                 padding: heightPercentageToDP(2),
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               }}
               className=" rounded-full ">
               <FontAwesome6Icon
@@ -66,18 +77,20 @@ const DepositScreen = () => {
               Deposit Crypto via different network on VRX Invest
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         {/** Deposit with Card */}
 
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             borderColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
-          }}>
+          }}
+          onPress={() => navigation.navigate('UpiDeposit')}
+          >
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -85,7 +98,8 @@ const DepositScreen = () => {
                 padding: heightPercentageToDP(2),
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               }}
               className=" rounded-full ">
               <Feather
@@ -104,7 +118,7 @@ const DepositScreen = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.title,
               }}>
-              Card Payment
+              UPI Payment
             </Text>
             <Text
               style={{
@@ -112,21 +126,23 @@ const DepositScreen = () => {
                 ...styles.subtitle,
               }}
               numberOfLines={2}>
-              Buy cryptocurrencies with your debit/credit card on VRX Invest
+              Buy cryptocurrencies with UPI Payment on VRX Invest
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         {/** Deposit with Cash */}
 
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             borderColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
-          }}>
+          }}
+          onPress={() => navigation.navigate('BankDeposit')}
+          >
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -134,7 +150,8 @@ const DepositScreen = () => {
                 padding: heightPercentageToDP(2),
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               }}
               className=" rounded-full ">
               <FontAwesome
@@ -164,11 +181,7 @@ const DepositScreen = () => {
               Deposit cash to our bank account on VRX Invest
             </Text>
           </View>
-        </View>
-
-
-
-
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -197,7 +210,7 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 4,
     margin: heightPercentageToDP(1),
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   title: {

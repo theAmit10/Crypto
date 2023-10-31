@@ -1,14 +1,23 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import HeaderTop from '../../component/profile/HeaderTop';
 import {useSelector} from 'react-redux';
 import {COLORS, FONT} from '../../../constants';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
-import Octicons from 'react-native-vector-icons/Octicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 const WithdrawScreen = () => {
   const THEME = useSelector(state => state.theme);
+  const navigation = useNavigation();
   return (
     <SafeAreaView
       style={{
@@ -19,14 +28,16 @@ const WithdrawScreen = () => {
       <HeaderTop value={'Withdraw'} />
       <ScrollView style={{flex: 1}}>
         {/** Withdraw Crypto */}
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             borderColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
-          }}>
+          }}
+          onPress={() => navigation.navigate('WithdrawCrypto') }
+          >
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -34,11 +45,12 @@ const WithdrawScreen = () => {
                 padding: heightPercentageToDP(2),
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               }}
               className=" rounded-full ">
-              <Octicons
-                name="comment-discussion"
+              <MaterialCommunityIcons
+                name="bitcoin"
                 size={heightPercentageToDP(3)}
                 color={COLORS.green}
                 style={{alignSelf: 'center'}}
@@ -64,18 +76,20 @@ const WithdrawScreen = () => {
               Withdraw Crypto via different network on VRX Invest
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         {/** Withdraw Cash */}
 
-        <View
+        <TouchableOpacity
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             borderColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
-          }}>
+          }}
+          onPress={() => navigation.navigate('WithdrawBank') }
+          >
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -83,7 +97,8 @@ const WithdrawScreen = () => {
                 padding: heightPercentageToDP(2),
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
               }}
               className=" rounded-full ">
               <FontAwesome
@@ -102,7 +117,7 @@ const WithdrawScreen = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.title,
               }}>
-              Withdraw Cash
+              Bank Withdraw 
             </Text>
             <Text
               style={{
@@ -110,10 +125,10 @@ const WithdrawScreen = () => {
                 ...styles.subtitle,
               }}
               numberOfLines={2}>
-              Withdraw Cash to our bank account on VRX Invest
+              Withdraw Cash to your bank account on VRX Invest
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

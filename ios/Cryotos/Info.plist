@@ -63,5 +63,7 @@
 		<string>Jost-SemiBold.ttf</string>
 		<string>Jost-Thin.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library to select a profile picture.</string>
 </dict>
 </plist>
