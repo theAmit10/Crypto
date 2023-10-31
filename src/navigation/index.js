@@ -60,7 +60,7 @@ const AppNavigation = () => {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="Hcontainer">
+          initialRouteName="SplashScreen">
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="OnboardingScreen" component={OnboardingScreen} />

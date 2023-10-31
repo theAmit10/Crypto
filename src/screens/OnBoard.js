@@ -20,6 +20,7 @@ import {
 import {COLORS, SIZES, FONT, images} from '../../constants';
 import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('window');
 
@@ -103,6 +104,8 @@ const Slide = ({item}) => {
 };
 
 const OnboardingScreen = ({navigation}) => {
+
+
   const THEME = useSelector(state => state.theme);
   // THEME = 'LIGHT';
   console.log('THEME OB : ' + THEME.data);
@@ -131,6 +134,17 @@ const OnboardingScreen = ({navigation}) => {
     setCurrentSlideIndex(lastSlideIndex);
   };
 
+  const settingFirstTimeInstall = () => {
+    try {
+      const jsonValue = JSON.stringify('yes');
+      AsyncStorage.setItem('firstTimeAppInstall', jsonValue);
+      navigation.replace('Login')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
   const Footer = () => {
     return (
       <View
@@ -169,7 +183,7 @@ const OnboardingScreen = ({navigation}) => {
             <View style={{height: 50}}>
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => navigation.replace('Login')}>
+                onPress={settingFirstTimeInstall}>
                 <Text
                   style={{
                     fontFamily: FONT.bold,

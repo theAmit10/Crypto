@@ -247,6 +247,7 @@ const HomeScreen = () => {
                 itemColor={'red'}
                 chartColor={'rgba(255, 0, 0, 1)'}
                 chartPrices={coins[0]?.sparkline_in_7d?.price}
+                
               />
             </TouchableOpacity>
 
@@ -275,7 +276,6 @@ const HomeScreen = () => {
           </ScrollView>
 
           {/** Active Status Gainer OR Looser */}
-
           <View style={{height: heightPercentageToDP(100)}}>
             <TabGainerLooser />
           </View>
@@ -287,9 +287,7 @@ const HomeScreen = () => {
               borderColor:
                 THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
               ...styles.containerTodayStatus,
-            }}>
-            
-          </View>
+            }}></View>
         </View>
       </ScrollView>
     </SafeAreaView>

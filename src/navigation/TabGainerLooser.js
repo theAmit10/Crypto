@@ -26,7 +26,7 @@ const TabGainerLooser = () => {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          height: heightPercentageToDP(6),
+          
           backgroundColor:
             THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
           borderRadius: heightPercentageToDP(2),
@@ -40,7 +40,7 @@ const TabGainerLooser = () => {
           fontFamily: FONT.medium,
         },
         tabBarIndicatorStyle: {
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
         },
         tabBarIndicator: false,
         tabBarBounces: false,
@@ -54,7 +54,7 @@ const TabGainerLooser = () => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'pink',
+               
               }}>
               <Text
                 style={{
@@ -69,13 +69,15 @@ const TabGainerLooser = () => {
                     ? COLORS.skyBlue
                     : COLORS.lightGray,
                   width: widthPercentageToDP(40),
-                  height: heightPercentageToDP(5),
+                  height: heightPercentageToDP(4),
                   fontSize: heightPercentageToDP(2),
                   borderColor: 'white',
                   borderRadius: heightPercentageToDP(1),
+
                   textAlign: 'center',
                   textAlignVertical: 'center',
                   fontFamily: FONT.bold,
+                  
                 }}>
                 Top Gainer
               </Text>
@@ -93,7 +95,7 @@ const TabGainerLooser = () => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'pink',
+                
               }}>
               <Text
                 style={{
@@ -108,7 +110,7 @@ const TabGainerLooser = () => {
                     ? COLORS.skyBlue
                     : COLORS.lightGray,
                   width: widthPercentageToDP(40),
-                  height: heightPercentageToDP(5),
+                  height: heightPercentageToDP(4),
                   fontSize: heightPercentageToDP(2),
                   borderColor: 'white',
                   borderRadius: heightPercentageToDP(1),

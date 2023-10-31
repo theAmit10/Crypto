@@ -21,7 +21,6 @@ const Chart = ({containerStyles, chartPrices}) => {
   const THEME = useSelector(state => state.theme);
   if (chartPrices && chartPrices.length > 0) {
     let startUnixTimeStamp = moment().subtract(7, 'day').unix();
-
     let realTimeChartData = chartPrices.map(value => value);
 
     return (

@@ -146,14 +146,15 @@ export default CenterGraph;
 const styles = StyleSheet.create({
   container: {
     width: widthPercentageToDP(35),
-    height: heightPercentageToDP(25),
+   
     flexDirection: 'column',
     justifyContent: 'flex-start',
     borderRadius: heightPercentageToDP(2),
     marginVertical: heightPercentageToDP(2),
     marginHorizontal: widthPercentageToDP(2),
     padding: heightPercentageToDP(1),
-    borderRadius: heightPercentageToDP(3),
+    borderRadius: heightPercentageToDP(2)
+    
   },
   contentTitle: {
     fontFamily: FONT.medium,
