@@ -14,7 +14,7 @@ const InvestmentItem = props => {
   return (
     <LinearGradient
       colors={[
-        THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+        THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.gray2,
         THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightWhite,
       ]}
       style={{

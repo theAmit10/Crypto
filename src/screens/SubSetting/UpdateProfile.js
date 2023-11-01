@@ -19,15 +19,17 @@ import {
 import {useSelector} from 'react-redux';
 import HeaderTop from '../../component/profile/HeaderTop';
 import {COLORS, FONT} from '../../../constants';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import {useState} from 'react';
 import axios from 'axios';
-import ImagePicker from 'react-native-image-picker';
+import * as Progress from 'react-native-progress';
+import DocumentPicker from 'react-native-document-picker';
 
 const UpdateProfile = () => {
   const THEME = useSelector(state => state.theme);
   const navigation = useNavigation();
-  const [imageSource, setImageSource] = useState(null);
+  const source = require('../../../assets/image/user_placeholder.png');
+  const [imageSource, setImageSource] = useState(source);
 
   const [firstNameVal, setFirstName] = useState('');
   const [secondNameVal, setSecondName] = useState('');
@@ -39,16 +41,18 @@ const UpdateProfile = () => {
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMGE5ZTY1YTM2ZWQ2NDNlOWYzZDRhOGNlZTAwMDQ3Y2U1ZTE1ZDQyYWRjNzVmZTQ0NjBjMTBjNjFjOTVhOWY3NzA4NmRmYTYyOWQ3N2JlZTciLCJpYXQiOjE2OTgwNjIzMTkuNzQ2OTcxLCJuYmYiOjE2OTgwNjIzMTkuNzQ2OTc1LCJleHAiOjE3Mjk2ODQ3MTkuNzQ2MTAzLCJzdWIiOiIxMCIsInNjb3BlcyI6W119.TkRGB7JiajYr_zVD30uiT30Xe1XOKFdTR5Tdhp9w8V7gsXS1nVPWDhKzg5g4H0aZwgAs_ROmrrk32PcsQXQF4mkdAZDzxJAZJOjhsAUpzHXnmF_o4ls-YejbqV1P1cvpLIJNYm5TUV2c4H2huC4QKqD3B6Cb_p8t49G0UdB8Hl7xd39A4TqWxsbTBi_GqrX6Hm33Tmf7VvRwYEiOMpKN91lVwSRWJISMMV9q0ndKvbMerw5DtHKdAa4DWlalBOmkvRY5qJzAmYBV9-5bczKFJ1IfKtHV7072q08Ie1J7IVcXoLwSmjxtodd55PN0YCE8mCbY65qLCtD0MVTYHhQMODVpIkFz9av37veldCqcaATSzh_bkD4M1TyzVfzQ9y5f-9GW4n1DFOQ9UTGIe0NQxL33qbEyJVvsDbt4Zm_moF_MrxFPS6ZpRcuy7DYTWIgF1rMDBsAKnmHdySClsXFQFnueiVwZ3ceAf9kNCf9u1mkNR1-FTqcvm6ZQwELe5P4Nz9Y8oRMvvIDA6egK7wZi5w2iiycoTkK8m_H7yNZ5I585_a1ebL9Qx46FHd3ujNi1nIELocn7u89Y0MN_RwgyGWJ4JuP2IZatB7wrU9Be6K3mCdNmbLbZlbnN4lC2FqSFflg94jhh7VGUrFqcggMxkYr-BaY0NR8PzULK_3wHta4';
 
     const formData = new FormData();
-    formData.append('first_name', 'geeta');
-    formData.append('last_name', 'sdfasfasf');
+    formData.append('first_name', firstNameVal);
+    formData.append('last_name', secondNameVal);
     formData.append('phone', '7677777787');
     formData.append('country', 'India');
-    formData.append('gender', 'Female');
-    // formData.append('photo', {
-    //   uri: '/home/theaamit/Pictures/dwsitss/dahsboard.png',
-    //   name: 'photo.jpg',
-    //   type: 'image/jpeg',
-    // });
+    formData.append('gender', 'Male');
+    
+    formData.append('photo', {
+      uri: source,
+      name: 'user_placeholder.png',
+      type: 'image/jpeg',
+      
+    });
 
     try {
       const response = await axios.post(url, formData, {
@@ -62,36 +66,32 @@ const UpdateProfile = () => {
       console.log('Response:', response.data);
     } catch (error) {
       if (error.response) {
-        console.error('Error:', error.response);
+        console.error('Error if:', error.response);
       } else {
-        console.error('Error:', error.message);
+        console.error('Error else:', error.message);
+        console.error('Error else:', error);
       }
     }
   };
 
-  // for Seleting Image
-  const selectImage = () => {
-    const options = {
-      title: 'Select Profile Picture',
-      mediaType: 'photo',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        // You can now use the selected image. For example, set it as the profile picture.
-        setImageSource({uri: response.uri});
-      }
-    });
+  const selectDoc = async () => {
+    try {
+      const doc = await DocumentPicker.pick({
+        type: [DocumentPicker.types.images],
+        allowMultiSelection: true,
+      });
+      // const doc = await DocumentPicker.pickSingle()
+      // const doc = await DocumentPicker.pickMultiple({
+      //   type: [ DocumentPicker.types.images]
+      // })
+      console.log(doc);
+      console.log(doc[0].uri);
+      setImageSource({uri: doc[0].uri});
+    } catch (err) {
+      if (DocumentPicker.isCancel(err))
+        console.log('User cancelled the upload', err);
+      else console.log(err);
+    }
   };
 
   return (
@@ -127,20 +127,21 @@ const UpdateProfile = () => {
                 position: 'relative',
               }}>
               <Image
-                source={require('../../../assets/image/person.jpeg')}
+                source={imageSource}
                 className="rounded-full"
                 style={styles.profileImage}
               />
 
-              <View
+              <TouchableOpacity
                 style={styles.profileImageEdit}
-                className="rounded-full p-2">
-                <AntDesign
-                  name="edit"
-                  size={heightPercentageToDP(2)}
+                className="rounded-full p-2"
+                onPress={selectDoc}>
+                <Feather
+                  name="upload"
+                  size={heightPercentageToDP(2.5)}
                   color={'white'}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -202,10 +203,6 @@ const UpdateProfile = () => {
             </View>
           </View>
 
-          {imageSource && (
-            <Image source={imageSource} style={{width: 200, height: 200}} />
-          )}
-
           <TouchableOpacity
             style={{margin: heightPercentageToDP(2)}}
             onPress={updateProfile}>
@@ -260,7 +257,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.green,
     alignSelf: 'center',
     left: heightPercentageToDP(15),
-    top: heightPercentageToDP(8),
+    top: heightPercentageToDP(6),
     zIndex: 2,
   },
   userNameInput: {
@@ -287,7 +284,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(1.5),
+    fontSize: heightPercentageToDP(2),
     margin: 5,
   },
 });
@@ -344,3 +341,48 @@ const styles = StyleSheet.create({
 // };
 
 // export default ProfilePictureSelector;
+// import React, {useState} from 'react';
+// import {View, Text, TouchableOpacity} from 'react-native';
+// import * as Progress from 'react-native-progress';
+
+// const UploadScreen = () => {
+//   const [uploadProgress, setUploadProgress] = useState(0);
+
+//   // Mock upload function for demonstration purposes
+//   const uploadFile = async () => {
+//     // Simulate a delay for demonstration
+//     const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+//     // Upload process simulation
+//     for (let i = 0; i <= 100; i += 10) {
+//       setUploadProgress(i / 100);
+//       await delay(1000); // Simulate a 1-second delay per 10% progress
+//     }
+
+//     // Reset the progress bar
+//     setUploadProgress(0);
+//   };
+
+//   return (
+//     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//       <Text>Upload Progress</Text>
+//       <Progress.Bar
+//         progress={uploadProgress}
+//         width={200}
+//         height={20}
+//         borderRadius={5}
+//         borderColor="black"
+//         color="blue"
+//       />
+//       <Progress.Pie progress={uploadProgress} size={50} />
+//       <Progress.Circle size={30} indeterminate={true} />
+//       <Progress.CircleSnail color={['red', 'green', 'blue']} />
+//       <Text>{Math.round(uploadProgress * 100)}%</Text>
+//       <TouchableOpacity onPress={uploadFile}>
+//         <Text>Start Upload</Text>
+//       </TouchableOpacity>
+//     </View>
+//   );
+// };
+
+// export default UploadScreen;

@@ -41,7 +41,7 @@ const ChartDetails = ({containerStyles, chartPrices}) => {
           style={styles.centerImage}
         />
 
-        <StatusBar barStyle={'light-content'} />
+        
         <View style={styles.chart}>
           <LineChart
             data={{
@@ -461,7 +461,7 @@ const styles = StyleSheet.create({
   },
   buy: {
     backgroundColor: COLORS.green,
-    height: heightPercentageToDP(6),
+    height: heightPercentageToDP(7),
     flex: 1,
     textAlign: 'center',
     textAlignVertical: 'center',

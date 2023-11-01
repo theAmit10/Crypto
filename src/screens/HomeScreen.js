@@ -109,6 +109,8 @@ const HomeScreen = () => {
   //   }, []),
   // );
 
+  
+
   const [activeDayStatus, setActiveDayStatus] = useState('Top Gainers');
 
   function topCryptoCurrencySection() {
@@ -301,7 +303,7 @@ const HomeScreen = () => {
                   </TouchableOpacity>
                 )}
                 contentContainerStyle={{columnGap: 10}}
-                width={widthPercentageToDP(100)}
+                
                 horizontal
               />
             </View>
@@ -439,7 +441,7 @@ const HomeScreen = () => {
             </TouchableOpacity>
           );
         }}
-        ListFooterComponent={<View style={{marginBottom: 10}}></View>}
+        ListFooterComponent={<View style={{marginBottom: 10, paddingBottom: heightPercentageToDP(10)}}></View>}
       />
     </SafeAreaView>
   );
@@ -490,27 +492,29 @@ const styles = StyleSheet.create({
     left: 10,
   },
   containerTodayStatus: {
-    flex: 1,
-
+    
     marginTop: heightPercentageToDP(1),
     marginStart: heightPercentageToDP(1),
     marginEnd: heightPercentageToDP(1),
     padding: heightPercentageToDP(1),
     borderWidth: 2,
     borderRadius: heightPercentageToDP(1),
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    
+
+    
+    
+    
   },
 
   tab: (activeJobType, item) => ({
-    flex: 1,
-    paddingVertical: 12 / 2,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-    width: widthPercentageToDP(42),
+    
+    paddingVertical: heightPercentageToDP(2) / 2,
+    paddingHorizontal: heightPercentageToDP(2),
+    borderRadius: heightPercentageToDP(2),
+    width: widthPercentageToDP(40),
     borderWidth: 1,
     borderColor: activeJobType === item ? 'green' : 'gray',
+   
   }),
   tabText: (activeJobType, item) => ({
     color: activeJobType === item ? 'green' : 'gray',
