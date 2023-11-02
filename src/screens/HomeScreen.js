@@ -39,6 +39,8 @@ import Search from './Search';
 import Market from './Market';
 import AssetDetails from './AssetDetails';
 import {fetchwalletMarket} from '../../stores/walletDataSlice';
+import TopBarPayment from '../navigation/TopBarPayment';
+import TabGainerLooser from '../navigation/TabGainerLooser';
 
 // flatlist data
 const dailyStatus = ['Top Gainers', 'Top Losers'];
@@ -108,8 +110,6 @@ const HomeScreen = () => {
   //     // getHoldings(holdings = dummyData)
   //   }, []),
   // );
-
-  
 
   const [activeDayStatus, setActiveDayStatus] = useState('Top Gainers');
 
@@ -218,231 +218,80 @@ const HomeScreen = () => {
 
       {topCryptoCurrencySection()}
 
-      <FlatList
-        data={coins}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{}}
-        ListHeaderComponent={
+      <ScrollView>
+        <View>
+          {/**Top Chart Coponent */}
           <View>
-            {/**Top Chart Coponent */}
-            <View>
-              {
-                <Chart
-                  containerStyles={{
-                    marginTop: heightPercentageToDP(2),
-                  }}
-                  chartPrices={
-                    selectedCoin
-                      ? selectedCoin?.sparkline_in_7d?.price
-                      : coins[0]?.sparkline_in_7d?.price
-                  }
-                />
-              }
-            </View>
-
-            {/**Middle Chart Coponent */}
-
-            <ScrollView horizontal={true}>
-              <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
-                <CenterGraph
-                  image={'wallet'}
-                  title={'Total Balance'}
-                  amount={'$8,060.34'}
-                  itemColor={'red'}
-                  chartColor={'rgba(255, 0, 0, 1)'}
-                  chartPrices={coins[0]?.sparkline_in_7d?.price}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => navigation.navigate('ProfitAndLoss')}>
-                <CenterGraph
-                  image={'barschart'}
-                  title={'Profit & Loss'}
-                  amount={'$6,640.34'}
-                  itemColor={'orange'}
-                  chartColor={'rgba(255, 165, 0, 1)'}
-                  chartPrices={coins[0]?.sparkline_in_7d?.price}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => navigation.navigate('Rewards')}>
-                <CenterGraph
-                  image={'gift'}
-                  title={'Rewards'}
-                  amount={'$1,050.14'}
-                  itemColor={'rgba(0, 255, 0, 1)'}
-                  chartColor={'rgba(0,255, 0, 1)'}
-                  chartPrices={coins[0]?.sparkline_in_7d?.price}
-                />
-              </TouchableOpacity>
-            </ScrollView>
-
-            {/** Active Status Gainer OR Looser */}
-
-            <View
-              style={{
-                backgroundColor:
-                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-                borderColor:
-                  THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
-                ...styles.containerTodayStatus,
-              }}>
-              <FlatList
-                data={dailyStatus}
-                keyExtractor={item => item}
-                renderItem={({item}) => (
-                  <TouchableOpacity
-                    style={styles.tab(activeDayStatus, item)}
-                    onPress={() => {
-                      setActiveDayStatus(item);
-                    }}>
-                    <Text style={styles.tabText(activeDayStatus, item)}>
-                      {item}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-                contentContainerStyle={{columnGap: 10}}
-                
-                horizontal
+            {
+              <Chart
+                containerStyles={{
+                  marginTop: heightPercentageToDP(2),
+                }}
+                chartPrices={
+                  selectedCoin
+                    ? selectedCoin?.sparkline_in_7d?.price
+                    : coins[0]?.sparkline_in_7d?.price
+                }
               />
-            </View>
+            }
           </View>
-        }
-        renderItem={({item, index}) => {
-          let priceColor =
-            item.price_change_percentage_7d_in_currency == 0
-              ? COLORS.gray
-              : item.price_change_percentage_7d_in_currency > 0
-              ? COLORS.green
-              : COLORS.red;
 
-          return (
-            <TouchableOpacity
-              style={{
-                height: heightPercentageToDP(10),
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor:
-                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-                marginVertical: heightPercentageToDP(1),
-                borderRadius: heightPercentageToDP(1),
-                padding: heightPercentageToDP(1),
-                marginHorizontal: heightPercentageToDP(1),
-              }}
-              // on press
-              // onPress={() => setSelectedCoin(item)}
-              onPress={() => {
-                console.log(item.id);
-                navigation.navigate('AssetDetails', {
-                  itemId: item,
-                  itemIndex: index,
-                });
-              }}>
-              {/** LOGO */}
-              <View
-                style={{
-                  width: widthPercentageToDP(15),
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    backgroundColor:
-                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
-                    padding: heightPercentageToDP(1),
-                  }}
-                  className="rounded-full ">
-                  <Image
-                    source={{uri: item.image}}
-                    style={{
-                      height: 20,
-                      width: 20,
-                      resizeMode: 'cover',
-                    }}
-                  />
-                </View>
-              </View>
+          {/**Middle Chart Coponent */}
 
-              {/** NAME */}
-
-              <View
-                style={{
-                  flex: 1,
-                }}>
-                <Text
-                  style={{
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    fontFamily: FONT.bold,
-                    fontSize: heightPercentageToDP(2),
-                  }}>
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    fontFamily: FONT.regular,
-                    fontSize: heightPercentageToDP(2),
-                  }}>
-                  {item.symbol.toUpperCase()}
-                </Text>
-              </View>
-
-              {/** FIGURES */}
-
-              <View>
-                <Text
-                  style={{
-                    textAlign: 'right',
-                    fontSize: heightPercentageToDP(2),
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    fontFamily: FONT.medium,
-                  }}>
-                  $ {item.current_price.toFixed(2)}
-                </Text>
-
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                  }}>
-                  {item.price_change_percentage_7d_in_currency != 0 && (
-                    <AntDesign
-                      name={
-                        item.price_change_percentage_7d_in_currency < 0
-                          ? 'caretdown'
-                          : 'caretup'
-                      }
-                      size={heightPercentageToDP(1.5)}
-                      color={priceColor}
-                      style={{alignSelf: 'center', marginRight: 5}}
-                    />
-                  )}
-
-                  <Text
-                    style={{
-                      marginLeft: 5,
-                      color: priceColor,
-                      fontFamily: FONT.regular,
-                      lineHeight: 15,
-                      padding: 2,
-                      fontSize: heightPercentageToDP(1.5),
-                      textAlignVertical: 'center',
-                      textAlign: 'center',
-                    }}>
-                    {item.price_change_percentage_7d_in_currency.toFixed(2)}%
-                  </Text>
-                </View>
-              </View>
+          <ScrollView horizontal={true}>
+            <TouchableOpacity onPress={() => navigation.navigate('Wallet')}>
+              <CenterGraph
+                image={'wallet'}
+                title={'Total Balance'}
+                amount={'$8,060.34'}
+                itemColor={'red'}
+                chartColor={'rgba(255, 0, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
             </TouchableOpacity>
-          );
-        }}
-        ListFooterComponent={<View style={{marginBottom: 10, paddingBottom: heightPercentageToDP(10)}}></View>}
-      />
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ProfitAndLoss')}>
+              <CenterGraph
+                image={'barschart'}
+                title={'Profit & Loss'}
+                amount={'$6,640.34'}
+                itemColor={'orange'}
+                chartColor={'rgba(255, 165, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Rewards')}>
+              <CenterGraph
+                image={'gift'}
+                title={'Rewards'}
+                amount={'$1,050.14'}
+                itemColor={'rgba(0, 255, 0, 1)'}
+                chartColor={'rgba(0,255, 0, 1)'}
+                chartPrices={coins[0]?.sparkline_in_7d?.price}
+              />
+            </TouchableOpacity>
+          </ScrollView>
+
+          {/** Active Status Gainer OR Looser */}
+
+          <View style={{height: heightPercentageToDP(100)}}>
+            <TabGainerLooser />
+          </View>
+
+          <View
+            style={{
+              backgroundColor:
+                THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+              borderColor:
+                THEME.data === 'LIGHT' ? COLORS.white : COLORS.skyBlue,
+              ...styles.containerTodayStatus,
+            }}>
+            
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -492,29 +341,21 @@ const styles = StyleSheet.create({
     left: 10,
   },
   containerTodayStatus: {
-    
     marginTop: heightPercentageToDP(1),
     marginStart: heightPercentageToDP(1),
     marginEnd: heightPercentageToDP(1),
     padding: heightPercentageToDP(1),
     borderWidth: 2,
     borderRadius: heightPercentageToDP(1),
-    
-
-    
-    
-    
   },
 
   tab: (activeJobType, item) => ({
-    
     paddingVertical: heightPercentageToDP(2) / 2,
     paddingHorizontal: heightPercentageToDP(2),
     borderRadius: heightPercentageToDP(2),
     width: widthPercentageToDP(40),
     borderWidth: 1,
     borderColor: activeJobType === item ? 'green' : 'gray',
-   
   }),
   tabText: (activeJobType, item) => ({
     color: activeJobType === item ? 'green' : 'gray',

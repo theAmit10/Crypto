@@ -7,16 +7,33 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../../constants';
 import HeaderTop from '../component/profile/HeaderTop';
 import InvestmentItem from '../component/investment/InvestmentItem';
+import { fetchTopLooserMarket } from '../../stores/topLooserSlice';
 
 const Investment = () => {
   const THEME = useSelector(state => state.theme);
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+  const topLooser = useSelector(state => state.topLooserMarket.topLooser);
+
+  useEffect(() => {
+    dispatch(fetchTopLooserMarket());
+  }, []);
+
+
+  console.log("FOR TOP lOOSER")
+  console.log("FOR TOP lOOSER : "+topLooser[1].name)
+  topLooser
+  console.log("FOR TOP lOOSER datas : "+topLooser.length)
+
+
+  
   return (
     <SafeAreaView
       style={{
