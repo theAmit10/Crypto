@@ -28,55 +28,9 @@ const WithdrawScreen = () => {
       <HeaderTop value={'Withdraw'} />
       <ScrollView style={{flex: 1}}>
         {/** Withdraw Crypto */}
-        <TouchableOpacity
-          style={{
-            backgroundColor:
-              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-            borderColor:
-              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-            ...styles.contentContainer,
-          }}
-          onPress={() => navigation.navigate('WithdrawCrypto') }
-          >
-          {/** left container */}
-          <View style={styles.leftContainer}>
-            <View
-              style={{
-                padding: heightPercentageToDP(2),
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor:
-                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
-              }}
-              className=" rounded-full ">
-              <MaterialCommunityIcons
-                name="bitcoin"
-                size={heightPercentageToDP(3)}
-                color={COLORS.green}
-                style={{alignSelf: 'center'}}
-              />
-            </View>
-          </View>
 
-          {/** right container */}
-          <View style={styles.rightContainer}>
-            <Text
-              style={{
-                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.title,
-              }}>
-              Withdraw Crypto
-            </Text>
-            <Text
-              style={{
-                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.subtitle,
-              }}
-              numberOfLines={2}>
-              Withdraw Crypto via different network on VRX Invest
-            </Text>
-          </View>
-        </TouchableOpacity>
+        
+        
 
         {/** Withdraw Cash */}
 
@@ -173,3 +127,55 @@ const styles = StyleSheet.create({
     marginStart: heightPercentageToDP(2),
   },
 });
+
+
+
+// <TouchableOpacity
+//           style={{
+//             backgroundColor:
+//               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+//             borderColor:
+//               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+//             ...styles.contentContainer,
+//           }}
+//           onPress={() => navigation.navigate('WithdrawCrypto') }
+//           >
+//           {/** left container */}
+//           <View style={styles.leftContainer}>
+//             <View
+//               style={{
+//                 padding: heightPercentageToDP(2),
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//                 backgroundColor:
+//                   THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+//               }}
+//               className=" rounded-full ">
+              // <MaterialCommunityIcons
+              //   name="bitcoin"
+              //   size={heightPercentageToDP(3)}
+              //   color={COLORS.green}
+              //   style={{alignSelf: 'center'}}
+              // />
+//             </View>
+//           </View>
+
+//           {/** right container */}
+//           <View style={styles.rightContainer}>
+//             <Text
+//               style={{
+//                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+//                 ...styles.title,
+//               }}>
+//               Withdraw Crypto
+//             </Text>
+//             <Text
+//               style={{
+//                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+//                 ...styles.subtitle,
+//               }}
+//               numberOfLines={2}>
+//               Withdraw Crypto via different network on VRX Invest
+//             </Text>
+//           </View>
+//         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 import React from 'react';
 import Tabs from '../navigation/Tabs';
 import {COLORS} from '../../constants';
@@ -21,5 +21,3 @@ const Hcontainer = () => {
 };
 
 export default Hcontainer;
-
-const styles = StyleSheet.create({});

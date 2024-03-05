@@ -1,4 +1,4 @@
-import {StatusBar} from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import {
   StyleSheet,
   Text,
@@ -9,23 +9,28 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import HeaderTop from '../../component/profile/HeaderTop';
-import {COLORS, FONT} from '../../../constants';
+import { COLORS, FONT } from '../../../constants';
 import Feather from 'react-native-vector-icons/Feather';
-import {useState} from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import DocumentPicker from 'react-native-document-picker';
 import ImageResizer from '@bam.tech/react-native-image-resizer';
+import Toast from 'react-native-toast-message';
+import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+
+
 
 const UpdateProfile = () => {
   const THEME = useSelector(state => state.theme);
+  const ACCESS_TOKEN = useSelector(state => state.userAccessToken);
   const navigation = useNavigation();
   const source = require('../../../assets/image/user_placeholder.png');
   const [imageSource, setImageSource] = useState(null);
@@ -34,6 +39,27 @@ const UpdateProfile = () => {
   const [secondNameVal, setSecondName] = useState('');
 
   const [showProgressBar, setProgressBar] = useState(false);
+
+  const checkAndRequestPermission = async () => {
+    const result = await check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+
+    if (result === RESULTS.DENIED) {
+      if (Platform.OS === 'android' && Platform.Version <= 29) { // Target Android 10 and above
+        const permissionResult = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+        if (permissionResult !== RESULTS.GRANTED) {
+          console.log('Permission not granted!');
+          Toast.show({
+            type: 'info',
+            text1: 'Permission not granted!'
+          })
+          return;
+        }
+
+      }
+    }
+    // Call your DocumentPicker.pick() function here
+    selectDoc();
+  };
 
   // For Opening PhoneStorage
   const selectDoc = async () => {
@@ -46,9 +72,12 @@ const UpdateProfile = () => {
       // const doc = await DocumentPicker.pickMultiple({
       //   type: [ DocumentPicker.types.images]
       // })
-      console.log(doc);
-      console.log(doc[0].uri);
-      setImageSource({uri: doc[0].uri});
+      if (doc) {
+        console.log(doc);
+        console.log(doc[0].uri);
+        setImageSource({ uri: doc[0].uri });
+      }
+
     } catch (err) {
       if (DocumentPicker.isCancel(err))
         console.log('User cancelled the upload', err);
@@ -59,11 +88,23 @@ const UpdateProfile = () => {
   // for uploading Profile content
   const handleUpdateProfile = async () => {
     if (!firstNameVal) {
-      console.error('Enter your first name');
+      // console.error('Enter your first name');
+      Toast.show({
+        type: 'error',
+        text1: 'Enter your first name',
+      });
     } else if (!secondNameVal) {
-      console.error('Enter your second name');
+      Toast.show({
+        type: 'error',
+        text1: 'Enter your second name',
+      });
+      // console.error('Enter your second name');
     } else if (!imageSource) {
-      console.error('Add profile picture');
+      Toast.show({
+        type: 'error',
+        text1: 'Add profile picture',
+      });
+      // console.error('Add profile picture');
     } else {
       setProgressBar(true);
 
@@ -104,7 +145,12 @@ const UpdateProfile = () => {
             });
           }
         } catch (error) {
-          console.error('Error resizing the image:', error);
+          Toast.show({
+            type: 'error',
+            text1: 'Error resizing the image',
+            text2: error,
+          });
+          // console.error('Error resizing the image:', error);
         }
 
         const response = await axios.post(
@@ -113,27 +159,46 @@ const UpdateProfile = () => {
           {
             headers: {
               userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
-              Authorization: `Bearer ${bearerToken}`,
+              Authorization: `Bearer ${ACCESS_TOKEN.data}`,
               'Content-Type': 'multipart/form-data',
             },
           },
         );
 
         console.log('Profile updated successfully:', response.data);
-        console.warn('Profile updated successfully:');
+        // console.warn('Profile updated successfully:');
+        Toast.show({
+          type: 'error',
+          text1: 'Profile updated successfully',
+        });
         setProgressBar(false);
+        navigation.goBack();
       } catch (error) {
-        if (error.response) {
-          console.error(
-            'Request failed with status code',
-            error.response.status,
-          );
-          console.error('Response data:', error.response.data);
-        } else if (error.request) {
-          console.error('Request was made, but no response was received');
-        } else {
-          console.error('Error setting up the request:', error.message);
-        }
+        Toast.show({
+          type: 'error',
+          text1: 'Something went wrong',
+        });
+        console.log(error);
+
+        // if (error.response) {
+        //   Toast.show({
+        //     type: 'error',
+        //     text1: error.response.data,
+        //   });
+        //   // console.error(
+        //   //   'Request failed with status code',
+        //   //   error.response.status,
+        //   // );
+        //   console.log('Response data:', error.response.data);
+        // } else if (error.request) {
+        //   Toast.show({
+        //     type: 'error',
+        //     text1: error.response.data,
+        //   });
+        //   console.error('Request was made, but no response was received');
+        // } else {
+        //   console.error('Error setting up the request:', error.message);
+        // }
       }
     }
   };
@@ -179,7 +244,7 @@ const UpdateProfile = () => {
               <TouchableOpacity
                 style={styles.profileImageEdit}
                 className="rounded-full p-2"
-                onPress={selectDoc}>
+                onPress={checkAndRequestPermission}>
                 <Feather
                   name="upload"
                   size={heightPercentageToDP(2.5)}
@@ -259,7 +324,7 @@ const UpdateProfile = () => {
           )}
 
           <TouchableOpacity
-            style={{margin: heightPercentageToDP(2)}}
+            style={{ margin: heightPercentageToDP(2) }}
             onPress={handleUpdateProfile}>
             <Text
               style={{

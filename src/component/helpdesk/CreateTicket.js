@@ -1,5 +1,4 @@
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -7,18 +6,42 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {COLORS, FONT} from '../../../constants';
-import HeaderTop from '../../component/profile/HeaderTop';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import Toast from 'react-native-toast-message';
+import * as Progress from 'react-native-progress';
+import {useCreateTicket} from '../../../utils/hooks';
+import {createTicket} from '../../../stores/actions/createticket';
 
 const CreateTicket = () => {
   const THEME = useSelector(state => state.theme);
+  const ACCESS_TOKEN = useSelector(state => state.userAccessToken);
+
+  const [subjectVal, setSubject] = useState('');
+  const [messageVal, setMessage] = useState('');
+  const [showProgressBar, setProgressBar] = useState(false);
+
+  const dispatch = useDispatch();
+  const loading = useCreateTicket(dispatch);
+
+  console.log('LOADING :: ' + loading);
+
+  const submitTicket = () => {
+    console.log('Ticket Creating....');
+    if (subjectVal.length < 2 || messageVal.length < 2) {
+      Toast.show({
+        type: 'error',
+        text1: 'Enter required fields',
+      });
+    } else {
+      dispatch(createTicket(subjectVal, messageVal, ACCESS_TOKEN.data));
+      console.log('Ticket Created');
+    }
+  };
+
   return (
     <View
       style={{
@@ -77,13 +100,18 @@ const CreateTicket = () => {
             style={{
               backgroundColor:
                 THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
-              color:
-                THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
               borderColor:
                 THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
               ...styles.inputContainer,
+              textAlign: 'left',
             }}
-            placeholderTextColor="white"
+            placeholder="Enter your subject"
+            placeholderTextColor={
+              THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+            }
+            onChangeText={setSubject}
+            value={subjectVal}
           />
 
           <Text style={styles.subSubTitle}>Message</Text>
@@ -91,17 +119,38 @@ const CreateTicket = () => {
             style={{
               backgroundColor:
                 THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
-              color:
-                THEME.data === 'DARK' ? COLORS.lightGray : COLORS.lightGray,
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
               borderColor:
                 THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
               ...styles.messageInputContainer,
+              textAlign: 'left',
+              textAlignVertical: 'top',
             }}
-            placeholderTextColor="white"
+            placeholder="Enter your message"
+            placeholderTextColor={
+              THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+            }
+            onChangeText={setMessage}
+            value={messageVal}
+            multiline={true}
+            scrollEnabled={true}
           />
         </View>
 
-        <Text style={styles.addTicket}>Add Ticket</Text>
+        {loading ? (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: heightPercentageToDP(3),
+            }}>
+            <Progress.Circle size={30} indeterminate={true} />
+          </View>
+        ) : (
+          <TouchableOpacity onPress={submitTicket} activeOpacity={0.8}>
+            <Text style={styles.addTicket}>Add Ticket</Text>
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </View>
   );
@@ -149,13 +198,10 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: '95%',
     lineHeight: 20,
-    color: 'white',
     fontFamily: FONT.regular,
     padding: 10,
     fontSize: 14,
-
     borderWidth: 2,
-
     borderRadius: 5,
     margin: 5,
     marginEnd: 10,
@@ -163,13 +209,10 @@ const styles = StyleSheet.create({
   messageInputContainer: {
     height: heightPercentageToDP(20),
     lineHeight: 20,
-
     fontFamily: FONT.regular,
     padding: 10,
     fontSize: 14,
-
     borderWidth: 2,
-
     borderRadius: 5,
     margin: 5,
     marginEnd: 10,

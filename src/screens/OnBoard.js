@@ -9,7 +9,6 @@ import {
   StatusBar,
   TouchableOpacity,
   Dimensions,
-  ImageBackground,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -17,16 +16,12 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {COLORS, SIZES, FONT, images} from '../../constants';
+import {COLORS, FONT} from '../../constants';
 import {useSelector} from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('window');
-
-const COLOR = {primary: '#282534', white: '#fff'};
-
-const THEME = '';
 
 const slides = [
   {
@@ -104,8 +99,6 @@ const Slide = ({item}) => {
 };
 
 const OnboardingScreen = ({navigation}) => {
-
-
   const THEME = useSelector(state => state.theme);
   // THEME = 'LIGHT';
   console.log('THEME OB : ' + THEME.data);
@@ -138,13 +131,12 @@ const OnboardingScreen = ({navigation}) => {
     try {
       const jsonValue = JSON.stringify('yes');
       AsyncStorage.setItem('firstTimeAppInstall', jsonValue);
-      navigation.replace('Login')
+      navigation.replace('Login');
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  
   const Footer = () => {
     return (
       <View

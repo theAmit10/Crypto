@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "191145196270",
+    "project_id": "crypto-403111",
+    "storage_bucket": "crypto-403111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191145196270:android:84354a15b5eb9f566ed1ff",
+        "android_client_info": {
+          "package_name": "com.cryotos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191145196270-ru4ac3nj22665k2ldtvqjvd0c4361qiu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cryotos",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "191145196270-pjej7p01ub153jsn7ddidv3lmql936qa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMPTAcn_5uk8GumeUn-Rz60RzuRZhT38w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191145196270-pjej7p01ub153jsn7ddidv3lmql936qa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

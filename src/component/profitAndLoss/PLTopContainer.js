@@ -12,7 +12,6 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {BarChart, LineChart, PieChart} from 'react-native-gifted-charts';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 
@@ -59,48 +58,48 @@ const PLTopContainer = () => {
       style={{
         backgroundColor:
           THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.lightGray,
-        ...styles.container,
+        ...styles.PLcontainer,
       }}>
       <Image
         source={require('../../../assets/image/bitcoin_image.jpg')}
-        style={styles.centerImage}
+        style={styles.PLcenterImage}
       />
       <View>
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.totalBal,
+            ...styles.PLtotalBal,
           }}>
           Total Balance
         </Text>
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.totalBalAmount,
+            ...styles.PLtotalBalAmount,
           }}>
           $20,360.34
         </Text>
       </View>
 
-      <View style={styles.totalValContainer}>
+      <View style={styles.PLtotalValContainer}>
         <MaterialCommunityIcons name="bitcoin" size={20} color="orange" />
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.totalValText,
+            ...styles.PLtotalValText,
           }}>
           0,0035
         </Text>
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.totalValText,
+            ...styles.PLtotalValText,
           }}>
           BTC
         </Text>
       </View>
 
-      <View style={styles.containerBottom}>
+      <View style={styles.PLcontainerBottom}>
         <TouchableOpacity>
           <View
             style={{
@@ -111,14 +110,14 @@ const PLTopContainer = () => {
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.bottomContainerContent,
+                ...styles.PLbottomContainerContent,
               }}>
               YESTERDAY’S P&L
             </Text>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.bottomContainerLoss,
+                ...styles.PLbottomContainerLoss,
               }}>
               -$5979.68
               <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
@@ -130,19 +129,19 @@ const PLTopContainer = () => {
             style={{
               backgroundColor:
                 THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
-              ...styles.bottomContainerRight,
+              ...styles.PLbottomContainerRight,
             }}>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.bottomContainerContent,
+                ...styles.PLbottomContainerContent,
               }}>
               YESTERDAY’S P&L
             </Text>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                ...styles.bottomContainerProfit,
+                ...styles.PLbottomContainerProfit,
               }}>
               +$465.37{' '}
               <Text style={{fontSize: heightPercentageToDP(1.5)}}> +4.5%</Text>
@@ -157,7 +156,7 @@ const PLTopContainer = () => {
 export default PLTopContainer;
 
 const styles = StyleSheet.create({
-  container: {
+  PLcontainer: {
     display: 'flex',
     position: 'relative',
     width: '100%',
@@ -167,19 +166,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: heightPercentageToDP(3),
   },
-  totalBal: {
+  PLtotalBal: {
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(2),
     margin: heightPercentageToDP(2),
     alignSelf: 'center',
   },
 
-  totalBalAmount: {
+  PLtotalBalAmount: {
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(3),
     alignSelf: 'center',
   },
-  totalValContainer: {
+  PLtotalValContainer: {
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.6),
     flexDirection: 'row',
@@ -191,25 +190,25 @@ const styles = StyleSheet.create({
 
     textAlignVertical: 'center',
   },
-  totalVal: {
+  PLtotalVal: {
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.6),
   },
 
-  centerImage: {
+  PLcenterImage: {
     position: 'absolute',
     height: '100%',
     resizeMode: 'cover',
     opacity: 0.1,
   },
-  containerBottom: {
+  PLcontainerBottom: {
     flex: 1,
     width: widthPercentageToDP(100),
     height: heightPercentageToDP(100),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
-  bottomContainerLeft: {
+  PLbottomContainerLeft: {
     flex: 1,
     width: widthPercentageToDP(40),
     height: heightPercentageToDP(100),
@@ -218,7 +217,7 @@ const styles = StyleSheet.create({
     padding: heightPercentageToDP(2),
     alignItems: 'center',
   },
-  bottomContainerRight: {
+  PLbottomContainerRight: {
     flex: 1,
 
     width: widthPercentageToDP(40),
@@ -228,17 +227,17 @@ const styles = StyleSheet.create({
     padding: heightPercentageToDP(2),
     alignItems: 'center',
   },
-  bottomContainerContent: {
+  PLbottomContainerContent: {
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(1.5),
   },
-  bottomContainerLoss: {
+  PLbottomContainerLoss: {
     flex: 1,
     color: COLORS.red,
     fontFamily: FONT.medium,
     fontSize: heightPercentageToDP(1.8),
   },
-  bottomContainerProfit: {
+  PLbottomContainerProfit: {
     flex: 1,
     color: COLORS.green,
     fontFamily: FONT.medium,

@@ -3,8 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TouchableOpacity,
+  
 } from 'react-native';
 import React from 'react';
 import {COLORS, FONT} from '../../../constants';
@@ -23,15 +22,24 @@ const NotificationContent = props => {
         borderColor: THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
         ...styles.container,
       }}>
-      <View style={styles.containerLeft}>
+
+      {
+        /**
+         * 
+         * <View style={styles.containerLeft}>
         <Image
           source={require('../../../assets/image/user_placeholder.png')}
           style={styles.profileImage}
         />
       </View>
+         * 
+         */
+      }
+      
 
       <View style={styles.containerMiddle}>
         <Text
+        numberOfLines={1}
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.name,
@@ -39,30 +47,27 @@ const NotificationContent = props => {
           {title}
         </Text>
         <Text
+        numberOfLines={1}
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.email,
           }}>
           {name}
         </Text>
-        <Text
-          style={{
-            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-            ...styles.number,
-          }}>
-          {time}
-        </Text>
-      </View>
-
-      <View style={styles.containerRight}>
+        
+      </View>    
+    <View style={styles.containerRight}>
         <Text
           style={{
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.amout,
           }}>
-          {amount}
+          {time}
         </Text>
       </View>
+    
+
+      
     </SafeAreaView>
   );
 };
@@ -84,9 +89,10 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(1.8),
     opacity: 0.5,
+    
   },
   name: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
   },
   number: {
@@ -112,6 +118,7 @@ const styles = StyleSheet.create({
   containerRight: {
     flexDirection: 'column',
     flex: 1,
+    
     justifyContent: 'flex-start',
     marginTop: 10,
   },
@@ -134,13 +141,13 @@ const styles = StyleSheet.create({
   },
   containerMiddle: {
     flexDirection: 'column',
-    flex: 2,
+    flex: 3,
     justifyContent: 'center',
     padding: heightPercentageToDP(1),
   },
   amout: {
-    fontFamily: FONT.medium,
-    fontSize: heightPercentageToDP(2),
+    fontFamily: FONT.regular,
+    fontSize: heightPercentageToDP(1.5),
     textAlign: 'center',
   },
 });

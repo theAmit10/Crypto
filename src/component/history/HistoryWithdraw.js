@@ -1,22 +1,29 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {COLORS, FONT} from '../../../constants';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import Feather from 'react-native-vector-icons/Feather';
-import BottomCard from '../home/BottomCard';
-import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
 import WithdrawItem from './withdraw/WithdrawItem';
-import { useSelector } from 'react-redux';
-
+import {useSelector} from 'react-redux';
+import URLHelper from '../../api/URLhelper/URLHelper';
+import axios from 'axios';
+import moment from 'moment';
+import Toast from 'react-native-toast-message';
+import Loading from '../Loading';
+import LinearGradient from 'react-native-linear-gradient';
 
 const HistoryWithdraw = () => {
   const THEME = useSelector(state => state.theme);
-  
+  const ACCESS_TOKEN = useSelector(state => state.userAccessToken);
+  const [depositListData, setDepositList] = useState([]);
+  const [withdrawListData, setWithdrawList] = useState([]);
+  const [combinedData, setCombinedData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
 
@@ -57,31 +64,156 @@ const HistoryWithdraw = () => {
     // setMode(currentMode);
   };
 
-
   const showDatepickerFrom = () => {
     showModeFrom('date');
+    // handleDateChange(fromDate, 'START_DATE');
   };
 
   const showDatepickerTo = () => {
     showModeTo('date');
+    // handleDateChange(toDate, 'END_DATE');
   };
 
-  
+  // Getting Deposit History
+
+  useEffect(() => {
+    getDepositList();
+    getWithdrawList();
+  }, []);
+
+  // For Getting Bank List
+  const getDepositList = async () => {
+    const apiUrl = URLHelper.DEPOSIT_HISTORY;
+
+    const headers = {
+      userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
+      Authorization: `Bearer ${ACCESS_TOKEN.data}`,
+    };
+
+    try {
+      const response = await axios.get(apiUrl, {headers});
+      console.log('REQUEST STARTED');
+      console.log(
+        'Response length DEPOSIT HISTORY ::',
+        response.data.data.data.length,
+      );
+      // console.log('Response :', response.data.data.data);
+
+      setDepositList(response.data.data.data);
+
+      console.log('REQUEST STOPPED');
+    } catch (error) {
+      if (error.response) {
+        Toast.show({
+          type: 'error',
+          text1: 'error.response',
+        });
+        console.log('Error:', error.response);
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'error.message',
+        });
+        console.log('Error:', error.message);
+      }
+    }
+  };
+
+  const getWithdrawList = async () => {
+    const apiUrl = URLHelper.WITHDRAW_HISTORY;
+
+    const headers = {
+      userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
+      Authorization: `Bearer ${ACCESS_TOKEN.data}`,
+    };
+
+    try {
+      const response = await axios.get(apiUrl, {headers});
+      console.log('REQUEST STARTED');
+      console.log(
+        'Response length  WITHDRAW LENGTH ::',
+        response.data.data.data.length,
+      );
+      // console.log('Response :', response.data.data.data);
+
+      const depositData = response.data.data.data;
+
+      depositData.forEach(item => {
+        item.fees = 'WITHDRAW';
+      });
+
+      // setWithdrawList(response.data.data.data);
+      setWithdrawList(depositData);
+
+      console.log('REQUEST STOPPED');
+    } catch (error) {
+      if (error.response) {
+        Toast.show({
+          type: 'error',
+          text1: 'error.response',
+        });
+        console.log('Error:', error.response);
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'error.message',
+        });
+        console.log('Error:', error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Combine data from both APIs
+    setCombinedData([...depositListData, ...withdrawListData]);
+    setFilteredData([...depositListData, ...withdrawListData]);
+  }, [depositListData, withdrawListData]);
+
+  const handleDateChange = (date, type) => {
+    if (type === 'START_DATE') {
+      setFromDate(date.dateString);
+    } else if (type === 'END_DATE') {
+      setToDate(date.dateString);
+    }
+  };
+
+  const filterDataByDateRange = () => {
+    if (fromDate && toDate) {
+      const filtered = combinedData?.filter(item => {
+        const itemDate = moment(item.created_at).format('YYYY-MM-DD');
+        return (
+          moment(itemDate).isSameOrAfter(fromDate) &&
+          moment(itemDate).isSameOrBefore(toDate)
+        );
+      });
+      setFilteredData(filtered);
+    }
+  };
+
+  console.log('Deposit LENGTH :: ' + depositListData.length);
+  console.log('Withdraw LENGTH :: ' + withdrawListData.length);
+  console.log('COMBINE LENGTH :: ' + combinedData.length);
 
   return (
-    <View className="flex-1" style={{backgroundColor: THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,}}>
+    <View
+      className="flex-1"
+      style={{
+        backgroundColor:
+          THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+      }}>
       <View style={styles.dateContainer}>
         {/** Calender container */}
-        <View style={{
-          backgroundColor:
-            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-          borderColor:
-            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-          ...styles.dateContainerLeft,
-        }}>
+        <View
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.dateContainerLeft,
+          }}>
           <Feather name="calendar" size={20} color={COLORS.green} />
           {/** From Calender  */}
-          <View>
+          <TouchableOpacity onPress={showDatepickerFrom}>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
@@ -96,16 +228,21 @@ const HistoryWithdraw = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
-              }}
-              onPress={showDatepickerFrom}>
-              {fromDate.getDate() + ' '} {fromDate.getMonth() + 1 + ' '}{' '}
-              {fromDate.getFullYear() + ' '}
+              }}>
+              {fromDate?.getDate() + ' '} {fromDate?.getMonth() + 1 + ' '}{' '}
+              {fromDate?.getFullYear() + ' '}
             </Text>
-          </View>
+          </TouchableOpacity>
 
-          <Text style={{color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark, textAlignVertical: 'center'}}>-</Text>
+          <Text
+            style={{
+              color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+              textAlignVertical: 'center',
+            }}>
+            -
+          </Text>
           {/** To Calender  */}
-          <View>
+          <TouchableOpacity onPress={showDatepickerTo}>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
@@ -120,12 +257,11 @@ const HistoryWithdraw = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 textAlignVertical: 'center',
                 fontFamily: FONT.regular,
-              }}
-              onPress={showDatepickerTo}>
-              {toDate.getDate() + ' '} {toDate.getMonth() + 1 + ' '}{' '}
-              {toDate.getFullYear() + ' '}
+              }}>
+              {toDate?.getDate() + ' '} {toDate?.getMonth() + 1 + ' '}{' '}
+              {toDate?.getFullYear() + ' '}
             </Text>
-          </View>
+          </TouchableOpacity>
 
           {showFrom && (
             <DateTimePicker
@@ -150,32 +286,65 @@ const HistoryWithdraw = () => {
           )}
         </View>
 
-        <View style={{
-          borderColor:
-            THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
-          ...styles.dateContainerRight,
-        }}>
+        <TouchableOpacity
+          onPress={filterDataByDateRange}
+          style={{
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.dateContainerRight,
+          }}>
           <Feather
-            name="download"
+            name="search"
             size={25}
             color="white"
             style={{alignSelf: 'center', opacity: 0.9}}
           />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/**  Container content */}
 
-      <GestureHandlerRootView className="flex-1 mt-2">
-        <ScrollView>
-          <WithdrawItem/>
-
-
-          <WithdrawItem/>
-          <WithdrawItem/>
-          
-        </ScrollView>
-      </GestureHandlerRootView>
+      {filteredData.length > 0 ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={filteredData}
+          // keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => index}
+          // keyExtractor={(item, index) => `${item.id}-${index}`}
+          renderItem={({item}) => {
+            return <WithdrawItem value={item} />;
+          }}
+          ListFooterComponent={
+            <View
+              style={{
+                marginTop: heightPercentageToDP(10),
+              }}></View>
+          }
+        />
+      ) : (
+        <LinearGradient
+          colors={[
+            THEME.data === 'DARK' ? COLORS.skyBlue : COLORS.gray2,
+            THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.lightWhite,
+          ]}
+          style={{
+            height: heightPercentageToDP(30),
+            margin: heightPercentageToDP(2),
+            borderRadius: heightPercentageToDP(2),
+          }}>
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontFamily: FONT.bold,
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                textAlign: 'center',
+              }}>
+              No data found
+            </Text>
+          </View>
+        </LinearGradient>
+      )}
     </View>
   );
 };
@@ -186,6 +355,7 @@ const styles = StyleSheet.create({
   dateContainer: {
     height: heightPercentageToDP(10),
     marginTop: heightPercentageToDP(2),
+    marginBottom: heightPercentageToDP(1),
     flexDirection: 'row',
   },
   dateContainerRight: {
@@ -199,7 +369,7 @@ const styles = StyleSheet.create({
   },
   dateContainerLeft: {
     width: widthPercentageToDP(75),
-    
+
     padding: heightPercentageToDP(3),
     borderWidth: 2,
     borderRadius: heightPercentageToDP(2),

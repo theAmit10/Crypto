@@ -1,20 +1,11 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS, FONT} from '../../../constants';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
+import Helper from '../../../utils/Helper';
 
-const ExchangeFee = ({from, value}) => {
+const ExchangeFee = ({from, val}) => {
   const THEME = useSelector(state => state.theme);
   return (
     <SafeAreaView
@@ -41,11 +32,13 @@ const ExchangeFee = ({from, value}) => {
         </Text>
       </View>
 
-      <Text style={{
-        color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-        ...styles.tradeValue,
-      }} numberOfLines={1}>
-        $75.89
+      <Text
+        style={{
+          color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+          ...styles.tradeValue,
+        }}
+        numberOfLines={1}>
+        {val}
       </Text>
     </SafeAreaView>
   );
@@ -91,7 +84,6 @@ const styles = StyleSheet.create({
   },
 
   tradeValue: {
-    
     fontFamily: FONT.semibold,
     fontSize: heightPercentageToDP(2),
     textAlignVertical: 'center',

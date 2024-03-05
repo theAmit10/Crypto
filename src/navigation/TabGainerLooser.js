@@ -26,7 +26,6 @@ const TabGainerLooser = () => {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          
           backgroundColor:
             THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
           borderRadius: heightPercentageToDP(2),
@@ -43,7 +42,8 @@ const TabGainerLooser = () => {
           backgroundColor: 'transparent',
         },
         tabBarIndicator: false,
-        tabBarBounces: false,
+        tabBarBounces: true,
+        tabBarAndroidRipple: false,
       }}>
       <Tab.Screen
         name="Top Gainer"
@@ -54,7 +54,6 @@ const TabGainerLooser = () => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-               
               }}>
               <Text
                 style={{
@@ -77,7 +76,6 @@ const TabGainerLooser = () => {
                   textAlign: 'center',
                   textAlignVertical: 'center',
                   fontFamily: FONT.bold,
-                  
                 }}>
                 Top Gainer
               </Text>
@@ -95,7 +93,6 @@ const TabGainerLooser = () => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                
               }}>
               <Text
                 style={{

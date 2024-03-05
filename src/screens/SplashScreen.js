@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {COLORS} from '../../constants';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, StatusBar, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { COLORS } from '../../constants';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import LinearGradient from 'react-native-linear-gradient';
-import {getData, storeData} from '../../stores/AsyncLocalStorage';
+import { getData, storeData } from '../../stores/AsyncLocalStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import {changeTheme} from '../../stores/ThemeSlice';
+import messaging from '@react-native-firebase/messaging';
+import { changeTheme } from '../../stores/ThemeSlice';
+import { updateAccessToken } from '../../stores/userAccessTokenSlice';
+import { addDeviceToken } from '../../stores/deviceTokenSlice';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -25,22 +27,30 @@ const SplashScreen = () => {
   useEffect(() => {
     fetStoredTheme();
     checkFirstInstall();
+    generatingDeviceToken();
   }, []);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     if(firstInstall){
-  //       // navigation.navigate('Onboard');
-  //       navigation.navigate('Login');
-  //     }else{
-  //       navigation.navigate('Onboard');
-  //       // navigation.navigate('Login');
-  //     }
+  
 
-  //   }, 3000);
+  // Generating Device Token for Notification
 
-  //   return () => clearTimeout(timer);
-  // }, [navigation]);
+  const generatingDeviceToken = async () => {
+    let token = await messaging().getToken();
+    // dispatch(addDeviceToken(token));
+
+    // const jsonValue = JSON.stringify(token);
+    AsyncStorage.setItem('DEVICE_TOKEN', token);
+    console.log('Device Token :: ' + token);
+  };
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+
 
   const updateTheme = newTheme => {
     if (newTheme) {
@@ -60,26 +70,6 @@ const SplashScreen = () => {
   };
 
   const fetStoredTheme = async () => {
-    // try {
-    //   const jsonValue = await AsyncStorage.getItem('currentTheme');
-    //   setMyTheme(jsonValue)
-    //   // updateTheme(jsonValue);
-
-    //   console.log('Encrypted Mytheme :: ' + jsonValue);
-    //   if(jsonValue){
-    //     dispatch(changeTheme(jsonValue));
-    //     console.log('Encrypted if :: ' +jsonValue);
-    //     storeData('currentTheme', jsonValue);
-    //   }else{
-    //     console.log('Encrypted else :: ' + jsonValue);
-    //     storeData('currentTheme', jsonValue);
-    //   }
-    //   return jsonValue !== null ? JSON.parse(jsonValue) : null;
-    // } catch (error) {
-    //   console.log('error' + error);
-    // }finally {
-    //   navigation.navigate('SplashScreen');
-    // }
 
     try {
       console.log('#################');
@@ -125,14 +115,22 @@ const SplashScreen = () => {
   const checkFirstInstall = async () => {
     try {
       let jsonValue = await AsyncStorage.getItem('firstTimeAppInstall');
+      let auth = await AsyncStorage.getItem('accessToken');
       setCode(jsonValue);
       setFirstInstall(jsonValue);
       console.log('Encrypted CODE is firstTimeAppInstall :: ' + jsonValue);
 
+      dispatch(updateAccessToken(auth));
+
       const timer = setTimeout(() => {
         if (jsonValue) {
           // navigation.navigate('Onboard');
-          navigation.navigate('Login');
+          // navigation.navigate('Login');
+          if (auth) {
+            navigation.navigate('Hcontainer');
+          } else {
+            navigation.navigate('Login');
+          }
         } else {
           navigation.navigate('Onboard');
           // navigation.navigate('Login');
@@ -156,7 +154,7 @@ const SplashScreen = () => {
           backgroundColor:
             THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
         }}>
-        <StatusBar hidden />
+        <StatusBar hidden={true}   />
 
         <View
           style={{

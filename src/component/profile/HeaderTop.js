@@ -16,8 +16,7 @@ import {useSelector} from 'react-redux';
 const HeaderTop = ({value}) => {
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
-  console.log('THEME HEADER TOP : ' + THEME.data);
-
+ 
   return (
     <SafeAreaView
       style={{

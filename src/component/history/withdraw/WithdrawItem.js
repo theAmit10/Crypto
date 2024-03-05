@@ -18,10 +18,44 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONT} from '../../../../constants';
 import CoinItem from '../../Coinitems';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
+import Helper from '../../../../utils/Helper';
 
-const WithdrawItem = () => {
+const WithdrawItem = ({value}) => {
   const THEME = useSelector(state => state.theme);
   const [isHiddenBottomView, setIsHiddenBottomView] = useState(false);
+
+  const convertTime = timeString => {
+    const time = moment(timeString, 'YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
+    const formattedTime = time.format('MMM DD, YYYY hh:mm a');
+    return formattedTime;
+  };
+
+  const getPaymentMethod = v => {
+    let method = null;
+    if (v == 1) {
+      method = 'Bank';
+    } else if (v == 2) {
+      method = 'Wallet';
+    } else if (v == 3) {
+      method = 'UPI';
+    }
+    return method;
+  };
+
+  const getPaymentStatus = v => {
+    let method = null;
+    if (v == 0) {
+      method = 'Pending';
+    } else if (v == 1) {
+      method = 'Success';
+    } else if (v == 'Pending') {
+      method = 'Pending';
+    } else if (v == 'Success') {
+      method = 'Success';
+    }
+    return method;
+  };
 
   const hideView = () => {
     if (isHiddenBottomView) {
@@ -45,7 +79,7 @@ const WithdrawItem = () => {
           {/** withdraw or deposit icon  */}
           <View style={styles.iconStatus}>
             <Feather
-              name="arrow-up"
+              name={value.fees == 'WITHDRAW' ? 'arrow-up' : 'arrow-down'}
               size={25}
               color="white"
               style={{alignSelf: 'center', opacity: 0.9}}
@@ -54,7 +88,9 @@ const WithdrawItem = () => {
 
           <View style={styles.middleContent}>
             <View style={styles.middleContentTop}>
-              <View
+              {/** 
+          
+          <View
                 style={styles.middleContentTopIcon}
                 className="rounded-full ">
                 <MaterialCommunityIcons
@@ -64,13 +100,16 @@ const WithdrawItem = () => {
                   style={{alignSelf: 'center', opacity: 0.9}}
                 />
               </View>
+          */}
+
               <Text
                 style={{
                   color:
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.title,
                 }}>
-                Bitcoin
+                {Helper.INR_SYMBOL +
+                  Number.parseFloat(value.currency_amount).toFixed(0)}
               </Text>
             </View>
 
@@ -79,7 +118,7 @@ const WithdrawItem = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.topSubtitle,
               }}>
-              Jan 8, 2023 - 8:20am
+              {convertTime(value.created_at)}
             </Text>
           </View>
         </View>
@@ -97,13 +136,32 @@ const WithdrawItem = () => {
               }}
               className="rounded-full ">
               <MaterialCommunityIcons
-                name="check"
+                name={
+                  getPaymentStatus(value.status) == 'Success'
+                    ? 'check'
+                    : 'clock'
+                }
                 size={15}
-                color={COLORS.green}
+                color={
+                  getPaymentStatus(value.status) == 'Success'
+                    ? COLORS.green
+                    : 'orange'
+                }
                 style={{alignSelf: 'center', opacity: 0.9}}
               />
             </View>
-            <Text style={styles.rightStatusContainerIconTitle}>Success</Text>
+            <Text
+              style={{
+                color:
+                  getPaymentStatus(value.status) == 'Success'
+                    ? COLORS.green
+                    : 'orange',
+                fontFamily: FONT.regular,
+                fontSize: heightPercentageToDP(2),
+                textAlign: 'center',
+              }}>
+              {getPaymentStatus(value.status)}
+            </Text>
           </View>
           <View style={styles.rightStatusContainerLeft}>
             <View
@@ -144,7 +202,9 @@ const WithdrawItem = () => {
               gap: 3,
             }}>
             <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <Text style={styles.bottomTitle}>Accounts ID</Text>
+              <Text style={styles.bottomTitle}>
+                {value.fees == 'WITHDRAW' ? 'Account No' : 'Payment Method'}
+              </Text>
               <Text
                 style={{
                   color:
@@ -152,12 +212,16 @@ const WithdrawItem = () => {
                   ...styles.subtitle,
                 }}
                 numberOfLines={1}>
-                #13173917937917
+                {value.fees == 'WITHDRAW'
+                  ? value.account_no
+                  : getPaymentMethod(value.payment_method_id)}
               </Text>
             </View>
 
             <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={styles.bottomTitle}>From / To</Text>
+              <Text style={styles.bottomTitle}>
+                {value.fees == 'WITHDRAW' ? 'Holder Name' : 'ID'}
+              </Text>
               <Text
                 style={{
                   color:
@@ -165,7 +229,9 @@ const WithdrawItem = () => {
                   ...styles.subtitle,
                 }}
                 numberOfLines={1}>
-                092dfadsgadafbmasfa7a
+                {value.fees == 'WITHDRAW'
+                  ? value.account_holder_name
+                  : value.transaction_id}
               </Text>
             </View>
 
@@ -178,7 +244,7 @@ const WithdrawItem = () => {
                   ...styles.subtitle,
                 }}
                 numberOfLines={1}>
-                $78.89
+                {Number.parseFloat(value.currency_amount).toFixed(2)}
               </Text>
             </View>
           </View>
@@ -268,7 +334,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rightStatusContainerIconTitle: {
-    color: 'white',
     fontFamily: FONT.regular,
     fontSize: heightPercentageToDP(2),
     textAlign: 'center',

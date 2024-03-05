@@ -1,41 +1,56 @@
-import {StatusBar, Switch} from 'react-native';
+import {Alert, StatusBar, Switch} from 'react-native';
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   SafeAreaView,
-  ImageBackground,
   TouchableOpacity,
   TextInput,
-  Button,
   ScrollView,
 } from 'react-native';
-import {COLORS, SIZES, FONT, images} from '../../constants';
+import {COLORS, FONT} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import HeaderTop from '../component/profile/HeaderTop';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import Clipboard from '@react-native-community/clipboard';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import Modal from 'react-native-modal';
-import {useState} from 'react';
-import CoinItem from '../component/Coinitems';
+import {useEffect, useState} from 'react';
+
 import {useDispatch, useSelector} from 'react-redux';
 import {changeTheme} from '../../stores/ThemeSlice';
-import {storeData, getData} from '../../stores/AsyncLocalStorage';
+import {storeData} from '../../stores/AsyncLocalStorage';
 import LinearGradient from 'react-native-linear-gradient';
 import URLHelper from '../api/URLhelper/URLHelper';
 import axios from 'axios';
+import {stopFetchingDataFromWorker} from '../../stores/websocketDataSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
+import * as Progress from 'react-native-progress';
+import moment from 'moment';
+import Helper from '../../utils/Helper';
+import Share from 'react-native-share';
 
 const Setting = () => {
   const THEME = useSelector(state => state.theme);
-  console.log('THEME : ' + THEME.data);
+  const ACCESS_TOKEN = useSelector(state => state.userAccessToken);
+  const [accountIdVal, setAccountId] = useState(null);
+  const [showProgressBar, setProgressBar] = useState(false);
+  const [profileData, setProfileData] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    stopFetchingDataFromWorker();
+    getUserid();
+    getActivityLog();
+    console.log('Account id :: ' + accountIdVal);
+  }, []);
 
   const [isDark, setIsDark] = useState(THEME.data);
 
@@ -58,36 +73,243 @@ const Setting = () => {
   const [newPasswordVal, setNewPassword] = useState('');
   const [confirmPasswordVal, setConfirmPassword] = useState('');
 
+  // For Email Chanage
+  const [currentEmail, SetCurrentEmail] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+
+  // to copy text
+  const copyToClipboard = () => {
+    console.log('Clicked :: copybtn');
+    Clipboard.setString(accountIdVal);
+    // Alert.alert('Text copied to clipboard!');
+
+    setVisible(false);
+
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Text has been copied',
+    });
+
+    // Alert.prompt('Text has been copied', 'copied');
+    // showAlert();
+  };
+
+  const validatePassword = password => {
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?/~]).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      Alert.alert(
+        'Invalid New Password',
+        'Password must be at least 8 characters with at least one uppercase letter and one special symbol.',
+      );
+      return true;
+    }
+
+    // Valid password logic - You can add your code here for valid password case
+    // Alert.alert('Valid Password', 'Congratulations! Your password is valid.');
+    return false;
+    Toast.show({
+      type: 'info',
+      text1: 'Valid Password',
+      text2: 'Your password is valid.',
+    });
+  };
+
+  const shareLink = async () => {
+    console.log('Starting Sharing Process');
+    try {
+      const shareOptions = {
+        title: Helper.ADD_TITLE_SHARE,
+        message: Helper.ADD_MESSAGE_SHARE,
+        url: Helper.ADD_URL_SHARE,
+      };
+
+      await Share.open(shareOptions);
+    } catch (error) {
+      console.log('Error while sharing:', error.message);
+      // Toast.show({
+      //   type: 'error',
+      //   text1: error.message,
+      // });
+    }
+  };
+
   const updatePassword = async () => {
+    console.log('Change Password');
     const url = URLHelper.BASE_URL + URLHelper.CHANGE_PASSWORD;
 
-    console.log(" PASSWORD : "+oldPasswordVal +" | "+newPasswordVal+" | "+confirmPasswordVal)
+    console.log(
+      ' PASSWORD : ' +
+        oldPasswordVal +
+        ' | ' +
+        newPasswordVal +
+        ' | ' +
+        confirmPasswordVal,
+    );
 
-    const bearerToken =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMGE5ZTY1YTM2ZWQ2NDNlOWYzZDRhOGNlZTAwMDQ3Y2U1ZTE1ZDQyYWRjNzVmZTQ0NjBjMTBjNjFjOTVhOWY3NzA4NmRmYTYyOWQ3N2JlZTciLCJpYXQiOjE2OTgwNjIzMTkuNzQ2OTcxLCJuYmYiOjE2OTgwNjIzMTkuNzQ2OTc1LCJleHAiOjE3Mjk2ODQ3MTkuNzQ2MTAzLCJzdWIiOiIxMCIsInNjb3BlcyI6W119.TkRGB7JiajYr_zVD30uiT30Xe1XOKFdTR5Tdhp9w8V7gsXS1nVPWDhKzg5g4H0aZwgAs_ROmrrk32PcsQXQF4mkdAZDzxJAZJOjhsAUpzHXnmF_o4ls-YejbqV1P1cvpLIJNYm5TUV2c4H2huC4QKqD3B6Cb_p8t49G0UdB8Hl7xd39A4TqWxsbTBi_GqrX6Hm33Tmf7VvRwYEiOMpKN91lVwSRWJISMMV9q0ndKvbMerw5DtHKdAa4DWlalBOmkvRY5qJzAmYBV9-5bczKFJ1IfKtHV7072q08Ie1J7IVcXoLwSmjxtodd55PN0YCE8mCbY65qLCtD0MVTYHhQMODVpIkFz9av37veldCqcaATSzh_bkD4M1TyzVfzQ9y5f-9GW4n1DFOQ9UTGIe0NQxL33qbEyJVvsDbt4Zm_moF_MrxFPS6ZpRcuy7DYTWIgF1rMDBsAKnmHdySClsXFQFnueiVwZ3ceAf9kNCf9u1mkNR1-FTqcvm6ZQwELe5P4Nz9Y8oRMvvIDA6egK7wZi5w2iiycoTkK8m_H7yNZ5I585_a1ebL9Qx46FHd3ujNi1nIELocn7u89Y0MN_RwgyGWJ4JuP2IZatB7wrU9Be6K3mCdNmbLbZlbnN4lC2FqSFflg94jhh7VGUrFqcggMxkYr-BaY0NR8PzULK_3wHta4';
-
-    const formData = new FormData();
-    formData.append('old_password', oldPasswordVal);
-    formData.append('password', newPasswordVal);
-    formData.append('password_confirmation', confirmPasswordVal);
-
-    try {
-      const response = await axios.post(url, formData, {
-        headers: {
-          userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
-          Authorization: `Bearer ${bearerToken}`,
-          
-        },
+    if (!oldPasswordVal) {
+      Toast.show({
+        type: 'error',
+        text1: 'Enter current password',
       });
+    } else if (!newPasswordVal) {
+      Toast.show({
+        type: 'error',
+        text1: 'Enter new password',
+      });
+    } else if (validatePassword(newPasswordVal)) {
+      console.log('Password Valid');
+      // validatePassword(newPasswordVal);
+    } else if (!confirmPasswordVal) {
+      Toast.show({
+        type: 'error',
+        text1: 'Enter confirm password',
+      });
+    } else if (newPasswordVal != confirmPasswordVal) {
+      Toast.show({
+        type: 'error',
+        text1: 'Password and confirm password not matched',
+      });
+    } else {
+      setProgressBar(true);
+      console.log('Changing password ...');
+      const bearerToken =
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMGE5ZTY1YTM2ZWQ2NDNlOWYzZDRhOGNlZTAwMDQ3Y2U1ZTE1ZDQyYWRjNzVmZTQ0NjBjMTBjNjFjOTVhOWY3NzA4NmRmYTYyOWQ3N2JlZTciLCJpYXQiOjE2OTgwNjIzMTkuNzQ2OTcxLCJuYmYiOjE2OTgwNjIzMTkuNzQ2OTc1LCJleHAiOjE3Mjk2ODQ3MTkuNzQ2MTAzLCJzdWIiOiIxMCIsInNjb3BlcyI6W119.TkRGB7JiajYr_zVD30uiT30Xe1XOKFdTR5Tdhp9w8V7gsXS1nVPWDhKzg5g4H0aZwgAs_ROmrrk32PcsQXQF4mkdAZDzxJAZJOjhsAUpzHXnmF_o4ls-YejbqV1P1cvpLIJNYm5TUV2c4H2huC4QKqD3B6Cb_p8t49G0UdB8Hl7xd39A4TqWxsbTBi_GqrX6Hm33Tmf7VvRwYEiOMpKN91lVwSRWJISMMV9q0ndKvbMerw5DtHKdAa4DWlalBOmkvRY5qJzAmYBV9-5bczKFJ1IfKtHV7072q08Ie1J7IVcXoLwSmjxtodd55PN0YCE8mCbY65qLCtD0MVTYHhQMODVpIkFz9av37veldCqcaATSzh_bkD4M1TyzVfzQ9y5f-9GW4n1DFOQ9UTGIe0NQxL33qbEyJVvsDbt4Zm_moF_MrxFPS6ZpRcuy7DYTWIgF1rMDBsAKnmHdySClsXFQFnueiVwZ3ceAf9kNCf9u1mkNR1-FTqcvm6ZQwELe5P4Nz9Y8oRMvvIDA6egK7wZi5w2iiycoTkK8m_H7yNZ5I585_a1ebL9Qx46FHd3ujNi1nIELocn7u89Y0MN_RwgyGWJ4JuP2IZatB7wrU9Be6K3mCdNmbLbZlbnN4lC2FqSFflg94jhh7VGUrFqcggMxkYr-BaY0NR8PzULK_3wHta4';
 
-      console.log('Response:', response.data);
-    } catch (error) {
-      if (error.response) {
-        console.error('Error:', error.response);
-      } else {
-        console.error('Error:', error.message);
+      const headers = {
+        'Content-Type': 'multipart/form-data',
+        userapisecret: URLHelper.USER_SECRET_KEY,
+        Authorization: `Bearer ${ACCESS_TOKEN.data}`,
+      };
+
+      const formData = new FormData();
+      formData.append('old_password', oldPasswordVal);
+      formData.append('password', newPasswordVal);
+      formData.append('password_confirmation', confirmPasswordVal);
+
+      try {
+        const response = await axios.post(url, formData, {headers});
+        setProgressBar(false);
+        console.log('Response:', response.data);
+        setPasswordVisible(false);
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        Toast.show({
+          type: 'success',
+          text1: response.data.message,
+          visibilityTime: 3000,
+        });
+      } catch (error) {
+        setProgressBar(false);
+        if (error.response) {
+          console.log('Error RES:', error.response);
+          Toast.show({
+            type: 'error',
+            text1: error.response,
+          });
+        } else {
+          console.log('Error:', error.message);
+          Toast.show({
+            type: 'error',
+            text1: error.message,
+          });
+        }
       }
     }
+  };
+
+  const convertTime = timeString => {
+    const time = moment(timeString, 'YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
+    const formattedTime = time.format('MMM DD, YYYY hh:mm a');
+    return formattedTime;
+  };
+
+  const getActivityLog = async () => {
+    const apiUrl = URLHelper.BASE_URL + URLHelper.PROFILE;
+
+    const headers = {
+      userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
+      Authorization: `Bearer ${ACCESS_TOKEN.data}`,
+    };
+
+    try {
+      const response = await axios.get(apiUrl, {headers});
+      console.log('REQUEST STARTED');
+      console.log('Response:', response.data.activityLog);
+
+      setProfileData(response.data.activityLog);
+      console.log('REQUEST STOPPED');
+    } catch (error) {
+      if (error.response) {
+        Toast.show({
+          type: 'error',
+          text1: error.response,
+        });
+        console.log('Error:', error.response);
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: error.message,
+        });
+        console.log('Error:', error.message);
+      }
+    }
+  };
+
+  const getUserid = async () => {
+    try {
+      let jsonValue = await AsyncStorage.getItem('userId');
+      // setCode(jsonValue);
+      setAccountId(jsonValue);
+      console.log('Encrypted CODE is :: ' + jsonValue);
+      return jsonValue !== null ? JSON.parse(jsonValue) : null;
+    } catch (error) {
+      console.log('error' + error);
+    }
+  };
+
+  const submitEmailChange = () => {
+    console.log('Email Change Request');
+    console.log(' Email : ' + currentEmail + ' | ' + newEmail);
+    Toast.show({
+      type: 'info',
+      text1: 'Email Changed',
+    });
+  };
+
+  // Function to clear AsyncStorage data when the user logs out
+  const clearAsyncStorage = async () => {
+    try {
+      const apiUrl = URLHelper.MY_INVESTMENT_LIST;
+
+      const headers = {
+        userapisecret: 'h0vWu6MkInNlWHJVfIXmHbIbC66cQvlbSUQI09Whbp',
+        Authorization: `Bearer ${ACCESS_TOKEN.data}`,
+      };
+
+      await AsyncStorage.clear();
+      console.log('AsyncStorage data cleared successfully.');
+      navigation.navigate('Login');
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Something went wrong',
+        text2: error,
+      });
+    }
+  };
+
+  const logoutHandler = () => {
+    console.log('Logging Off...');
+    clearAsyncStorage();
+    Toast.show({
+      type: 'success',
+      text1: 'Logging Out ',
+      text2: 'Please wait...',
+    });
   };
 
   return (
@@ -168,8 +390,8 @@ const Setting = () => {
                     THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
                   ]}
                   className="rounded-full p-3">
-                  <Fontisto
-                    name="email"
+                  <Feather
+                    name="activity"
                     size={heightPercentageToDP(2)}
                     color={
                       THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
@@ -184,7 +406,7 @@ const Setting = () => {
                       THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                     ...styles.title,
                   }}>
-                  Change Email ID
+                  Activity Log
                 </Text>
               </View>
 
@@ -410,7 +632,7 @@ const Setting = () => {
                   THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 ...styles.contentContainer,
               }}
-              onPress={() => navigation.navigate('Payment')}>
+              onPress={() => navigation.navigate('DepositScreen')}>
               <View style={{flexDirection: 'row'}}>
                 <LinearGradient
                   colors={[
@@ -460,7 +682,7 @@ const Setting = () => {
                   THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 ...styles.contentContainer,
               }}
-              onPress={() => navigation.navigate('Rewards')}>
+              onPress={shareLink}>
               <View style={{flexDirection: 'row'}}>
                 <LinearGradient
                   colors={[
@@ -705,7 +927,7 @@ const Setting = () => {
                   THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 ...styles.contentContainer,
               }}
-              onPress={() => navigation.navigate('History')}>
+              onPress={logoutHandler}>
               <View style={{flexDirection: 'row'}}>
                 <LinearGradient
                   colors={[
@@ -794,10 +1016,12 @@ const Setting = () => {
                       THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                     ...styles.modelSubtitle,
                   }}>
-                  19876121249
+                  {accountIdVal ? accountIdVal : ''}
                 </Text>
 
-                <Text style={styles.copybtn}>Copy</Text>
+                <TouchableOpacity onPress={() => copyToClipboard()}>
+                  <Text style={styles.copybtn}>Copy</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </Modal>
@@ -829,44 +1053,54 @@ const Setting = () => {
                 borderTopLeftRadius: heightPercentageToDP(6),
               }}>
               <View style={styles.topView}></View>
-              <View style={styles.modelContent}>
+
+              <View>
                 <Text
                   style={{
                     color:
                       THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                     ...styles.modelParentTitle,
                   }}>
-                  New Email Address
+                  Active Devices
                 </Text>
 
-                <Text style={styles.modeltitle}>Current Email</Text>
-                <Text
-                  style={{
-                    backgroundColor:
-                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    ...styles.modelSubtitle,
-                  }}>
-                  wasu@gmail.com
-                </Text>
+                <ScrollView>
+                  {profileData.map((item, index) => (
+                    <View
+                      style={{
+                        ...styles.modelContent,
+                        margin: heightPercentageToDP(1),
+                      }}
+                      key={index}>
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          padding: heightPercentageToDP(1),
+                        }}>
+                        <Text style={styles.modeltitle}>{item?.source}</Text>
+                        <Text style={styles.modeltitle}>
+                          Logged in on {convertTime(item?.created_at)}
+                        </Text>
+                      </View>
 
-                <Text style={styles.modeltitle}>Enter New Email</Text>
-                <TextInput
-                  style={{
-                    backgroundColor:
-                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    ...styles.modelSubtitle,
-                  }}
-                  inputMode="email"
-                  placeholder="wasu@gmail.com"
-                  placeholderTextColor={
-                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
-                  }></TextInput>
-
-                <Text style={styles.copybtn}>Continue</Text>
+                      <Text
+                        style={{
+                          backgroundColor:
+                            THEME.data === 'LIGHT'
+                              ? COLORS.white
+                              : COLORS.purple,
+                          color:
+                            THEME.data === 'DARK'
+                              ? COLORS.white
+                              : COLORS.purpleDark,
+                          ...styles.modelSubtitle,
+                        }}>
+                        {item.ip_address}
+                      </Text>
+                    </View>
+                  ))}
+                </ScrollView>
               </View>
             </View>
           </Modal>
@@ -950,9 +1184,20 @@ const Setting = () => {
                   value={confirmPasswordVal}
                   secureTextEntry={true}></TextInput>
 
-                <TouchableOpacity onPress={updatePassword}>
-                  <Text style={styles.copybtn}>Continue</Text>
-                </TouchableOpacity>
+                {showProgressBar ? (
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      margin: heightPercentageToDP(3),
+                    }}>
+                    <Progress.Circle size={30} indeterminate={true} />
+                  </View>
+                ) : (
+                  <TouchableOpacity onPress={updatePassword}>
+                    <Text style={styles.copybtn}>Continue</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
           </Modal>

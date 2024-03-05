@@ -13,8 +13,9 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
+import Helper from '../../../utils/Helper';
 
-const AvailableBalance = ({from, value}) => {
+const AvailableBalance = ({from, val}) => {
   const THEME = useSelector(state => state.theme);
   return (
     <SafeAreaView
@@ -37,7 +38,7 @@ const AvailableBalance = ({from, value}) => {
           ...styles.tradeValue,
         }}
         numberOfLines={1}>
-        $765,678 BTC
+        {Helper.INR_SYMBOL + val}
       </Text>
     </SafeAreaView>
   );

@@ -22,6 +22,7 @@ import {
 import Market from '../screens/Market';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useSelector} from 'react-redux';
+import MyInvestment from '../screens/MyInvestment';
 
 const CustomTabBarButton = ({children, onPress}) => {
   <TouchableOpacity
@@ -55,6 +56,7 @@ const Tabs = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
+
           backgroundColor:
             THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
           borderBlockColor:
@@ -114,8 +116,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Market"
-        component={Market}
+        name="Trade"
+        component={Trade}
         options={{
           tabBarIcon: ({focused}) => (
             <View>
@@ -136,8 +138,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Trade"
-        component={Investment}
+        name="MyInvestment"
+        component={MyInvestment}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>

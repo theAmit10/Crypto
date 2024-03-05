@@ -18,11 +18,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONT} from '../../../../constants';
 import CoinItem from '../../Coinitems';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
 
-const WithdrawReferalItem = () => {
+const WithdrawReferalItem = ({value}) => {
   const THEME = useSelector(state => state.theme);
   const [isHiddenBottomView, setIsHiddenBottomView] = useState(false);
 
+  const convertTime = timeString => {
+    const time = moment(timeString, 'YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
+    const formattedTime = time.format('MMM DD, YYYY hh:mm a');
+    return formattedTime;
+  };
+
+  console.log('WITHDRAW VALUE :: ' + value.full_name);
   const hideView = () => {
     if (isHiddenBottomView) {
       setIsHiddenBottomView(false);
@@ -48,7 +56,7 @@ const WithdrawReferalItem = () => {
 
           <View style={styles.middleContentTopIcon} className="rounded-full ">
             <MaterialCommunityIcons
-              name="bitcoin"
+              name="account"
               size={25}
               color="white"
               style={{alignSelf: 'center', opacity: 0.9}}
@@ -62,8 +70,9 @@ const WithdrawReferalItem = () => {
                   color:
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.title,
-                }}>
-                0.0115
+                }}
+                numberOfLines={1}>
+                {value.full_name}
               </Text>
 
               <Text
@@ -71,9 +80,7 @@ const WithdrawReferalItem = () => {
                   color:
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.title,
-                }}>
-                BTC
-              </Text>
+                }}></Text>
             </View>
 
             <Text
@@ -81,7 +88,7 @@ const WithdrawReferalItem = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.subtitle,
               }}>
-              Jan 8, 2023 - 8:20am
+              {convertTime(value.joining_date)}
             </Text>
           </View>
         </View>
@@ -126,14 +133,15 @@ const WithdrawReferalItem = () => {
               alignItems: 'center',
             }}>
             <View style={{flex: 2, alignItems: 'flex-start'}}>
-              <Text style={styles.bottomTitle}>Accounts ID</Text>
+              <Text style={styles.bottomTitle}>Email</Text>
               <Text
                 style={{
                   color:
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.subtitle,
-                }}>
-                #13173917937917
+                }}
+                numberOfLines={2}>
+                {value.email}
               </Text>
             </View>
 
@@ -145,11 +153,12 @@ const WithdrawReferalItem = () => {
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.subtitle,
                 }}>
-                1
+                {value.level_2 ? '2' : '1'}
               </Text>
             </View>
 
-            <View style={{flex: 1, alignItems: 'center'}}>
+            {/**
+          <View style={{flex: 1, alignItems: 'center'}}>
               <Text style={styles.bottomTitle}>Total Value</Text>
               <Text
                 style={{
@@ -160,6 +169,8 @@ const WithdrawReferalItem = () => {
                 $78.89
               </Text>
             </View>
+          
+          */}
           </View>
         </View>
       )}

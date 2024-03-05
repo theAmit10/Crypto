@@ -18,10 +18,43 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONT} from '../../../../constants';
 import CoinItem from '../../Coinitems';
 import {useSelector} from 'react-redux';
+import moment from 'moment';
 
-const WithdrawTradeItem = () => {
+const WithdrawTradeItem = ({value}) => {
   const THEME = useSelector(state => state.theme);
   const [isHiddenBottomView, setIsHiddenBottomView] = useState(false);
+
+  const convertTime = timeString => {
+    const time = moment(timeString, 'YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
+    const formattedTime = time.format('MMM DD, YYYY hh:mm a');
+    return formattedTime;
+  };
+
+  const getPaymentMethod = v => {
+    let method = null;
+    if (v == 1) {
+      method = 'Bank';
+    } else if (v == 2) {
+      method = 'Wallet';
+    } else if (v == 3) {
+      method = 'UPI';
+    }
+    return method;
+  };
+
+  const getPaymentStatus = v => {
+    let method = null;
+    if (v == 0) {
+      method = 'Pending';
+    } else if (v == 1) {
+      method = 'Success';
+    } else if (v == 'Pending') {
+      method = 'Pending';
+    } else if (v == 'Success') {
+      method = 'Success';
+    }
+    return method;
+  };
 
   const hideView = () => {
     if (isHiddenBottomView) {
@@ -54,7 +87,7 @@ const WithdrawTradeItem = () => {
             }}
             className="rounded-full ">
             <MaterialCommunityIcons
-              name="bitcoin"
+              name={value.base_coin === 'INR' ? 'currency-inr' : 'bitcoin'}
               size={15}
               color={THEME.data === 'DARK' ? COLORS.white : COLORS.purple}
               style={{alignSelf: 'center', opacity: 0.9}}
@@ -71,7 +104,7 @@ const WithdrawTradeItem = () => {
             }}
             className="rounded-full ">
             <MaterialCommunityIcons
-              name="ethereum"
+              name={value.trade_coin === 'INR' ? 'currency-inr' : 'bitcoin'}
               size={15}
               color={THEME.data === 'DARK' ? COLORS.white : COLORS.purple}
               style={{alignSelf: 'center', opacity: 0.9}}
@@ -86,7 +119,7 @@ const WithdrawTradeItem = () => {
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.title,
                 }}>
-                BTC
+                {value.base_coin}
               </Text>
               <Text
                 style={{
@@ -102,7 +135,7 @@ const WithdrawTradeItem = () => {
                     THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                   ...styles.title,
                 }}>
-                ETH
+                {value.trade_coin}
               </Text>
             </View>
 
@@ -111,7 +144,7 @@ const WithdrawTradeItem = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.subtitle,
               }}>
-              Jan 8, 2023 - 8:20am
+              {convertTime(value.created_at)}
             </Text>
           </View>
         </View>
@@ -168,27 +201,20 @@ const WithdrawTradeItem = () => {
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.bottmContainer,
           }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
+          {value.type === 'TRANSFER' ? (
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
               <View style={{flexDirection: 'row', gap: 3}}>
-                <Text style={styles.bottomTitle}>Amounts :</Text>
-                <Text
-                  style={{
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    ...styles.subtitle,
-                  }}
-                  numberOfLines={1}>
-                  1.2267
+                <Text style={styles.bottomTitle}>
+                  {value.type === 'TRANSFER'
+                    ? 'Transfered Amount : '
+                    : 'Amount : '}
                 </Text>
-              </View>
-              <View style={{flexDirection: 'row', gap: 3}}>
-                <Text style={styles.bottomTitle}>Price :</Text>
                 <Text
                   style={{
                     color:
@@ -196,71 +222,140 @@ const WithdrawTradeItem = () => {
                     ...styles.subtitle,
                   }}
                   numberOfLines={1}>
-                  $6262
+                  {Number.parseFloat(value.amount).toFixed(2) +
+                    ' ' +
+                    value.base_coin}
                 </Text>
               </View>
             </View>
-
+          ) : (
             <View
-              style={{width: widthPercentageToDP(10), alignItems: 'center'}}>
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
               <View
                 style={{
                   flex: 1,
-                  alignItems: 'center',
-                  backgroundColor:
-                    THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
-                  width: 1,
-                  height: '100',
-                }}></View>
+                  alignItems: 'flex-start',
+                }}>
+                <View style={{flexDirection: 'row', gap: 3, width: '45%'}}>
+                  <Text style={styles.bottomTitle}>
+                    {value.type === 'TRANSFER'
+                      ? 'Withdraw Amount : '
+                      : 'Amount : '}
+                  </Text>
+                  <Text
+                    style={{
+                      color:
+                        THEME.data === 'DARK'
+                          ? COLORS.white
+                          : COLORS.purpleDark,
+                      ...styles.subtitle,
+                    }}
+                    numberOfLines={1}>
+                    {Number.parseFloat(value.amount).toFixed(2) +
+                      ' ' +
+                      value.base_coin}
+                  </Text>
+                </View>
+
+                <View style={{flexDirection: 'row', gap: 3, width: '45%'}}>
+                  <Text style={styles.bottomTitle}>Exg Price :</Text>
+                  <Text
+                    style={{
+                      color:
+                        THEME.data === 'DARK'
+                          ? COLORS.white
+                          : COLORS.purpleDark,
+                      ...styles.subtitle,
+                    }}
+                    numberOfLines={1}>
+                    {Number.parseFloat(value.exchange_amount).toFixed(2) +
+                      ' ' +
+                      value.base_coin}
+                  </Text>
+                </View>
+              </View>
 
               <View
                 style={{
-                  backgroundColor:
-                    THEME.data === 'LIGHT'
-                      ? COLORS.lightGray
-                      : COLORS.purpleDark,
-                  borderColor:
-                    THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+                  width: widthPercentageToDP(10),
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+                    width: 1,
+                    height: '100',
+                  }}></View>
 
-                  ...styles.middleContentRightIconView,
-                }}
-                className="rounded-full ">
-                <AntDesign
-                  name="arrowright"
-                  size={20}
-                  color={THEME.data === 'LIGHT' ? COLORS.white : COLORS.white}
-                  style={{alignSelf: 'center'}}
-                />
+                <View
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT'
+                        ? COLORS.lightGray
+                        : COLORS.purpleDark,
+                    borderColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.middleContentRightIconView,
+                  }}
+                  className="rounded-full ">
+                  <AntDesign
+                    name="arrowright"
+                    size={20}
+                    color={THEME.data === 'LIGHT' ? COLORS.white : COLORS.white}
+                    style={{alignSelf: 'center'}}
+                  />
+                </View>
+              </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-start',
+                  position: 'relative',
+                }}>
+                <View style={{flexDirection: 'row', gap: 3, width: '45%'}}>
+                  <Text style={styles.bottomTitle}>Total Value : </Text>
+                  <Text
+                    style={{
+                      color:
+                        THEME.data === 'DARK'
+                          ? COLORS.white
+                          : COLORS.purpleDark,
+                      ...styles.subtitle,
+                    }}
+                    numberOfLines={1}>
+                    {Number.parseFloat(value.total).toFixed(2) +
+                      ' ' +
+                      value.base_coin}
+                  </Text>
+                </View>
+                <View style={{flexDirection: 'row', gap: 3, width: '45%'}}>
+                  <Text style={styles.bottomTitle}>Price :</Text>
+                  <Text
+                    style={{
+                      color:
+                        THEME.data === 'DARK'
+                          ? COLORS.white
+                          : COLORS.purpleDark,
+                      ...styles.subtitle,
+                    }}
+                    numberOfLines={1}>
+                    {Number.parseFloat(value.receive_coin).toFixed(2) +
+                      ' ' +
+                      value.trade_coin}
+                  </Text>
+                </View>
               </View>
             </View>
-
-            <View style={{flex: 1, alignItems: 'flex-start'}}>
-              <View style={{flexDirection: 'row', gap: 3}}>
-                <Text style={styles.bottomTitle}>Total Value : </Text>
-                <Text
-                  style={{
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    ...styles.subtitle,
-                  }}
-                  numberOfLines={1}>
-                  $78.897
-                </Text>
-              </View>
-              <View style={{flexDirection: 'row', gap: 3}}>
-                <Text style={styles.bottomTitle}>Price :</Text>
-                <Text
-                  style={{
-                    color:
-                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-                    ...styles.subtitle,
-                  }}
-                  numberOfLines={1}>
-                  $6262
-                </Text>
-              </View>
-            </View>
-          </View>
+          )}
         </View>
       )}
     </TouchableOpacity>
@@ -274,10 +369,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: heightPercentageToDP(10),
-
     marginTop: heightPercentageToDP(1),
     marginHorizontal: heightPercentageToDP(1),
-
     padding: heightPercentageToDP(1),
     borderWidth: 2,
     borderRadius: heightPercentageToDP(1),
@@ -291,7 +384,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(2),
+    fontSize: heightPercentageToDP(1.5),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },
@@ -343,7 +436,6 @@ const styles = StyleSheet.create({
   },
   rightStatusContainerIconLeft: {
     borderWidth: 1,
-
     borderRadius: 5,
   },
   rightStatusContainerIcon: {
@@ -361,7 +453,7 @@ const styles = StyleSheet.create({
   bottomTitle: {
     color: COLORS.green,
     fontFamily: FONT.regular,
-    fontSize: heightPercentageToDP(2),
+    fontSize: heightPercentageToDP(1.8),
     textAlignVertical: 'center',
     alignItems: 'baseline',
   },

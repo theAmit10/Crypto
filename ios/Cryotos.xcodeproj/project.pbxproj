@@ -23,6 +23,42 @@
 		F6B9E26AAEC245F8996A8373 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */; };
 		D4C01EF861484E21A670F693 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */; };
 		B7269C57382B41E3AF777BAF /* Jost-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */; };
+		CDF138B40BD74E4BBC0A7736 /* account_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F9C47682B84F0CAB6D7CC7 /* account_background.png */; };
+		6B39E42894A540439E2C3E9E /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D3C70EB28444ABB582B9EF /* back_arrow.png */; };
+		846BDA2FD91D42B4AF3B4ACF /* back_one.png in Resources */ = {isa = PBXBuildFile; fileRef = 38529D850F344E4ABEB5547B /* back_one.png */; };
+		E8EFAB984E714053A910D631 /* bitcoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 6751C9AA17B14AFF972AB923 /* bitcoin.png */; };
+		3EE40FA604934DF4ADD5F4AD /* bitcoin_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */; };
+		2260B39B6559412B8B7E8C6E /* chart.png in Resources */ = {isa = PBXBuildFile; fileRef = BF3892503672468086697A60 /* chart.png */; };
+		B181C31EC9314934BB0DED04 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = B63B405BF3494BEC9AD66844 /* circle.png */; };
+		8629FB244140408D830048C1 /* circle_org.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E6EC7D4D8644EB9820764C /* circle_org.png */; };
+		35E8A95F16F9400A995555C5 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3B2CE2CD8347949FD977A9 /* google.png */; };
+		055F731D15DA4624A2EB33B1 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE404E1C8D4B24AB329D5D /* home.png */; };
+		8BE8188DD15E4770882C05B2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F379C2C9AD8C4713A1B6BE64 /* logo.png */; };
+		C729F9EAADF3416EB7901E3D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = FDEAB86A6D1643BF9FC084A4 /* menu.png */; };
+		0DC20F12FE534699BF1D4BFC /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */; };
+		44F1896F0B3E4A5E934B467F /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5825A5C2F44C56B480A62C /* notification.png */; };
+		EED59A7DE8664CB9BD742C5C /* notification_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C861A53342E47A0B7623E2C /* notification_white.png */; };
+		D8CF1A498D0F45899A3B9847 /* notification_white50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6799F4D6998C4DD6A7019108 /* notification_white50.png */; };
+		E45E7C7F757C4E7886AEB5F7 /* o_one.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A402A29AF04417927962D5 /* o_one.png */; };
+		02FA71A9A0EE4D3995631B0C /* o_three.png in Resources */ = {isa = PBXBuildFile; fileRef = DCEA73B343C04125BFF1F5BC /* o_three.png */; };
+		EC5475F9C7A34F97A5AC2A01 /* o_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 9705628D4E50458BB3E6BD4F /* o_two.png */; };
+		9F516CFDB8E548BB9E458DC9 /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = E8E8F726797F47A08ED2D287 /* onboarding.png */; };
+		A79FF7DCA3D44677BD2D23C3 /* person.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 365B8983E046459C95F50727 /* person.jpeg */; };
+		D44BF0BF525B419483A218D3 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DCE23199E041B2B6F33785 /* profile.png */; };
+		BBF2CEE4228240BEAE006381 /* round_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C31D6521B54CF187FD439A /* round_bg.png */; };
+		B3D1BCD189724AF8863B54FC /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 54AAAA7737B74C9BABDF29B1 /* search.png */; };
+		47F3FF63B8A6487A97A7F925 /* search_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B766774090814BDC87755F5A /* search_white.png */; };
+		02DAEC0A24D74C58ABC6855B /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = BA42D70E53E14F75A92849EA /* shield.png */; };
+		487D231AD84C414DA0192A79 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C62B62CDCF4B17867FBA02 /* splashscreen.png */; };
+		F731AE22897A492181FB4B2C /* successfully-done.json in Resources */ = {isa = PBXBuildFile; fileRef = 7326496D12CB4819A0222AB2 /* successfully-done.json */; };
+		9F5BA154976A419EA2E2D481 /* user_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */; };
+		244C1A1769624B3D80077D10 /* wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A2B5569A5242618759DC80 /* wallet.png */; };
+		5BE32A80DE304A4D842D1F2E /* wallet_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EBD5BB739425686DF030F /* wallet_nav.png */; };
+		CD7FA99D9E5849A6AE0F62FE /* wallet_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 270942C2892B437DB2002412 /* wallet_two.png */; };
+		C5C5DFC5C21647EA9CAD93D4 /* white_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB89C21C20494E892C6635 /* white_ss.png */; };
+		7C25A1AC71AC46C1BE947003 /* forgot_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0AA468CA0449A087EF1919 /* forgot_password.png */; };
+		2745F545FE734DC3843CC475 /* add_user.png in Resources */ = {isa = PBXBuildFile; fileRef = A6FBEFC0DA67444487FCD243 /* add_user.png */; };
+		A47AFA92D52B426BB9D146DA /* up_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8506EB16687340B6A5D2E550 /* up_down.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +98,42 @@
 		EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */ = {isa = PBXFileReference; name = "Jost-Regular.ttf"; path = "../assets/fonts/Jost-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; name = "Jost-SemiBold.ttf"; path = "../assets/fonts/Jost-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */ = {isa = PBXFileReference; name = "Jost-Thin.ttf"; path = "../assets/fonts/Jost-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		65F9C47682B84F0CAB6D7CC7 /* account_background.png */ = {isa = PBXFileReference; name = "account_background.png"; path = "../assets/image/account_background.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54D3C70EB28444ABB582B9EF /* back_arrow.png */ = {isa = PBXFileReference; name = "back_arrow.png"; path = "../assets/image/back_arrow.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		38529D850F344E4ABEB5547B /* back_one.png */ = {isa = PBXFileReference; name = "back_one.png"; path = "../assets/image/back_one.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6751C9AA17B14AFF972AB923 /* bitcoin.png */ = {isa = PBXFileReference; name = "bitcoin.png"; path = "../assets/image/bitcoin.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */ = {isa = PBXFileReference; name = "bitcoin_image.jpg"; path = "../assets/image/bitcoin_image.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BF3892503672468086697A60 /* chart.png */ = {isa = PBXFileReference; name = "chart.png"; path = "../assets/image/chart.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B63B405BF3494BEC9AD66844 /* circle.png */ = {isa = PBXFileReference; name = "circle.png"; path = "../assets/image/circle.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A9E6EC7D4D8644EB9820764C /* circle_org.png */ = {isa = PBXFileReference; name = "circle_org.png"; path = "../assets/image/circle_org.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7B3B2CE2CD8347949FD977A9 /* google.png */ = {isa = PBXFileReference; name = "google.png"; path = "../assets/image/google.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1DAE404E1C8D4B24AB329D5D /* home.png */ = {isa = PBXFileReference; name = "home.png"; path = "../assets/image/home.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F379C2C9AD8C4713A1B6BE64 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/image/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FDEAB86A6D1643BF9FC084A4 /* menu.png */ = {isa = PBXFileReference; name = "menu.png"; path = "../assets/image/menu.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */ = {isa = PBXFileReference; name = "menu_white.png"; path = "../assets/image/menu_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5D5825A5C2F44C56B480A62C /* notification.png */ = {isa = PBXFileReference; name = "notification.png"; path = "../assets/image/notification.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9C861A53342E47A0B7623E2C /* notification_white.png */ = {isa = PBXFileReference; name = "notification_white.png"; path = "../assets/image/notification_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6799F4D6998C4DD6A7019108 /* notification_white50.png */ = {isa = PBXFileReference; name = "notification_white50.png"; path = "../assets/image/notification_white50.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D0A402A29AF04417927962D5 /* o_one.png */ = {isa = PBXFileReference; name = "o_one.png"; path = "../assets/image/o_one.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DCEA73B343C04125BFF1F5BC /* o_three.png */ = {isa = PBXFileReference; name = "o_three.png"; path = "../assets/image/o_three.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9705628D4E50458BB3E6BD4F /* o_two.png */ = {isa = PBXFileReference; name = "o_two.png"; path = "../assets/image/o_two.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E8E8F726797F47A08ED2D287 /* onboarding.png */ = {isa = PBXFileReference; name = "onboarding.png"; path = "../assets/image/onboarding.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		365B8983E046459C95F50727 /* person.jpeg */ = {isa = PBXFileReference; name = "person.jpeg"; path = "../assets/image/person.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60DCE23199E041B2B6F33785 /* profile.png */ = {isa = PBXFileReference; name = "profile.png"; path = "../assets/image/profile.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54C31D6521B54CF187FD439A /* round_bg.png */ = {isa = PBXFileReference; name = "round_bg.png"; path = "../assets/image/round_bg.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		54AAAA7737B74C9BABDF29B1 /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../assets/image/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B766774090814BDC87755F5A /* search_white.png */ = {isa = PBXFileReference; name = "search_white.png"; path = "../assets/image/search_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BA42D70E53E14F75A92849EA /* shield.png */ = {isa = PBXFileReference; name = "shield.png"; path = "../assets/image/shield.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B2C62B62CDCF4B17867FBA02 /* splashscreen.png */ = {isa = PBXFileReference; name = "splashscreen.png"; path = "../assets/image/splashscreen.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7326496D12CB4819A0222AB2 /* successfully-done.json */ = {isa = PBXFileReference; name = "successfully-done.json"; path = "../assets/image/successfully-done.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */ = {isa = PBXFileReference; name = "user_placeholder.png"; path = "../assets/image/user_placeholder.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A3A2B5569A5242618759DC80 /* wallet.png */ = {isa = PBXFileReference; name = "wallet.png"; path = "../assets/image/wallet.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3E3EBD5BB739425686DF030F /* wallet_nav.png */ = {isa = PBXFileReference; name = "wallet_nav.png"; path = "../assets/image/wallet_nav.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		270942C2892B437DB2002412 /* wallet_two.png */ = {isa = PBXFileReference; name = "wallet_two.png"; path = "../assets/image/wallet_two.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C1FB89C21C20494E892C6635 /* white_ss.png */ = {isa = PBXFileReference; name = "white_ss.png"; path = "../assets/image/white_ss.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2A0AA468CA0449A087EF1919 /* forgot_password.png */ = {isa = PBXFileReference; name = "forgot_password.png"; path = "../assets/image/forgot_password.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A6FBEFC0DA67444487FCD243 /* add_user.png */ = {isa = PBXFileReference; name = "add_user.png"; path = "../assets/image/add_user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8506EB16687340B6A5D2E550 /* up_down.png */ = {isa = PBXFileReference; name = "up_down.png"; path = "../assets/image/up_down.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +251,42 @@
 				EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */,
 				41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */,
 				F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */,
+				65F9C47682B84F0CAB6D7CC7 /* account_background.png */,
+				54D3C70EB28444ABB582B9EF /* back_arrow.png */,
+				38529D850F344E4ABEB5547B /* back_one.png */,
+				6751C9AA17B14AFF972AB923 /* bitcoin.png */,
+				8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */,
+				BF3892503672468086697A60 /* chart.png */,
+				B63B405BF3494BEC9AD66844 /* circle.png */,
+				A9E6EC7D4D8644EB9820764C /* circle_org.png */,
+				7B3B2CE2CD8347949FD977A9 /* google.png */,
+				1DAE404E1C8D4B24AB329D5D /* home.png */,
+				F379C2C9AD8C4713A1B6BE64 /* logo.png */,
+				FDEAB86A6D1643BF9FC084A4 /* menu.png */,
+				09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */,
+				5D5825A5C2F44C56B480A62C /* notification.png */,
+				9C861A53342E47A0B7623E2C /* notification_white.png */,
+				6799F4D6998C4DD6A7019108 /* notification_white50.png */,
+				D0A402A29AF04417927962D5 /* o_one.png */,
+				DCEA73B343C04125BFF1F5BC /* o_three.png */,
+				9705628D4E50458BB3E6BD4F /* o_two.png */,
+				E8E8F726797F47A08ED2D287 /* onboarding.png */,
+				365B8983E046459C95F50727 /* person.jpeg */,
+				60DCE23199E041B2B6F33785 /* profile.png */,
+				54C31D6521B54CF187FD439A /* round_bg.png */,
+				54AAAA7737B74C9BABDF29B1 /* search.png */,
+				B766774090814BDC87755F5A /* search_white.png */,
+				BA42D70E53E14F75A92849EA /* shield.png */,
+				B2C62B62CDCF4B17867FBA02 /* splashscreen.png */,
+				7326496D12CB4819A0222AB2 /* successfully-done.json */,
+				E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */,
+				A3A2B5569A5242618759DC80 /* wallet.png */,
+				3E3EBD5BB739425686DF030F /* wallet_nav.png */,
+				270942C2892B437DB2002412 /* wallet_two.png */,
+				C1FB89C21C20494E892C6635 /* white_ss.png */,
+				2A0AA468CA0449A087EF1919 /* forgot_password.png */,
+				A6FBEFC0DA67444487FCD243 /* add_user.png */,
+				8506EB16687340B6A5D2E550 /* up_down.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -289,6 +397,42 @@
 				F6B9E26AAEC245F8996A8373 /* Jost-Regular.ttf in Resources */,
 				D4C01EF861484E21A670F693 /* Jost-SemiBold.ttf in Resources */,
 				B7269C57382B41E3AF777BAF /* Jost-Thin.ttf in Resources */,
+				CDF138B40BD74E4BBC0A7736 /* account_background.png in Resources */,
+				6B39E42894A540439E2C3E9E /* back_arrow.png in Resources */,
+				846BDA2FD91D42B4AF3B4ACF /* back_one.png in Resources */,
+				E8EFAB984E714053A910D631 /* bitcoin.png in Resources */,
+				3EE40FA604934DF4ADD5F4AD /* bitcoin_image.jpg in Resources */,
+				2260B39B6559412B8B7E8C6E /* chart.png in Resources */,
+				B181C31EC9314934BB0DED04 /* circle.png in Resources */,
+				8629FB244140408D830048C1 /* circle_org.png in Resources */,
+				35E8A95F16F9400A995555C5 /* google.png in Resources */,
+				055F731D15DA4624A2EB33B1 /* home.png in Resources */,
+				8BE8188DD15E4770882C05B2 /* logo.png in Resources */,
+				C729F9EAADF3416EB7901E3D /* menu.png in Resources */,
+				0DC20F12FE534699BF1D4BFC /* menu_white.png in Resources */,
+				44F1896F0B3E4A5E934B467F /* notification.png in Resources */,
+				EED59A7DE8664CB9BD742C5C /* notification_white.png in Resources */,
+				D8CF1A498D0F45899A3B9847 /* notification_white50.png in Resources */,
+				E45E7C7F757C4E7886AEB5F7 /* o_one.png in Resources */,
+				02FA71A9A0EE4D3995631B0C /* o_three.png in Resources */,
+				EC5475F9C7A34F97A5AC2A01 /* o_two.png in Resources */,
+				9F516CFDB8E548BB9E458DC9 /* onboarding.png in Resources */,
+				A79FF7DCA3D44677BD2D23C3 /* person.jpeg in Resources */,
+				D44BF0BF525B419483A218D3 /* profile.png in Resources */,
+				BBF2CEE4228240BEAE006381 /* round_bg.png in Resources */,
+				B3D1BCD189724AF8863B54FC /* search.png in Resources */,
+				47F3FF63B8A6487A97A7F925 /* search_white.png in Resources */,
+				02DAEC0A24D74C58ABC6855B /* shield.png in Resources */,
+				487D231AD84C414DA0192A79 /* splashscreen.png in Resources */,
+				F731AE22897A492181FB4B2C /* successfully-done.json in Resources */,
+				9F5BA154976A419EA2E2D481 /* user_placeholder.png in Resources */,
+				244C1A1769624B3D80077D10 /* wallet.png in Resources */,
+				5BE32A80DE304A4D842D1F2E /* wallet_nav.png in Resources */,
+				CD7FA99D9E5849A6AE0F62FE /* wallet_two.png in Resources */,
+				C5C5DFC5C21647EA9CAD93D4 /* white_ss.png in Resources */,
+				7C25A1AC71AC46C1BE947003 /* forgot_password.png in Resources */,
+				2745F545FE734DC3843CC475 /* add_user.png in Resources */,
+				A47AFA92D52B426BB9D146DA /* up_down.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

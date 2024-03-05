@@ -1,16 +1,14 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
 import {COLORS, FONT} from '../../../constants';
-import History from '../../screens/History';
 import LinearGradient from 'react-native-linear-gradient';
 
 const InvestmentItem = props => {
-  const {planAbout, investment, montlyrReturn} = props;
+  const {planAbout, investment, montlyrReturn, planDuration} = props;
   const THEME = useSelector(state => state.theme);
-  const navigation = useNavigation();
+
   return (
     <LinearGradient
       colors={[
@@ -100,6 +98,17 @@ const InvestmentItem = props => {
             numberOfLines={1}>
             {montlyrReturn}
           </Text>
+
+
+          <Text
+          style={{
+            color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+            fontFamily: FONT.bold,
+            fontSize: heightPercentageToDP(1.5),
+            letterSpacing: 3,
+          }}>
+          {planDuration} MONTH PLAN
+        </Text>
         </View>
       </View>
     </LinearGradient>

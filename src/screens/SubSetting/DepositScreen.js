@@ -11,7 +11,6 @@ import HeaderTop from '../../component/profile/HeaderTop';
 import {useSelector} from 'react-redux';
 import {COLORS, FONT} from '../../../constants';
 import {heightPercentageToDP} from 'react-native-responsive-screen';
-import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -31,6 +30,7 @@ const DepositScreen = () => {
       <ScrollView style={{flex: 1}}>
         {/** Deposit Crypto */}
         <TouchableOpacity
+          activeOpacity={0.8}
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
@@ -82,6 +82,7 @@ const DepositScreen = () => {
         {/** Deposit with Card */}
 
         <TouchableOpacity
+          activeOpacity={0.8}
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
@@ -89,8 +90,7 @@ const DepositScreen = () => {
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
           }}
-          onPress={() => navigation.navigate('UpiDeposit')}
-          >
+          onPress={() => navigation.navigate('UpiDeposit')}>
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -134,6 +134,7 @@ const DepositScreen = () => {
         {/** Deposit with Cash */}
 
         <TouchableOpacity
+          activeOpacity={0.8}
           style={{
             backgroundColor:
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
@@ -141,8 +142,7 @@ const DepositScreen = () => {
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
           }}
-          onPress={() => navigation.navigate('BankDeposit')}
-          >
+          onPress={() => navigation.navigate('BankDeposit')}>
           {/** left container */}
           <View style={styles.leftContainer}>
             <View

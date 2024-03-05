@@ -1,24 +1,15 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS, FONT} from '../../../constants';
-import HeaderTop from '../../component/profile/HeaderTop';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
+import {heightPercentageToDP} from 'react-native-responsive-screen';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useSelector} from 'react-redux';
 
-const ExistingItem = () => {
+const ExistingItem = ({value}) => {
   const THEME = useSelector(state => state.theme);
+
+  // console.log(value.id);
+
   return (
     <View
       style={{
@@ -53,7 +44,7 @@ const ExistingItem = () => {
             color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
             ...styles.title,
           }}>
-          Ticket #101
+          Ticket #{value.id}
         </Text>
         <Text
           style={{
@@ -61,7 +52,7 @@ const ExistingItem = () => {
             ...styles.subtitle,
           }}
           numberOfLines={1}>
-          Hey, something went wrong in my account please solve my issue
+          {value.sub}
         </Text>
       </View>
     </View>

@@ -1,66 +1,158 @@
-import {StatusBar} from 'react-native';
+import { Alert, BackHandler, StatusBar } from 'react-native';
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   SafeAreaView,
   ImageBackground,
   TouchableOpacity,
   TextInput,
-  Button,
 } from 'react-native';
-import {COLORS, SIZES, FONT, images} from '../../constants';
-import {useNavigation} from '@react-navigation/native';
+import { COLORS, FONT } from '../../constants';
+import { useNavigation } from '@react-navigation/native';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import URLHelper from '../api/URLhelper/URLHelper';
 import axios from 'axios';
-import {useState} from 'react';
+import { useEffect, useState } from 'react';
+
+import * as Progress from 'react-native-progress';
+import { storeData } from '../../stores/AsyncLocalStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-toast-message';
+import { updateAccessToken } from '../../stores/userAccessTokenSlice';
 
 const Login = () => {
   const navigation = useNavigation();
   const THEME = useSelector(state => state.theme);
+  const dispatch = useDispatch()
 
   const [emailVal, setEmail] = useState('');
   const [passwordVal, setPassword] = useState('');
+  const [showProgressBar, setProgressBar] = useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to exit?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      // BackHandler.exitApp(); 
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const signIn = async () => {
     if (!emailVal) {
-      console.error('Enter email address');
-    } else if (passwordVal.length <= 8) {
-      console.error('Password must contains 8 character');
+      Toast.show({
+        type: 'error',
+        text1: 'Enter email address',
+      });
+    } else if (!passwordVal) {
+      Toast.show({
+        type: 'error',
+        text1: 'Enter password',
+      });
     } else {
       console.log('Else : ' + emailVal + ' | ' + passwordVal + ' | ');
-
+      setProgressBar(true);
       const apiUrl = URLHelper.BASE_URL + URLHelper.SIGN_IN;
       const headers = {
         userapisecret: URLHelper.USER_SECRET_KEY,
+        'Content-Type': 'multipart/form-data',
       };
       const formData = new FormData();
       formData.append('email', emailVal);
       formData.append('password', passwordVal);
 
       try {
-        const response = await axios.post(apiUrl, formData, {headers});
+        const response = await axios.post(apiUrl, formData, { headers });
         console.log('REGISTERING STARTED');
         console.log('Response:', response.data);
-        console.log('REGISTERING STOP');
-        
+
+        if (response.data.message == 'Login successful') {
+          console.log('Response:', response.data.access_token);
+          // storeData('accessToken', response.data.access_token);
+
+          AsyncStorage.setItem('accessToken', response.data.access_token);
+          dispatch(updateAccessToken(response.data.access_token));
+          storeData('userId', response.data.user.id);
+          settingFirstTimeInstall()
+          console.log('REGISTERING STOP');
+          navigation.navigate('Hcontainer');
+        } else if (response.data.message == "Email or Password doesn't match") {
+          Toast.show({
+            type: 'error',
+            text1: "Email or Password doesn't match",
+          });
+        } else if (response.data.message == "Your account has been deleted. please contact support team to active again") {
+          Toast.show({
+            type: 'error',
+            text1: "Your account has been deleted",
+            text2: " please contact support team to active again"
+          });
+        }
+
+        else if (
+          response.data.message ==
+          'You have no account,please register new account'
+        ) {
+          Toast.show({
+            type: 'error',
+            text1: 'No account found ,please register a new account',
+          });
+        }
+
+        setProgressBar(false);
       } catch (error) {
+        setProgressBar(false);
         if (error.response) {
-          console.error('Error:', error.response.data); 
+          console.log('Error:', error.response.data);
+          console.log('Error:', error.response.data.errors);
           console.log('ERROR : ' + error.response.data.errors.email);
+
+          Toast.show({
+            type: 'error',
+            text1: 'something went wrong',
+          });
         } else {
-          console.error('Error:', error.message);
+          console.log('Error:', error);
+          console.log('Error:', error.message);
+
+          Toast.show({
+            type: 'error',
+            text1: 'Please, check your internet connection',
+          });
         }
       }
     }
   };
+
+  const settingFirstTimeInstall = () => {
+    try {
+      const jsonValue = JSON.stringify('yes');
+      AsyncStorage.setItem('firstTimeAppInstall', jsonValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -156,33 +248,42 @@ const Login = () => {
           value={passwordVal}
           secureTextEntry={true}></TextInput>
         <View style={styles.accountAndForgotContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
-
                 ...styles.account,
-              }}
-              onPress={() => navigation.navigate('Register')}>
+              }}>
               Create An Account
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               style={{
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.forgot,
-              }}
-              onPress={() => navigation.navigate('ForgotPassword')}>
+              }}>
               Forgot Account
             </Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.bottonContainer} onPress={() => navigation.navigate('Hcontainer')}>
-          <Text style={styles.next}>Continue</Text>
-        </TouchableOpacity>
+        {showProgressBar ? (
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: heightPercentageToDP(3),
+            }}>
+            <Progress.Circle size={30} indeterminate={true} />
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.bottonContainer} onPress={signIn}>
+            <Text style={styles.next}>Continue</Text>
+          </TouchableOpacity>
+        )}
 
         <LinearGradient
           colors={[
