@@ -22,18 +22,14 @@ import Chart from '../component/home/Chart';
 import LinearGradient from 'react-native-linear-gradient';
 import TabGainerLooser from '../navigation/TabGainerLooser';
 import {setTickerData} from '../../stores/websocketSlice';
-import {fetchCoinMarket} from '../../stores/coinMarketSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {updateAccessToken} from '../../stores/userAccessTokenSlice';
 import {fetchDataFromWorkerTa} from '../../stores/websocketDataSlice';
 import {useNetInfoInstance} from '@react-native-community/netinfo';
 import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-toast-message';
-import {getAllMarketData} from '../../stores/actions/allmarketaction';
 import {getMyReferralProfit, getMyProfit} from '../../stores/actions/profitaction';
 import {LineChart} from 'react-native-chart-kit';
-import URLHelper from '../api/URLhelper/URLHelper';
-import axios, { all } from 'axios';
 import Loading from '../component/Loading';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
@@ -51,27 +47,70 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused()
 
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     Alert.alert("Hold on!", "Are you sure you want to exit?", [
+  //       {
+  //         text: "Cancel",
+  //         onPress: () => null,
+  //         style: "cancel"
+  //       },
+  //       { text: "YES", onPress: () => BackHandler.exitApp() }
+  //     ]);
+  //     // BackHandler.exitApp(); 
+  //     return true;
+  //   };
+
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction
+  //   );
+
+  //   return () => backHandler.remove();
+  // }, []);
+
+
+
+  const [currentScreen, setCurrentScreen] = useState('');
+
   useEffect(() => {
     const backAction = () => {
-      Alert.alert("Hold on!", "Are you sure you want to exit?", [
-        {
-          text: "Cancel",
-          onPress: () => null,
-          style: "cancel"
-        },
-        { text: "YES", onPress: () => BackHandler.exitApp() }
-      ]);
-      // BackHandler.exitApp(); 
-      return true;
+      if (currentScreen === 'HomeScreen') {
+
+        Alert.alert("Hold on!", "Are you sure you want to exit?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => BackHandler.exitApp() }
+        ]);
+
+        // BackHandler.exitApp();
+        return true;
+      } else {
+        navigation.goBack();
+        return true;
+      }
     };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction
-    );
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () => backHandler.remove();
-  }, []);
+  }, [currentScreen, navigation]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setCurrentScreen('HomeScreen'); // Set the current screen to 'HomeScreen' when this screen is focused
+      return () => setCurrentScreen(''); // Reset the current screen when the screen is blurred
+    }, [])
+  );
+
+
+
+
+
+
 
   const memoizedData = useMemo(() => {
     // Perform any memoization logic here if needed

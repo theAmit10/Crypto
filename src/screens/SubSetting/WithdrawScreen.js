@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import React from 'react';
 import HeaderTop from '../../component/profile/HeaderTop';
-import {useSelector} from 'react-redux';
-import {COLORS, FONT} from '../../../constants';
-import {heightPercentageToDP} from 'react-native-responsive-screen';
+import { useSelector } from 'react-redux';
+import { COLORS, FONT } from '../../../constants';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -26,11 +26,11 @@ const WithdrawScreen = () => {
         ...styles.container,
       }}>
       <HeaderTop value={'Withdraw'} />
-      <ScrollView style={{flex: 1}}>
-        {/** Withdraw Crypto */}
+      <ScrollView style={{ flex: 1 }}>
 
-        
-        
+
+
+
 
         {/** Withdraw Cash */}
 
@@ -42,8 +42,61 @@ const WithdrawScreen = () => {
               THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
             ...styles.contentContainer,
           }}
-          onPress={() => navigation.navigate('WithdrawBank') }
-          >
+          onPress={() => navigation.navigate('WithdrawBank')}
+        >
+          {/** left container */}
+          <View style={styles.leftContainer}>
+            <View
+              style={{
+                padding: heightPercentageToDP(2),
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor:
+                  THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
+              }}
+              className=" rounded-full ">
+              <FontAwesome
+                name="bank"
+                size={heightPercentageToDP(3)}
+                color={COLORS.green}
+                style={{ alignSelf: 'center' }}
+              />
+            </View>
+          </View>
+
+          {/** right container */}
+          <View style={styles.rightContainer}>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.title,
+              }}>
+              Bank Withdraw
+            </Text>
+            <Text
+              style={{
+                color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                ...styles.subtitle,
+              }}
+              numberOfLines={2}>
+              Withdraw Cash to your bank account on VRX Invest
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        // Completed the Two Changes of the Crypto Project and Currently working on the Remaining Changes
+
+        {/** Withdraw through UPI */}
+        <TouchableOpacity
+          style={{
+            backgroundColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            borderColor:
+              THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+            ...styles.contentContainer,
+          }}
+          onPress={() => navigation.navigate('WithdrawUpi')}
+        >
           {/** left container */}
           <View style={styles.leftContainer}>
             <View
@@ -59,7 +112,7 @@ const WithdrawScreen = () => {
                 name="money"
                 size={heightPercentageToDP(3)}
                 color={COLORS.green}
-                style={{alignSelf: 'center'}}
+                style={{ alignSelf: 'center' }}
               />
             </View>
           </View>
@@ -71,7 +124,7 @@ const WithdrawScreen = () => {
                 color: THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
                 ...styles.title,
               }}>
-              Bank Withdraw 
+              UPI Withdraw
             </Text>
             <Text
               style={{
@@ -79,10 +132,11 @@ const WithdrawScreen = () => {
                 ...styles.subtitle,
               }}
               numberOfLines={2}>
-              Withdraw Cash to your bank account on VRX Invest
+              Withdraw Cash to your bank account using UPI on VRX Invest
             </Text>
           </View>
         </TouchableOpacity>
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -151,12 +205,12 @@ const styles = StyleSheet.create({
 //                   THEME.data === 'DARK' ? COLORS.purple : COLORS.white,
 //               }}
 //               className=" rounded-full ">
-              // <MaterialCommunityIcons
-              //   name="bitcoin"
-              //   size={heightPercentageToDP(3)}
-              //   color={COLORS.green}
-              //   style={{alignSelf: 'center'}}
-              // />
+// <MaterialCommunityIcons
+//   name="bitcoin"
+//   size={heightPercentageToDP(3)}
+//   color={COLORS.green}
+//   style={{alignSelf: 'center'}}
+// />
 //             </View>
 //           </View>
 

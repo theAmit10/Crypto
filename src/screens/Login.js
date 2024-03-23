@@ -35,6 +35,9 @@ const Login = () => {
   const [passwordVal, setPassword] = useState('');
   const [showProgressBar, setProgressBar] = useState(false);
 
+
+  
+
   useEffect(() => {
     const backAction = () => {
       Alert.alert("Hold on!", "Are you sure you want to exit?", [

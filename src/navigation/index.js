@@ -56,6 +56,7 @@ import GoogleAuthPassword from '../screens/GoogleAuthPassword';
 import Toast from 'react-native-toast-message';
 import TicketDetails from '../screens/SubSetting/TicketDetails';
 import Temp from '../screens/Temp';
+import WithdrawUpi from '../screens/SubSetting/withdraw/WithdrawUpi';
 
 const Stack = createNativeStackNavigator();
 
@@ -127,6 +128,7 @@ const AppNavigation = () => {
           <Stack.Screen name="PL" component={PL} />
           <Stack.Screen name="ChartComponent" component={ChartComponent} />
           <Stack.Screen name="CryptoBuy" component={CryptoBuy} />
+          <Stack.Screen name="WithdrawUpi" component={WithdrawUpi} />
           <Stack.Screen
             name="MyInvestmentDetails"
             component={MyInvestmentDetails}

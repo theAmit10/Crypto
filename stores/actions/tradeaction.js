@@ -18,6 +18,8 @@ export const getCurrencyDetails = ACCESS_TOKEN => async dispatch => {
       headers: headers,
     });
 
+    console.log("Currency Details Trade Action :: "+response.data.currency_detail)
+
     dispatch({
       type: 'tradeSuccess',
       payload: response.data.currency_detail,
@@ -77,7 +79,7 @@ export const getINRtoUSDTCurrencyDetails = ACCESS_TOKEN => async dispatch => {
       headers: headers,
     });
 
-    console.log('INRtoUSDT : ' + response.data.data);
+    console.log('INRtoUSDT : ' + JSON.stringify(response.data.data));
 
     dispatch({
       type: 'tradeINRtoUSDTSuccess',
@@ -120,7 +122,7 @@ export const getUSDTtoINRCurrencyDetails = ACCESS_TOKEN => async dispatch => {
       headers: headers,
     });
 
-    console.log('USDTtoINR : ' + response.data.data);
+    console.log('USDTtoINR : ' + JSON.stringify(response.data.data));
 
     dispatch({
       type: 'tradeUSDTtoINRSuccess',

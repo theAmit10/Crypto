@@ -77,7 +77,7 @@ const Trade = props => {
     state => state.tradeDetails,
   );
 
-  console.log(currDetails);
+  console.log("Currency Detaiils :: "+currDetails);
   const {allwallet} = useSelector(state => state.wallet);
 
   // console.log('STATE LOADING :: ' + loading);
@@ -96,7 +96,7 @@ const Trade = props => {
     dispatch(getINRtoUSDTCurrencyDetails(ACCESS_TOKEN.data));
     dispatch(getUSDTtoINRCurrencyDetails(ACCESS_TOKEN.data));
     dispatch(getMyWallet(ACCESS_TOKEN.data));
-  }, [receiveAmount, sendAmount, exchangeFeeVal]);
+  }, [dispatch,receiveAmount, sendAmount, exchangeFeeVal]);
 
   const convertINRtoUSDT = text => {
     console.log('VALUE :: ' + text);

@@ -1,4 +1,4 @@
-import {Alert, StatusBar, Switch} from 'react-native';
+import { Alert, StatusBar, Switch } from 'react-native';
 import {
   StyleSheet,
   Text,
@@ -8,11 +8,10 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import {COLORS, FONT} from '../../constants';
-import {useNavigation} from '@react-navigation/native';
+import { COLORS, FONT } from '../../constants';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import HeaderTop from '../component/profile/HeaderTop';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Clipboard from '@react-native-community/clipboard';
@@ -21,21 +20,21 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import Modal from 'react-native-modal';
-import {useEffect, useState} from 'react';
-
-import {useDispatch, useSelector} from 'react-redux';
-import {changeTheme} from '../../stores/ThemeSlice';
-import {storeData} from '../../stores/AsyncLocalStorage';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme } from '../../stores/ThemeSlice';
+import { storeData } from '../../stores/AsyncLocalStorage';
 import LinearGradient from 'react-native-linear-gradient';
 import URLHelper from '../api/URLhelper/URLHelper';
 import axios from 'axios';
-import {stopFetchingDataFromWorker} from '../../stores/websocketDataSlice';
+import { stopFetchingDataFromWorker } from '../../stores/websocketDataSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
 import * as Progress from 'react-native-progress';
 import moment from 'moment';
 import Helper from '../../utils/Helper';
 import Share from 'react-native-share';
+import { getMyWallet } from '../../stores/actions/walletAction';
 
 const Setting = () => {
   const THEME = useSelector(state => state.theme);
@@ -43,16 +42,25 @@ const Setting = () => {
   const [accountIdVal, setAccountId] = useState(null);
   const [showProgressBar, setProgressBar] = useState(false);
   const [profileData, setProfileData] = useState([]);
+  const { allwallet } = useSelector(state => state.wallet);
+  const [isDark, setIsDark] = useState(THEME.data);
+
+
   const dispatch = useDispatch();
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    dispatch(getMyWallet(ACCESS_TOKEN.data));
+  }, [isFocused]);
 
   useEffect(() => {
     stopFetchingDataFromWorker();
     getUserid();
     getActivityLog();
-    console.log('Account id :: ' + accountIdVal);
+
   }, []);
 
-  const [isDark, setIsDark] = useState(THEME.data);
+
 
   const toggleTheme = () => {
     const newTheme = THEME.data === 'DARK' ? 'LIGHT' : 'DARK';
@@ -66,6 +74,7 @@ const Setting = () => {
   const navigation = useNavigation();
   const [visible, setVisible] = useState(false);
   const [emailVisible, setEmailVisible] = useState(false);
+  const [wallerAddressVisible, setWallerAddressVisible] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   // For Password Change
@@ -78,11 +87,10 @@ const Setting = () => {
   const [newEmail, setNewEmail] = useState('');
 
   // to copy text
-  const copyToClipboard = () => {
+  const copyToClipboard = (val) => {
     console.log('Clicked :: copybtn');
-    Clipboard.setString(accountIdVal);
+    Clipboard.setString(val);
     // Alert.alert('Text copied to clipboard!');
-
     setVisible(false);
 
     Toast.show({
@@ -94,6 +102,14 @@ const Setting = () => {
     // Alert.prompt('Text has been copied', 'copied');
     // showAlert();
   };
+
+
+
+  if (allwallet.length > 0) {
+    console.log("Wallet address :: " + allwallet[1].address)
+
+  }
+
 
   const validatePassword = password => {
     const passwordRegex =
@@ -142,11 +158,11 @@ const Setting = () => {
 
     console.log(
       ' PASSWORD : ' +
-        oldPasswordVal +
-        ' | ' +
-        newPasswordVal +
-        ' | ' +
-        confirmPasswordVal,
+      oldPasswordVal +
+      ' | ' +
+      newPasswordVal +
+      ' | ' +
+      confirmPasswordVal,
     );
 
     if (!oldPasswordVal) {
@@ -190,7 +206,7 @@ const Setting = () => {
       formData.append('password_confirmation', confirmPasswordVal);
 
       try {
-        const response = await axios.post(url, formData, {headers});
+        const response = await axios.post(url, formData, { headers });
         setProgressBar(false);
         console.log('Response:', response.data);
         setPasswordVisible(false);
@@ -236,7 +252,7 @@ const Setting = () => {
     };
 
     try {
-      const response = await axios.get(apiUrl, {headers});
+      const response = await axios.get(apiUrl, { headers });
       console.log('REQUEST STARTED');
       console.log('Response:', response.data.activityLog);
 
@@ -333,7 +349,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => setVisible(true)}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -360,7 +376,58 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
+                <AntDesign
+                  name="right"
+                  size={heightPercentageToDP(2)}
+                  color={
+                    THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                  }
+                  style={styles.centerImage}
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+
+          {/** Wallet Address Information */}
+
+          <View>
+            <TouchableOpacity
+              style={{
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                ...styles.contentContainer,
+              }}
+              onPress={() => setWallerAddressVisible(true)}>
+              <View style={{ flexDirection: 'row' }}>
+                <LinearGradient
+                  colors={[
+                    THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
+                    THEME.data === 'DARK' ? COLORS.purpleDark : COLORS.white,
+                  ]}
+                  className="rounded-full p-3">
+                  <AntDesign
+                    name="wallet"
+                    size={heightPercentageToDP(2)}
+                    color={
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark
+                    }
+                    style={styles.centerImage}
+                  />
+                </LinearGradient>
+
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.title,
+                  }}>
+                  Wallet Address
+                </Text>
+              </View>
+
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -383,7 +450,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => setEmailVisible(true)}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -410,7 +477,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -433,7 +500,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => setPasswordVisible(true)}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -460,7 +527,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -483,7 +550,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('Wallet')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -510,7 +577,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -533,7 +600,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('NotificationTab')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -560,7 +627,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -583,7 +650,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('History')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -610,7 +677,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -633,7 +700,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('DepositScreen')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -660,7 +727,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -683,7 +750,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={shareLink}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -710,7 +777,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -733,7 +800,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('Rewards')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -760,7 +827,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -783,7 +850,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('KnowYourCrypto')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -810,7 +877,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -833,7 +900,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={() => navigation.navigate('HelpDesk')}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -860,7 +927,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -882,7 +949,7 @@ const Setting = () => {
                   THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
                 ...styles.contentContainer,
               }}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -909,7 +976,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <Switch
                   value={THEME.data === 'DARK'}
                   onValueChange={toggleTheme}
@@ -928,7 +995,7 @@ const Setting = () => {
                 ...styles.contentContainer,
               }}
               onPress={logoutHandler}>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <LinearGradient
                   colors={[
                     THEME.data === 'DARK' ? COLORS.purple : COLORS.gray2,
@@ -955,7 +1022,7 @@ const Setting = () => {
                 </Text>
               </View>
 
-              <Text style={{textAlignVertical: 'center'}}>
+              <Text style={{ textAlignVertical: 'center' }}>
                 <AntDesign
                   name="right"
                   size={heightPercentageToDP(2)}
@@ -974,7 +1041,7 @@ const Setting = () => {
 
           <Modal
             animationIn={'slideInUp'}
-            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            style={{ width: '100%', marginLeft: 0, marginBottom: 0 }}
             isVisible={visible}
             onTouchCancel={() => {
               setVisible(false);
@@ -1019,18 +1086,78 @@ const Setting = () => {
                   {accountIdVal ? accountIdVal : ''}
                 </Text>
 
-                <TouchableOpacity onPress={() => copyToClipboard()}>
+                <TouchableOpacity onPress={() => copyToClipboard(accountIdVal)}>
                   <Text style={styles.copybtn}>Copy</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </Modal>
 
+          {/**  Wallet Address Models  */}
+
+          <Modal
+            animationIn={'slideInUp'}
+            style={{ width: '100%', marginLeft: 0, marginBottom: 0 }}
+            isVisible={wallerAddressVisible}
+            onTouchCancel={() => {
+              setWallerAddressVisible(false);
+            }}
+            onBackdropPress={() => {
+              setWallerAddressVisible(false);
+            }}
+            onBackButtonPress={() => {
+              setWallerAddressVisible(false);
+            }}>
+            <View
+              style={{
+                flex: 1,
+                position: 'absolute',
+                bottom: 0,
+                backgroundColor:
+                  THEME.data === 'LIGHT' ? COLORS.lightGray : COLORS.skyBlue,
+                width: '100%',
+                borderTopRightRadius: heightPercentageToDP(6),
+                borderTopLeftRadius: heightPercentageToDP(6),
+              }}>
+              <View style={styles.topView}></View>
+              <View style={styles.modelContent}>
+                <Text
+                  style={{
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelParentTitle,
+                  }}>
+                  Wallet Address
+                </Text>
+
+                <Text style={styles.modeltitle}>USDT Wallet Address</Text>
+                <Text
+                  style={{
+                    backgroundColor:
+                      THEME.data === 'LIGHT' ? COLORS.white : COLORS.purple,
+                    color:
+                      THEME.data === 'DARK' ? COLORS.white : COLORS.purpleDark,
+                    ...styles.modelSubtitle,
+                  }}>
+                  {allwallet.length > 0 ? allwallet[1].address : ""}
+                </Text>
+
+                {
+                  allwallet.length > 0 && (<TouchableOpacity onPress={() => copyToClipboard(allwallet[1].address)}>
+                    <Text style={styles.copybtn}>Copy</Text>
+                  </TouchableOpacity>)
+                }
+
+              </View>
+            </View>
+          </Modal>
+
+
           {/**  Email Models  */}
 
           <Modal
             animationIn={'slideInUp'}
-            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            style={{ width: '100%', marginLeft: 0, marginBottom: 0 }}
             isVisible={emailVisible}
             onTouchCancel={() => {
               setEmailVisible(false);
@@ -1109,7 +1236,7 @@ const Setting = () => {
 
           <Modal
             animationIn={'slideInUp'}
-            style={{width: '100%', marginLeft: 0, marginBottom: 0}}
+            style={{ width: '100%', marginLeft: 0, marginBottom: 0 }}
             isVisible={passwordVisible}
             onTouchCancel={() => {
               setPasswordVisible(false);
