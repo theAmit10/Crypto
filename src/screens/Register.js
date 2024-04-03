@@ -447,6 +447,7 @@ const Register = () => {
     GoogleSignin.configure({
       webClientId:
         '191145196270-pjej7p01ub153jsn7ddidv3lmql936qa.apps.googleusercontent.com',
+       
       // androidClientId: '191145196270-ru4ac3nj22665k2ldtvqjvd0c4361qiu.apps.googleusercontent.com',
       // offlineAccess: true
     });

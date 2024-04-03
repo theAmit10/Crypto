@@ -8,57 +8,73 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CryotosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CryotosTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-Cryotos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Cryotos.a */; };
+		02DAEC0A24D74C58ABC6855B /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = BA42D70E53E14F75A92849EA /* shield.png */; };
+		02FA71A9A0EE4D3995631B0C /* o_three.png in Resources */ = {isa = PBXBuildFile; fileRef = DCEA73B343C04125BFF1F5BC /* o_three.png */; };
+		04E1B6976E9C90911C1824FE /* Pods_Cryotos_CryotosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F9A4B31D3CEDB2DCC135C8 /* Pods_Cryotos_CryotosTests.framework */; };
+		055F731D15DA4624A2EB33B1 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE404E1C8D4B24AB329D5D /* home.png */; };
+		0DC20F12FE534699BF1D4BFC /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-Cryotos-CryotosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Cryotos-CryotosTests.a */; };
+		2260B39B6559412B8B7E8C6E /* chart.png in Resources */ = {isa = PBXBuildFile; fileRef = BF3892503672468086697A60 /* chart.png */; };
+		244C1A1769624B3D80077D10 /* wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A2B5569A5242618759DC80 /* wallet.png */; };
+		2745F545FE734DC3843CC475 /* add_user.png in Resources */ = {isa = PBXBuildFile; fileRef = A6FBEFC0DA67444487FCD243 /* add_user.png */; };
+		35E8A95F16F9400A995555C5 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3B2CE2CD8347949FD977A9 /* google.png */; };
+		3EE40FA604934DF4ADD5F4AD /* bitcoin_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */; };
+		4080270722334E4592038D7A /* Jost-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A1BBFBA10F14A3B85CE4241 /* Jost-ExtraLight.ttf */; };
+		44F1896F0B3E4A5E934B467F /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5825A5C2F44C56B480A62C /* notification.png */; };
+		47F3FF63B8A6487A97A7F925 /* search_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B766774090814BDC87755F5A /* search_white.png */; };
+		487D231AD84C414DA0192A79 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C62B62CDCF4B17867FBA02 /* splashscreen.png */; };
+		5BE32A80DE304A4D842D1F2E /* wallet_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EBD5BB739425686DF030F /* wallet_nav.png */; };
+		5ED34E5C78BC414BB3DF7E79 /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05AF9A6E2BE3423E865FDFEE /* Jost-Bold.ttf */; };
+		6B39E42894A540439E2C3E9E /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D3C70EB28444ABB582B9EF /* back_arrow.png */; };
+		6D3B9BBC839943339BD274A8 /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A17C3CAAE49403F9A4D94F0 /* Jost-Light.ttf */; };
+		7C25A1AC71AC46C1BE947003 /* forgot_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0AA468CA0449A087EF1919 /* forgot_password.png */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		840D0F0D13FD468AA3AC9B79 /* Jost-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EEDC46D657542BD8B93635A /* Jost-Black.ttf */; };
-		5ED34E5C78BC414BB3DF7E79 /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05AF9A6E2BE3423E865FDFEE /* Jost-Bold.ttf */; };
-		A560A65F9F6946879B38E13D /* Jost-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78A3E1920CA843AE8831EB9A /* Jost-ExtraBold.ttf */; };
-		4080270722334E4592038D7A /* Jost-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A1BBFBA10F14A3B85CE4241 /* Jost-ExtraLight.ttf */; };
-		6D3B9BBC839943339BD274A8 /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A17C3CAAE49403F9A4D94F0 /* Jost-Light.ttf */; };
-		E95597186FAA4D91BA580679 /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FF23CBCDE8F4022AB8D29D7 /* Jost-Medium.ttf */; };
-		F6B9E26AAEC245F8996A8373 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */; };
-		D4C01EF861484E21A670F693 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */; };
-		B7269C57382B41E3AF777BAF /* Jost-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */; };
-		CDF138B40BD74E4BBC0A7736 /* account_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F9C47682B84F0CAB6D7CC7 /* account_background.png */; };
-		6B39E42894A540439E2C3E9E /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D3C70EB28444ABB582B9EF /* back_arrow.png */; };
 		846BDA2FD91D42B4AF3B4ACF /* back_one.png in Resources */ = {isa = PBXBuildFile; fileRef = 38529D850F344E4ABEB5547B /* back_one.png */; };
-		E8EFAB984E714053A910D631 /* bitcoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 6751C9AA17B14AFF972AB923 /* bitcoin.png */; };
-		3EE40FA604934DF4ADD5F4AD /* bitcoin_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */; };
-		2260B39B6559412B8B7E8C6E /* chart.png in Resources */ = {isa = PBXBuildFile; fileRef = BF3892503672468086697A60 /* chart.png */; };
-		B181C31EC9314934BB0DED04 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = B63B405BF3494BEC9AD66844 /* circle.png */; };
 		8629FB244140408D830048C1 /* circle_org.png in Resources */ = {isa = PBXBuildFile; fileRef = A9E6EC7D4D8644EB9820764C /* circle_org.png */; };
-		35E8A95F16F9400A995555C5 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3B2CE2CD8347949FD977A9 /* google.png */; };
-		055F731D15DA4624A2EB33B1 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAE404E1C8D4B24AB329D5D /* home.png */; };
 		8BE8188DD15E4770882C05B2 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F379C2C9AD8C4713A1B6BE64 /* logo.png */; };
-		C729F9EAADF3416EB7901E3D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = FDEAB86A6D1643BF9FC084A4 /* menu.png */; };
-		0DC20F12FE534699BF1D4BFC /* menu_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */; };
-		44F1896F0B3E4A5E934B467F /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D5825A5C2F44C56B480A62C /* notification.png */; };
-		EED59A7DE8664CB9BD742C5C /* notification_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C861A53342E47A0B7623E2C /* notification_white.png */; };
-		D8CF1A498D0F45899A3B9847 /* notification_white50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6799F4D6998C4DD6A7019108 /* notification_white50.png */; };
-		E45E7C7F757C4E7886AEB5F7 /* o_one.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A402A29AF04417927962D5 /* o_one.png */; };
-		02FA71A9A0EE4D3995631B0C /* o_three.png in Resources */ = {isa = PBXBuildFile; fileRef = DCEA73B343C04125BFF1F5BC /* o_three.png */; };
-		EC5475F9C7A34F97A5AC2A01 /* o_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 9705628D4E50458BB3E6BD4F /* o_two.png */; };
 		9F516CFDB8E548BB9E458DC9 /* onboarding.png in Resources */ = {isa = PBXBuildFile; fileRef = E8E8F726797F47A08ED2D287 /* onboarding.png */; };
-		A79FF7DCA3D44677BD2D23C3 /* person.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 365B8983E046459C95F50727 /* person.jpeg */; };
-		D44BF0BF525B419483A218D3 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DCE23199E041B2B6F33785 /* profile.png */; };
-		BBF2CEE4228240BEAE006381 /* round_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C31D6521B54CF187FD439A /* round_bg.png */; };
-		B3D1BCD189724AF8863B54FC /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 54AAAA7737B74C9BABDF29B1 /* search.png */; };
-		47F3FF63B8A6487A97A7F925 /* search_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B766774090814BDC87755F5A /* search_white.png */; };
-		02DAEC0A24D74C58ABC6855B /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = BA42D70E53E14F75A92849EA /* shield.png */; };
-		487D231AD84C414DA0192A79 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C62B62CDCF4B17867FBA02 /* splashscreen.png */; };
-		F731AE22897A492181FB4B2C /* successfully-done.json in Resources */ = {isa = PBXBuildFile; fileRef = 7326496D12CB4819A0222AB2 /* successfully-done.json */; };
 		9F5BA154976A419EA2E2D481 /* user_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */; };
-		244C1A1769624B3D80077D10 /* wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A2B5569A5242618759DC80 /* wallet.png */; };
-		5BE32A80DE304A4D842D1F2E /* wallet_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3EBD5BB739425686DF030F /* wallet_nav.png */; };
-		CD7FA99D9E5849A6AE0F62FE /* wallet_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 270942C2892B437DB2002412 /* wallet_two.png */; };
-		C5C5DFC5C21647EA9CAD93D4 /* white_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB89C21C20494E892C6635 /* white_ss.png */; };
-		7C25A1AC71AC46C1BE947003 /* forgot_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A0AA468CA0449A087EF1919 /* forgot_password.png */; };
-		2745F545FE734DC3843CC475 /* add_user.png in Resources */ = {isa = PBXBuildFile; fileRef = A6FBEFC0DA67444487FCD243 /* add_user.png */; };
 		A47AFA92D52B426BB9D146DA /* up_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 8506EB16687340B6A5D2E550 /* up_down.png */; };
+		A560A65F9F6946879B38E13D /* Jost-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 78A3E1920CA843AE8831EB9A /* Jost-ExtraBold.ttf */; };
+		A79FF7DCA3D44677BD2D23C3 /* person.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 365B8983E046459C95F50727 /* person.jpeg */; };
+		B181C31EC9314934BB0DED04 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = B63B405BF3494BEC9AD66844 /* circle.png */; };
+		B3D1BCD189724AF8863B54FC /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 54AAAA7737B74C9BABDF29B1 /* search.png */; };
+		B7269C57382B41E3AF777BAF /* Jost-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */; };
+		BBF2CEE4228240BEAE006381 /* round_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C31D6521B54CF187FD439A /* round_bg.png */; };
+		C5C5DFC5C21647EA9CAD93D4 /* white_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = C1FB89C21C20494E892C6635 /* white_ss.png */; };
+		C729F9EAADF3416EB7901E3D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = FDEAB86A6D1643BF9FC084A4 /* menu.png */; };
+		CD7FA99D9E5849A6AE0F62FE /* wallet_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 270942C2892B437DB2002412 /* wallet_two.png */; };
+		CDF138B40BD74E4BBC0A7736 /* account_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F9C47682B84F0CAB6D7CC7 /* account_background.png */; };
+		D304C5C52BBA9022008FA255 /* libRNFBMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D304C5C42BBA9022008FA255 /* libRNFBMessaging.a */; };
+		D3503DB32BBAA0D600236245 /* RNFBApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B0F0362BBA9594007B4F48 /* RNFBApp.framework */; };
+		D3503DB42BBAA0D600236245 /* RNFBApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3B0F0362BBA9594007B4F48 /* RNFBApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3503DB72BBAA16A00236245 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D3503DB62BBAA16A00236245 /* FirebaseMessaging */; };
+		D36213282BBACE3500ADD09A /* ReactCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36213272BBACE3500ADD09A /* ReactCommon.framework */; };
+		D36213292BBACE3500ADD09A /* ReactCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D36213272BBACE3500ADD09A /* ReactCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D36E2D522BBAA42200451CB0 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3503DB82BBAA1DB00236245 /* FirebaseMessaging.framework */; };
+		D36E2D532BBAA42200451CB0 /* FirebaseMessaging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D3503DB82BBAA1DB00236245 /* FirebaseMessaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D36E2D552BBAB35000451CB0 /* React_RCTAppDelegate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D36E2D542BBAB35000451CB0 /* React_RCTAppDelegate.framework */; };
+		D36E2D562BBAB35000451CB0 /* React_RCTAppDelegate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D36E2D542BBAB35000451CB0 /* React_RCTAppDelegate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D3A492202BBA85AC002496FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3A4921F2BBA85AC002496FF /* GoogleService-Info.plist */; };
+		D3A492232BBA8666002496FF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D3A492222BBA8666002496FF /* FirebaseAnalytics */; };
+		D3A492252BBA8666002496FF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D3A492242BBA8666002496FF /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		D3A492272BBA894E002496FF /* libFirebaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A492262BBA894E002496FF /* libFirebaseCore.a */; };
+		D3A492292BBA8A21002496FF /* libFirebaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A492282BBA8A21002496FF /* libFirebaseCore.a */; };
+		D3C7C6D52BBA98C2002C7964 /* RNFBApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C7C6D42BBA98C2002C7964 /* RNFBApp.framework */; };
+		D44BF0BF525B419483A218D3 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 60DCE23199E041B2B6F33785 /* profile.png */; };
+		D4C01EF861484E21A670F693 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */; };
+		D8CF1A498D0F45899A3B9847 /* notification_white50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6799F4D6998C4DD6A7019108 /* notification_white50.png */; };
+		DE9B4D0EEB83467359CA722B /* Pods_Cryotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C136AE3274CB4640E733CBC /* Pods_Cryotos.framework */; };
+		E45E7C7F757C4E7886AEB5F7 /* o_one.png in Resources */ = {isa = PBXBuildFile; fileRef = D0A402A29AF04417927962D5 /* o_one.png */; };
+		E8EFAB984E714053A910D631 /* bitcoin.png in Resources */ = {isa = PBXBuildFile; fileRef = 6751C9AA17B14AFF972AB923 /* bitcoin.png */; };
+		E95597186FAA4D91BA580679 /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4FF23CBCDE8F4022AB8D29D7 /* Jost-Medium.ttf */; };
+		EC5475F9C7A34F97A5AC2A01 /* o_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 9705628D4E50458BB3E6BD4F /* o_two.png */; };
+		EED59A7DE8664CB9BD742C5C /* notification_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C861A53342E47A0B7623E2C /* notification_white.png */; };
+		F6B9E26AAEC245F8996A8373 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */; };
+		F731AE22897A492181FB4B2C /* successfully-done.json in Resources */ = {isa = PBXBuildFile; fileRef = 7326496D12CB4819A0222AB2 /* successfully-done.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,69 +87,95 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D3503DB52BBAA0D600236245 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D36E2D532BBAA42200451CB0 /* FirebaseMessaging.framework in Embed Frameworks */,
+				D36213292BBACE3500ADD09A /* ReactCommon.framework in Embed Frameworks */,
+				D36E2D562BBAB35000451CB0 /* React_RCTAppDelegate.framework in Embed Frameworks */,
+				D3503DB42BBAA0D600236245 /* RNFBApp.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* CryotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CryotosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CryotosTests.m; sourceTree = "<group>"; };
+		05AF9A6E2BE3423E865FDFEE /* Jost-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Bold.ttf"; path = "../assets/fonts/Jost-Bold.ttf"; sourceTree = "<group>"; };
+		09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = menu_white.png; path = ../assets/image/menu_white.png; sourceTree = "<group>"; };
+		0B7A46DFDB66808A5685C348 /* Pods-Cryotos-CryotosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos-CryotosTests.debug.xcconfig"; path = "Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Cryotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cryotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Cryotos/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Cryotos/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Cryotos/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Cryotos/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Cryotos/main.m; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Cryotos-CryotosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cryotos-CryotosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-Cryotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos.debug.xcconfig"; path = "Target Support Files/Pods-Cryotos/Pods-Cryotos.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-Cryotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos.release.xcconfig"; path = "Target Support Files/Pods-Cryotos/Pods-Cryotos.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-Cryotos-CryotosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos-CryotosTests.debug.xcconfig"; path = "Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-Cryotos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cryotos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DAE404E1C8D4B24AB329D5D /* home.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = home.png; path = ../assets/image/home.png; sourceTree = "<group>"; };
+		26F9A4B31D3CEDB2DCC135C8 /* Pods_Cryotos_CryotosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cryotos_CryotosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		270942C2892B437DB2002412 /* wallet_two.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = wallet_two.png; path = ../assets/image/wallet_two.png; sourceTree = "<group>"; };
+		2A0AA468CA0449A087EF1919 /* forgot_password.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = forgot_password.png; path = ../assets/image/forgot_password.png; sourceTree = "<group>"; };
+		365B8983E046459C95F50727 /* person.jpeg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = person.jpeg; path = ../assets/image/person.jpeg; sourceTree = "<group>"; };
+		38529D850F344E4ABEB5547B /* back_one.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = back_one.png; path = ../assets/image/back_one.png; sourceTree = "<group>"; };
+		3E3EBD5BB739425686DF030F /* wallet_nav.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = wallet_nav.png; path = ../assets/image/wallet_nav.png; sourceTree = "<group>"; };
+		41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-SemiBold.ttf"; path = "../assets/fonts/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		4FF23CBCDE8F4022AB8D29D7 /* Jost-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Medium.ttf"; path = "../assets/fonts/Jost-Medium.ttf"; sourceTree = "<group>"; };
+		54AAAA7737B74C9BABDF29B1 /* search.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = search.png; path = ../assets/image/search.png; sourceTree = "<group>"; };
+		54C31D6521B54CF187FD439A /* round_bg.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = round_bg.png; path = ../assets/image/round_bg.png; sourceTree = "<group>"; };
+		54D3C70EB28444ABB582B9EF /* back_arrow.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = back_arrow.png; path = ../assets/image/back_arrow.png; sourceTree = "<group>"; };
+		5D5825A5C2F44C56B480A62C /* notification.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = notification.png; path = ../assets/image/notification.png; sourceTree = "<group>"; };
+		60DCE23199E041B2B6F33785 /* profile.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = profile.png; path = ../assets/image/profile.png; sourceTree = "<group>"; };
+		65F9C47682B84F0CAB6D7CC7 /* account_background.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = account_background.png; path = ../assets/image/account_background.png; sourceTree = "<group>"; };
+		6751C9AA17B14AFF972AB923 /* bitcoin.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bitcoin.png; path = ../assets/image/bitcoin.png; sourceTree = "<group>"; };
+		6799F4D6998C4DD6A7019108 /* notification_white50.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = notification_white50.png; path = ../assets/image/notification_white50.png; sourceTree = "<group>"; };
+		6A17C3CAAE49403F9A4D94F0 /* Jost-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Light.ttf"; path = "../assets/fonts/Jost-Light.ttf"; sourceTree = "<group>"; };
+		7326496D12CB4819A0222AB2 /* successfully-done.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "successfully-done.json"; path = "../assets/image/successfully-done.json"; sourceTree = "<group>"; };
+		78A3E1920CA843AE8831EB9A /* Jost-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-ExtraBold.ttf"; path = "../assets/fonts/Jost-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7B3B2CE2CD8347949FD977A9 /* google.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = google.png; path = ../assets/image/google.png; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Cryotos/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-Cryotos-CryotosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos-CryotosTests.release.xcconfig"; path = "Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests.release.xcconfig"; sourceTree = "<group>"; };
+		8506EB16687340B6A5D2E550 /* up_down.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = up_down.png; path = ../assets/image/up_down.png; sourceTree = "<group>"; };
+		8A1BBFBA10F14A3B85CE4241 /* Jost-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-ExtraLight.ttf"; path = "../assets/fonts/Jost-ExtraLight.ttf"; sourceTree = "<group>"; };
+		8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = bitcoin_image.jpg; path = ../assets/image/bitcoin_image.jpg; sourceTree = "<group>"; };
+		9705628D4E50458BB3E6BD4F /* o_two.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = o_two.png; path = ../assets/image/o_two.png; sourceTree = "<group>"; };
+		9C136AE3274CB4640E733CBC /* Pods_Cryotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cryotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C861A53342E47A0B7623E2C /* notification_white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = notification_white.png; path = ../assets/image/notification_white.png; sourceTree = "<group>"; };
+		9EEDC46D657542BD8B93635A /* Jost-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Black.ttf"; path = "../assets/fonts/Jost-Black.ttf"; sourceTree = "<group>"; };
+		A3A2B5569A5242618759DC80 /* wallet.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = wallet.png; path = ../assets/image/wallet.png; sourceTree = "<group>"; };
+		A6FBEFC0DA67444487FCD243 /* add_user.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = add_user.png; path = ../assets/image/add_user.png; sourceTree = "<group>"; };
+		A9E6EC7D4D8644EB9820764C /* circle_org.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = circle_org.png; path = ../assets/image/circle_org.png; sourceTree = "<group>"; };
+		B2C62B62CDCF4B17867FBA02 /* splashscreen.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = splashscreen.png; path = ../assets/image/splashscreen.png; sourceTree = "<group>"; };
+		B63B405BF3494BEC9AD66844 /* circle.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = circle.png; path = ../assets/image/circle.png; sourceTree = "<group>"; };
+		B766774090814BDC87755F5A /* search_white.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = search_white.png; path = ../assets/image/search_white.png; sourceTree = "<group>"; };
+		BA42D70E53E14F75A92849EA /* shield.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = shield.png; path = ../assets/image/shield.png; sourceTree = "<group>"; };
+		BF3892503672468086697A60 /* chart.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = chart.png; path = ../assets/image/chart.png; sourceTree = "<group>"; };
+		C1FB89C21C20494E892C6635 /* white_ss.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = white_ss.png; path = ../assets/image/white_ss.png; sourceTree = "<group>"; };
+		C4AF31A8A01E64C719C9E9E4 /* Pods-Cryotos-CryotosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos-CryotosTests.release.xcconfig"; path = "Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests.release.xcconfig"; sourceTree = "<group>"; };
+		D0A402A29AF04417927962D5 /* o_one.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = o_one.png; path = ../assets/image/o_one.png; sourceTree = "<group>"; };
+		D304C5C42BBA9022008FA255 /* libRNFBMessaging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBMessaging.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3503DB82BBAA1DB00236245 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D36213272BBACE3500ADD09A /* ReactCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D36E2D542BBAB35000451CB0 /* React_RCTAppDelegate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = React_RCTAppDelegate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A4921F2BBA85AC002496FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D3A492262BBA894E002496FF /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3A492282BBA8A21002496FF /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3B0F0362BBA9594007B4F48 /* RNFBApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RNFBApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3C7C6D42BBA98C2002C7964 /* RNFBApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RNFBApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCEA73B343C04125BFF1F5BC /* o_three.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = o_three.png; path = ../assets/image/o_three.png; sourceTree = "<group>"; };
+		E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = user_placeholder.png; path = ../assets/image/user_placeholder.png; sourceTree = "<group>"; };
+		E8E8F726797F47A08ED2D287 /* onboarding.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = onboarding.png; path = ../assets/image/onboarding.png; sourceTree = "<group>"; };
+		EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Regular.ttf"; path = "../assets/fonts/Jost-Regular.ttf"; sourceTree = "<group>"; };
+		EB911CAB2DE24EE753AD261B /* Pods-Cryotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos.release.xcconfig"; path = "Target Support Files/Pods-Cryotos/Pods-Cryotos.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		9EEDC46D657542BD8B93635A /* Jost-Black.ttf */ = {isa = PBXFileReference; name = "Jost-Black.ttf"; path = "../assets/fonts/Jost-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		05AF9A6E2BE3423E865FDFEE /* Jost-Bold.ttf */ = {isa = PBXFileReference; name = "Jost-Bold.ttf"; path = "../assets/fonts/Jost-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		78A3E1920CA843AE8831EB9A /* Jost-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Jost-ExtraBold.ttf"; path = "../assets/fonts/Jost-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8A1BBFBA10F14A3B85CE4241 /* Jost-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Jost-ExtraLight.ttf"; path = "../assets/fonts/Jost-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6A17C3CAAE49403F9A4D94F0 /* Jost-Light.ttf */ = {isa = PBXFileReference; name = "Jost-Light.ttf"; path = "../assets/fonts/Jost-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4FF23CBCDE8F4022AB8D29D7 /* Jost-Medium.ttf */ = {isa = PBXFileReference; name = "Jost-Medium.ttf"; path = "../assets/fonts/Jost-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EB4D70E5685E48B6AE96D895 /* Jost-Regular.ttf */ = {isa = PBXFileReference; name = "Jost-Regular.ttf"; path = "../assets/fonts/Jost-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		41197EB493764A0A87D285E9 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; name = "Jost-SemiBold.ttf"; path = "../assets/fonts/Jost-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */ = {isa = PBXFileReference; name = "Jost-Thin.ttf"; path = "../assets/fonts/Jost-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		65F9C47682B84F0CAB6D7CC7 /* account_background.png */ = {isa = PBXFileReference; name = "account_background.png"; path = "../assets/image/account_background.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		54D3C70EB28444ABB582B9EF /* back_arrow.png */ = {isa = PBXFileReference; name = "back_arrow.png"; path = "../assets/image/back_arrow.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		38529D850F344E4ABEB5547B /* back_one.png */ = {isa = PBXFileReference; name = "back_one.png"; path = "../assets/image/back_one.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6751C9AA17B14AFF972AB923 /* bitcoin.png */ = {isa = PBXFileReference; name = "bitcoin.png"; path = "../assets/image/bitcoin.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8FC9386721D3450F846DCF5C /* bitcoin_image.jpg */ = {isa = PBXFileReference; name = "bitcoin_image.jpg"; path = "../assets/image/bitcoin_image.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BF3892503672468086697A60 /* chart.png */ = {isa = PBXFileReference; name = "chart.png"; path = "../assets/image/chart.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B63B405BF3494BEC9AD66844 /* circle.png */ = {isa = PBXFileReference; name = "circle.png"; path = "../assets/image/circle.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A9E6EC7D4D8644EB9820764C /* circle_org.png */ = {isa = PBXFileReference; name = "circle_org.png"; path = "../assets/image/circle_org.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7B3B2CE2CD8347949FD977A9 /* google.png */ = {isa = PBXFileReference; name = "google.png"; path = "../assets/image/google.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1DAE404E1C8D4B24AB329D5D /* home.png */ = {isa = PBXFileReference; name = "home.png"; path = "../assets/image/home.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F379C2C9AD8C4713A1B6BE64 /* logo.png */ = {isa = PBXFileReference; name = "logo.png"; path = "../assets/image/logo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FDEAB86A6D1643BF9FC084A4 /* menu.png */ = {isa = PBXFileReference; name = "menu.png"; path = "../assets/image/menu.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		09D0AADDFF7F49E4A1ADD5F7 /* menu_white.png */ = {isa = PBXFileReference; name = "menu_white.png"; path = "../assets/image/menu_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5D5825A5C2F44C56B480A62C /* notification.png */ = {isa = PBXFileReference; name = "notification.png"; path = "../assets/image/notification.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9C861A53342E47A0B7623E2C /* notification_white.png */ = {isa = PBXFileReference; name = "notification_white.png"; path = "../assets/image/notification_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6799F4D6998C4DD6A7019108 /* notification_white50.png */ = {isa = PBXFileReference; name = "notification_white50.png"; path = "../assets/image/notification_white50.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D0A402A29AF04417927962D5 /* o_one.png */ = {isa = PBXFileReference; name = "o_one.png"; path = "../assets/image/o_one.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DCEA73B343C04125BFF1F5BC /* o_three.png */ = {isa = PBXFileReference; name = "o_three.png"; path = "../assets/image/o_three.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9705628D4E50458BB3E6BD4F /* o_two.png */ = {isa = PBXFileReference; name = "o_two.png"; path = "../assets/image/o_two.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E8E8F726797F47A08ED2D287 /* onboarding.png */ = {isa = PBXFileReference; name = "onboarding.png"; path = "../assets/image/onboarding.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		365B8983E046459C95F50727 /* person.jpeg */ = {isa = PBXFileReference; name = "person.jpeg"; path = "../assets/image/person.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		60DCE23199E041B2B6F33785 /* profile.png */ = {isa = PBXFileReference; name = "profile.png"; path = "../assets/image/profile.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		54C31D6521B54CF187FD439A /* round_bg.png */ = {isa = PBXFileReference; name = "round_bg.png"; path = "../assets/image/round_bg.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		54AAAA7737B74C9BABDF29B1 /* search.png */ = {isa = PBXFileReference; name = "search.png"; path = "../assets/image/search.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B766774090814BDC87755F5A /* search_white.png */ = {isa = PBXFileReference; name = "search_white.png"; path = "../assets/image/search_white.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BA42D70E53E14F75A92849EA /* shield.png */ = {isa = PBXFileReference; name = "shield.png"; path = "../assets/image/shield.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B2C62B62CDCF4B17867FBA02 /* splashscreen.png */ = {isa = PBXFileReference; name = "splashscreen.png"; path = "../assets/image/splashscreen.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7326496D12CB4819A0222AB2 /* successfully-done.json */ = {isa = PBXFileReference; name = "successfully-done.json"; path = "../assets/image/successfully-done.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E4E9CD33FCA1404CA9D6B1E9 /* user_placeholder.png */ = {isa = PBXFileReference; name = "user_placeholder.png"; path = "../assets/image/user_placeholder.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A3A2B5569A5242618759DC80 /* wallet.png */ = {isa = PBXFileReference; name = "wallet.png"; path = "../assets/image/wallet.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3E3EBD5BB739425686DF030F /* wallet_nav.png */ = {isa = PBXFileReference; name = "wallet_nav.png"; path = "../assets/image/wallet_nav.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		270942C2892B437DB2002412 /* wallet_two.png */ = {isa = PBXFileReference; name = "wallet_two.png"; path = "../assets/image/wallet_two.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C1FB89C21C20494E892C6635 /* white_ss.png */ = {isa = PBXFileReference; name = "white_ss.png"; path = "../assets/image/white_ss.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2A0AA468CA0449A087EF1919 /* forgot_password.png */ = {isa = PBXFileReference; name = "forgot_password.png"; path = "../assets/image/forgot_password.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A6FBEFC0DA67444487FCD243 /* add_user.png */ = {isa = PBXFileReference; name = "add_user.png"; path = "../assets/image/add_user.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8506EB16687340B6A5D2E550 /* up_down.png */ = {isa = PBXFileReference; name = "up_down.png"; path = "../assets/image/up_down.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F379C2C9AD8C4713A1B6BE64 /* logo.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = logo.png; path = ../assets/image/logo.png; sourceTree = "<group>"; };
+		F4F39B9EBD2E4756921E1035 /* Jost-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Jost-Thin.ttf"; path = "../assets/fonts/Jost-Thin.ttf"; sourceTree = "<group>"; };
+		F96C7B0570EA39B606A98AA5 /* Pods-Cryotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cryotos.debug.xcconfig"; path = "Target Support Files/Pods-Cryotos/Pods-Cryotos.debug.xcconfig"; sourceTree = "<group>"; };
+		FDEAB86A6D1643BF9FC084A4 /* menu.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = menu.png; path = ../assets/image/menu.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-Cryotos-CryotosTests.a in Frameworks */,
+				04E1B6976E9C90911C1824FE /* Pods_Cryotos_CryotosTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +191,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-Cryotos.a in Frameworks */,
+				D3503DB72BBAA16A00236245 /* FirebaseMessaging in Frameworks */,
+				D304C5C52BBA9022008FA255 /* libRNFBMessaging.a in Frameworks */,
+				D3A492232BBA8666002496FF /* FirebaseAnalytics in Frameworks */,
+				D3A492272BBA894E002496FF /* libFirebaseCore.a in Frameworks */,
+				D36E2D552BBAB35000451CB0 /* React_RCTAppDelegate.framework in Frameworks */,
+				D36213282BBACE3500ADD09A /* ReactCommon.framework in Frameworks */,
+				D3A492252BBA8666002496FF /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D3A492292BBA8A21002496FF /* libFirebaseCore.a in Frameworks */,
+				D36E2D522BBAA42200451CB0 /* FirebaseMessaging.framework in Frameworks */,
+				D3C7C6D52BBA98C2002C7964 /* RNFBApp.framework in Frameworks */,
+				D3503DB32BBAA0D600236245 /* RNFBApp.framework in Frameworks */,
+				DE9B4D0EEB83467359CA722B /* Pods_Cryotos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +242,17 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D36213272BBACE3500ADD09A /* ReactCommon.framework */,
+				D36E2D542BBAB35000451CB0 /* React_RCTAppDelegate.framework */,
+				D3503DB82BBAA1DB00236245 /* FirebaseMessaging.framework */,
+				D3C7C6D42BBA98C2002C7964 /* RNFBApp.framework */,
+				D3B0F0362BBA9594007B4F48 /* RNFBApp.framework */,
+				D304C5C42BBA9022008FA255 /* libRNFBMessaging.a */,
+				D3A492282BBA8A21002496FF /* libFirebaseCore.a */,
+				D3A492262BBA894E002496FF /* libFirebaseCore.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-Cryotos.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Cryotos-CryotosTests.a */,
+				9C136AE3274CB4640E733CBC /* Pods_Cryotos.framework */,
+				26F9A4B31D3CEDB2DCC135C8 /* Pods_Cryotos_CryotosTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,6 +267,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D3A4921F2BBA85AC002496FF /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* Cryotos */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CryotosTests */,
@@ -231,16 +293,16 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-Cryotos.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-Cryotos.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-Cryotos-CryotosTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-Cryotos-CryotosTests.release.xcconfig */,
+				F96C7B0570EA39B606A98AA5 /* Pods-Cryotos.debug.xcconfig */,
+				EB911CAB2DE24EE753AD261B /* Pods-Cryotos.release.xcconfig */,
+				0B7A46DFDB66808A5685C348 /* Pods-Cryotos-CryotosTests.debug.xcconfig */,
+				C4AF31A8A01E64C719C9E9E4 /* Pods-Cryotos-CryotosTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		D4BE1AC2BAB3456E809E29F6 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				9EEDC46D657542BD8B93635A /* Jost-Black.ttf */,
 				05AF9A6E2BE3423E865FDFEE /* Jost-Bold.ttf */,
@@ -290,7 +352,6 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -299,12 +360,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CryotosTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				9A3F8806B4A5461393326F94 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				907222A0243935BE34E70ECE /* [CP] Embed Pods Frameworks */,
+				146F33C5FB3FFFEECEF4DADE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -320,20 +381,26 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Cryotos" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				3D2E01F02F45A4339672AED0 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				D3503DB52BBAA0D600236245 /* Embed Frameworks */,
+				0C8F389A1E5F5EFD174B33B3 /* [CP] Embed Pods Frameworks */,
+				BCD1D24FF744293731A445C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Cryotos;
+			packageProductDependencies = (
+				D3A492222BBA8666002496FF /* FirebaseAnalytics */,
+				D3A492242BBA8666002496FF /* FirebaseAnalyticsWithoutAdIdSupport */,
+				D3503DB62BBAA16A00236245 /* FirebaseMessaging */,
+			);
 			productName = Cryotos;
 			productReference = 13B07F961A680F5B00A75B9A /* Cryotos.app */;
 			productType = "com.apple.product-type.application";
@@ -344,7 +411,8 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -364,6 +432,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				D3A492212BBA8666002496FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,6 +498,7 @@
 				F731AE22897A492181FB4B2C /* successfully-done.json in Resources */,
 				9F5BA154976A419EA2E2D481 /* user_placeholder.png in Resources */,
 				244C1A1769624B3D80077D10 /* wallet.png in Resources */,
+				D3A492202BBA85AC002496FF /* GoogleService-Info.plist in Resources */,
 				5BE32A80DE304A4D842D1F2E /* wallet_nav.png in Resources */,
 				CD7FA99D9E5849A6AE0F62FE /* wallet_two.png in Resources */,
 				C5C5DFC5C21647EA9CAD93D4 /* white_ss.png in Resources */,
@@ -455,7 +527,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		0C8F389A1E5F5EFD174B33B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,29 +544,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cryotos/Pods-Cryotos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		146F33C5FB3FFFEECEF4DADE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cryotos-CryotosTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		3D2E01F02F45A4339672AED0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -516,7 +583,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		907222A0243935BE34E70ECE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -533,7 +600,29 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		9A3F8806B4A5461393326F94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cryotos-CryotosTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCD1D24FF744293731A445C8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -548,23 +637,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cryotos/Pods-Cryotos-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cryotos-CryotosTests/Pods-Cryotos-CryotosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -619,8 +691,9 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Cryotos-CryotosTests.debug.xcconfig */;
+			baseConfigurationReference = 0B7A46DFDB66808A5685C348 /* Pods-Cryotos-CryotosTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -646,8 +719,9 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Cryotos-CryotosTests.release.xcconfig */;
+			baseConfigurationReference = C4AF31A8A01E64C719C9E9E4 /* Pods-Cryotos-CryotosTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = CryotosTests/Info.plist;
@@ -670,12 +744,15 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Cryotos.debug.xcconfig */;
+			baseConfigurationReference = F96C7B0570EA39B606A98AA5 /* Pods-Cryotos.debug.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Cryotos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -697,11 +774,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Cryotos.release.xcconfig */;
+			baseConfigurationReference = EB911CAB2DE24EE753AD261B /* Pods-Cryotos.release.xcconfig */;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = Cryotos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -753,7 +833,8 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -769,6 +850,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
@@ -781,12 +870,14 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -824,7 +915,8 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -833,6 +925,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
@@ -844,12 +944,14 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -886,6 +988,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D3A492212BBA8666002496FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.23.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D3503DB62BBAA16A00236245 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3A492212BBA8666002496FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		D3A492222BBA8666002496FF /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3A492212BBA8666002496FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D3A492242BBA8666002496FF /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3A492212BBA8666002496FF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
